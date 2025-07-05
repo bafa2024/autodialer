@@ -945,7 +945,7 @@
 
             <!-- Power Dialer Section -->
             <div id="power-dialer-section" class="dashboard-section">
-                <h4 class="mb-4">Power Dialer - Manual Calling</h4>
+                <h4 class="mb-4">Power Dialer - Sequential VoIP Calling</h4>
                 
                 <!-- Power Dialer Overview Stats -->
                 <div class="row g-4 mb-4">
@@ -990,176 +990,140 @@
                             <div class="stat-icon bg-info bg-opacity-10 text-info">
                                 <i class="bi bi-list-check"></i>
                             </div>
-                            <h3 class="fw-bold">23</h3>
-                            <p class="text-secondary mb-2">Contacts in Queue</p>
+                            <h3 class="fw-bold">1,247</h3>
+                            <p class="text-secondary mb-2">Numbers in List</p>
                             <small class="text-info">
-                                <i class="bi bi-clock"></i> Ready to call
+                                <i class="bi bi-clock"></i> 23 remaining
                             </small>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Management -->
+                <!-- List Upload Section -->
                 <div class="bg-white p-4 rounded shadow-sm mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0">Contact Management</h5>
+                        <h5 class="mb-0">Upload Contact List</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addManualContactModal">
-                                <i class="bi bi-person-plus me-2"></i>Add Contact
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#uploadListModal">
+                                <i class="bi bi-upload me-2"></i>Upload CSV/Excel
                             </button>
                             <button class="btn btn-outline-success">
-                                <i class="bi bi-upload me-2"></i>Upload Excel/CSV
+                                <i class="bi bi-download me-2"></i>Download Template
                             </button>
                             <button class="btn btn-outline-info">
-                                <i class="bi bi-diagram-3 me-2"></i>Import from CRM
+                                <i class="bi bi-gear me-2"></i>Dialer Settings
                             </button>
                         </div>
                     </div>
                     <div class="row g-3">
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="Search contacts...">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6 class="text-primary mb-2">Current List</h6>
+                                <p class="mb-1"><strong>Insurance Leads Q4</strong></p>
+                                <p class="mb-1 text-secondary">1,247 numbers • 23 remaining • 1,224 completed</p>
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 98%"></div>
+                                </div>
+                                <small class="text-secondary">Uploaded: Nov 14, 2024 at 9:30 AM</small>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <select class="form-select">
-                                <option>All Status</option>
-                                <option>Ready to Call</option>
-                                <option>In Progress</option>
-                                <option>Completed</option>
-                                <option>No Answer</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select">
-                                <option>All Lists</option>
-                                <option>Today's List</option>
-                                <option>Follow-up List</option>
-                                <option>New Leads</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary w-100">
-                                <i class="bi bi-funnel me-2"></i>Filter
-                            </button>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6 class="text-warning mb-2">Validation Status</h6>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Valid Numbers</span>
+                                    <span class="text-success">1,245</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Invalid Numbers</span>
+                                    <span class="text-danger">2</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>DNC Matches</span>
+                                    <span class="text-warning">0</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary mt-2">View Validation Report</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact List Table -->
-                <div class="bg-white rounded shadow-sm mb-4">
-                    <div class="p-4 border-bottom">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Contact List</h5>
-                            <div class="d-flex gap-2">
-                                <button class="btn btn-sm btn-outline-success">
-                                    <i class="bi bi-play-fill me-1"></i>Start Calling
-                                </button>
-                                <button class="btn btn-sm btn-outline-warning">
-                                    <i class="bi bi-pause-fill me-1"></i>Pause
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-stop-fill me-1"></i>Stop
-                                </button>
+                <!-- Dialer Controls -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Dialer Controls</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-success" id="startDialingBtn">
+                                <i class="bi bi-play-fill me-2"></i>Start Dialing
+                            </button>
+                            <button class="btn btn-warning" id="pauseDialingBtn" disabled>
+                                <i class="bi bi-pause-fill me-2"></i>Pause
+                            </button>
+                            <button class="btn btn-danger" id="stopDialingBtn" disabled>
+                                <i class="bi bi-stop-fill me-2"></i>Stop
+                            </button>
+                            <button class="btn btn-outline-secondary" id="skipCallBtn" disabled>
+                                <i class="bi bi-skip-forward me-2"></i>Skip
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Call Delay (seconds)</label>
+                            <input type="number" class="form-control" value="2" min="1" max="10" id="callDelay">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Retry Failed Calls</label>
+                            <select class="form-select" id="retryLogic">
+                                <option value="0">No retry</option>
+                                <option value="1">1 retry</option>
+                                <option value="2">2 retries</option>
+                                <option value="3">3 retries</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">VoIP Service</label>
+                            <select class="form-select" id="voipService">
+                                <option value="vonage">Vonage</option>
+                                <option value="zoom">Zoom Phone</option>
+                                <option value="twilio">Twilio</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Connection Status</label>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success rounded-circle me-2" style="width: 12px; height: 12px;"></div>
+                                <span class="text-success">Connected to Vonage</span>
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
-                                    <th>Contact Info</th>
-                                    <th>Company</th>
-                                    <th>Status</th>
-                                    <th>Last Call</th>
-                                    <th>Notes</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check-input">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <strong>John Smith</strong>
-                                            <br><small class="text-secondary">+1 (555) 123-4567</small>
-                                        </div>
-                                    </td>
-                                    <td>Acme Corporation</td>
-                                    <td><span class="badge bg-warning">Ready</span></td>
-                                    <td>Never</td>
-                                    <td>New lead from website</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="bi bi-telephone"></i> Call
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check-input">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <strong>Sarah Wilson</strong>
-                                            <br><small class="text-secondary">+1 (555) 987-6543</small>
-                                        </div>
-                                    </td>
-                                    <td>Tech Solutions</td>
-                                    <td><span class="badge bg-success">Completed</span></td>
-                                    <td>2 hours ago</td>
-                                    <td>Interested in demo</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-telephone"></i> Redial
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check-input">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <strong>Mike Johnson</strong>
-                                            <br><small class="text-secondary">+1 (555) 456-7890</small>
-                                        </div>
-                                    </td>
-                                    <td>Sales Pro</td>
-                                    <td><span class="badge bg-warning">Ready</span></td>
-                                    <td>Never</td>
-                                    <td>Cold lead</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="bi bi-telephone"></i> Call
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="form-check-input">
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <strong>Lisa Brown</strong>
-                                            <br><small class="text-secondary">+1 (555) 321-6540</small>
-                                        </div>
-                                    </td>
-                                    <td>Marketing Inc</td>
-                                    <td><span class="badge bg-danger">No Answer</span></td>
-                                    <td>1 hour ago</td>
-                                    <td>Left voicemail</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-telephone"></i> Redial
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Current Call Status -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <h4 id="callStatus">Ready to Start Dialing</h4>
+                            <p class="text-secondary" id="callStatusDetails">Upload a list and click "Start Dialing" to begin</p>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <h5 class="text-primary">Current Number</h5>
+                                <p class="mb-0" id="currentNumber">--</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="text-success">Connected</h5>
+                                <p class="mb-0" id="connectedCount">1,224</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="text-warning">Remaining</h5>
+                                <p class="mb-0" id="remainingCount">23</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="text-danger">Failed</h5>
+                                <p class="mb-0" id="failedCount">0</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1169,56 +1133,52 @@
                         <div class="call-panel">
                             <div class="text-center">
                                 <h4 class="mb-4">Power Dialer Interface</h4>
-                                <div class="mb-4">
-                                    <h2 class="display-4 fw-bold text-primary">Ready to Call</h2>
-                                    <p class="text-secondary">Select a contact from your list to start calling</p>
-                                </div>
                                 
-                                <!-- Manual Dial -->
-                                <div class="mb-4">
-                                    <h6 class="text-secondary mb-3">Or dial manually:</h6>
-                                    <div class="input-group mb-3" style="max-width: 300px; margin: 0 auto;">
-                                        <input type="tel" class="form-control form-control-lg text-center" placeholder="Enter phone number">
-                                        <button class="btn btn-primary btn-lg">
-                                            <i class="bi bi-telephone-fill"></i>
-                                        </button>
+                                <!-- Current Call Display -->
+                                <div class="mb-4" id="currentCallDisplay">
+                                    <div class="mb-3">
+                                        <img src="https://ui-avatars.com/api/?name=John+Smith&background=5B5FDE&color=fff&size=100" 
+                                             class="rounded-circle" alt="Contact" id="contactAvatar">
                                     </div>
-                                </div>
-
-                                <!-- Call Controls -->
-                                <div class="d-flex justify-content-center gap-3 mb-4">
-                                    <button class="call-btn bg-success text-white" disabled>
-                                        <i class="bi bi-telephone-fill"></i>
-                                    </button>
-                                    <button class="call-btn bg-danger text-white" disabled>
-                                        <i class="bi bi-telephone-x-fill"></i>
-                                    </button>
-                                    <button class="call-btn bg-warning text-white" disabled>
-                                        <i class="bi bi-pause-fill"></i>
-                                    </button>
-                                    <button class="call-btn bg-primary text-white" disabled>
-                                        <i class="bi bi-arrow-left-right"></i>
-                                    </button>
+                                    <h4 id="contactName">John Smith</h4>
+                                    <p class="text-secondary" id="contactCompany">Acme Corporation</p>
+                                    <h5 class="text-primary mb-4" id="contactPhone">+1 (555) 123-4567</h5>
                                 </div>
 
                                 <!-- Call Timer -->
                                 <div class="mb-4">
-                                    <h2 class="display-4 fw-bold text-secondary">00:00</h2>
+                                    <h2 class="display-4 fw-bold text-primary" id="callTimer">00:00</h2>
                                     <p class="text-secondary">Call Duration</p>
+                                </div>
+
+                                <!-- Call Controls -->
+                                <div class="d-flex justify-content-center gap-3 mb-4">
+                                    <button class="call-btn bg-success text-white" id="answerBtn" disabled>
+                                        <i class="bi bi-telephone-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-danger text-white" id="hangupBtn" disabled>
+                                        <i class="bi bi-telephone-x-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-warning text-white" id="pauseBtn" disabled>
+                                        <i class="bi bi-pause-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-primary text-white" id="transferBtn" disabled>
+                                        <i class="bi bi-arrow-left-right"></i>
+                                    </button>
                                 </div>
 
                                 <!-- Additional Controls -->
                                 <div class="d-flex justify-content-center gap-2">
-                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                    <button class="btn btn-outline-secondary btn-sm" id="muteBtn" disabled>
                                         <i class="bi bi-mic-mute me-1"></i>Mute
                                     </button>
-                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                    <button class="btn btn-outline-secondary btn-sm" id="recordBtn" disabled>
                                         <i class="bi bi-record-circle me-1"></i>Record
                                     </button>
-                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                    <button class="btn btn-outline-secondary btn-sm" id="keypadBtn" disabled>
                                         <i class="bi bi-keyboard me-1"></i>Keypad
                                     </button>
-                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                    <button class="btn btn-outline-secondary btn-sm" id="speakerBtn" disabled>
                                         <i class="bi bi-volume-up me-1"></i>Speaker
                                     </button>
                                 </div>
@@ -1240,22 +1200,36 @@
                             <button class="btn btn-primary btn-sm w-100">View Full Script</button>
                         </div>
 
-                        <!-- Quick Actions -->
+                        <!-- Call Notes -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h5 class="mb-3">Call Notes</h5>
+                            <textarea class="form-control mb-3" rows="4" placeholder="Add notes about this call..." id="callNotes"></textarea>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary btn-sm" id="saveNotesBtn" disabled>
+                                    <i class="bi bi-save me-1"></i>Save Notes
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" id="markInterestedBtn" disabled>
+                                    <i class="bi bi-check-circle me-1"></i>Mark Interested
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Log -->
                         <div class="bg-white p-4 rounded shadow-sm">
-                            <h5 class="mb-3">Quick Actions</h5>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-outline-primary">
-                                    <i class="bi bi-list-ul me-2"></i>View All Contacts
-                                </button>
-                                <button class="btn btn-outline-success">
-                                    <i class="bi bi-download me-2"></i>Export Results
-                                </button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-clock me-2"></i>Schedule Follow-up
-                                </button>
-                                <button class="btn btn-outline-info">
-                                    <i class="bi bi-gear me-2"></i>Power Dialer Settings
-                                </button>
+                            <h5 class="mb-3">Call Log</h5>
+                            <div class="call-log" id="callLog" style="max-height: 200px; overflow-y: auto;">
+                                <div class="log-entry mb-2">
+                                    <small class="text-secondary">2:30 PM</small>
+                                    <p class="mb-1">Calling John Smith (+1 555-123-4567)</p>
+                                </div>
+                                <div class="log-entry mb-2">
+                                    <small class="text-secondary">2:28 PM</small>
+                                    <p class="mb-1">Call ended - No answer (0:00)</p>
+                                </div>
+                                <div class="log-entry mb-2">
+                                    <small class="text-secondary">2:25 PM</small>
+                                    <p class="mb-1">Calling Sarah Wilson (+1 555-987-6543)</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2000,6 +1974,87 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload List Modal for Power Dialer -->
+            <div class="modal fade" id="uploadListModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upload Contact List</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">Upload File</h6>
+                                    <div class="border rounded p-4 text-center">
+                                        <i class="bi bi-cloud-upload fs-1 text-primary mb-3"></i>
+                                        <h6>Drag & Drop or Click to Upload</h6>
+                                        <p class="text-secondary mb-3">Supports CSV, Excel (.xlsx, .xls)</p>
+                                        <input type="file" class="form-control" accept=".csv,.xlsx,.xls" id="fileUpload">
+                                        <small class="text-secondary">Maximum 2000 numbers per list</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-3">File Requirements</h6>
+                                    <div class="border rounded p-3">
+                                        <h6 class="text-primary">Required Columns:</h6>
+                                        <ul class="list-unstyled">
+                                            <li><i class="bi bi-check-circle text-success me-2"></i>Phone Number (required)</li>
+                                            <li><i class="bi bi-check-circle text-success me-2"></i>First Name (optional)</li>
+                                            <li><i class="bi bi-check-circle text-success me-2"></i>Last Name (optional)</li>
+                                            <li><i class="bi bi-check-circle text-success me-2"></i>Company (optional)</li>
+                                            <li><i class="bi bi-check-circle text-success me-2"></i>Notes (optional)</li>
+                                        </ul>
+                                        <hr>
+                                        <h6 class="text-warning">Validation:</h6>
+                                        <ul class="list-unstyled">
+                                            <li><i class="bi bi-info-circle text-info me-2"></i>Phone numbers will be validated</li>
+                                            <li><i class="bi bi-info-circle text-info me-2"></i>DNC list will be checked</li>
+                                            <li><i class="bi bi-info-circle text-info me-2"></i>Invalid numbers will be flagged</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Validation Results -->
+                            <div class="mt-4" id="validationResults" style="display: none;">
+                                <h6 class="mb-3">Validation Results</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-success mb-1" id="validCount">0</h4>
+                                            <small class="text-secondary">Valid Numbers</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-danger mb-1" id="invalidCount">0</h4>
+                                            <small class="text-secondary">Invalid Numbers</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-warning mb-1" id="dncCount">0</h4>
+                                            <small class="text-secondary">DNC Matches</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-info mb-1" id="totalCount">0</h4>
+                                            <small class="text-secondary">Total Numbers</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" id="uploadAndValidateBtn">Upload & Validate</button>
                         </div>
                     </div>
                 </div>
@@ -4095,9 +4150,291 @@
             }
         });
 
+        // Power Dialer Variables
+        let powerDialerState = {
+            isDialing: false,
+            isPaused: false,
+            currentCall: null,
+            callList: [],
+            currentIndex: 0,
+            callTimer: null,
+            callStartTime: null,
+            connectedCount: 1224,
+            failedCount: 0,
+            remainingCount: 23
+        };
+
+        // Power Dialer Functions
+        function initializePowerDialer() {
+            // Start Dialing Button
+            document.getElementById('startDialingBtn')?.addEventListener('click', function() {
+                if (powerDialerState.callList.length === 0) {
+                    alert('Please upload a contact list first');
+                    return;
+                }
+                startDialing();
+            });
+
+            // Pause Dialing Button
+            document.getElementById('pauseDialingBtn')?.addEventListener('click', function() {
+                pauseDialing();
+            });
+
+            // Stop Dialing Button
+            document.getElementById('stopDialingBtn')?.addEventListener('click', function() {
+                stopDialing();
+            });
+
+            // Skip Call Button
+            document.getElementById('skipCallBtn')?.addEventListener('click', function() {
+                skipCurrentCall();
+            });
+
+            // File Upload
+            document.getElementById('fileUpload')?.addEventListener('change', function(e) {
+                handleFileUpload(e.target.files[0]);
+            });
+
+            // Upload and Validate Button
+            document.getElementById('uploadAndValidateBtn')?.addEventListener('click', function() {
+                validateAndUpload();
+            });
+        }
+
+        function startDialing() {
+            powerDialerState.isDialing = true;
+            powerDialerState.isPaused = false;
+            
+            document.getElementById('startDialingBtn').disabled = true;
+            document.getElementById('pauseDialingBtn').disabled = false;
+            document.getElementById('stopDialingBtn').disabled = false;
+            document.getElementById('skipCallBtn').disabled = false;
+            
+            updateCallStatus('Starting dialer...', 'Initializing VoIP connection');
+            
+            // Simulate starting the first call
+            setTimeout(() => {
+                dialNextNumber();
+            }, 2000);
+        }
+
+        function pauseDialing() {
+            powerDialerState.isPaused = true;
+            document.getElementById('pauseDialingBtn').disabled = true;
+            document.getElementById('startDialingBtn').disabled = false;
+            updateCallStatus('Dialer Paused', 'Click "Start Dialing" to resume');
+        }
+
+        function stopDialing() {
+            powerDialerState.isDialing = false;
+            powerDialerState.isPaused = false;
+            powerDialerState.currentCall = null;
+            
+            document.getElementById('startDialingBtn').disabled = false;
+            document.getElementById('pauseDialingBtn').disabled = true;
+            document.getElementById('stopDialingBtn').disabled = true;
+            document.getElementById('skipCallBtn').disabled = true;
+            
+            updateCallStatus('Dialer Stopped', 'Ready to start dialing');
+            resetCallInterface();
+        }
+
+        function dialNextNumber() {
+            if (!powerDialerState.isDialing || powerDialerState.isPaused) return;
+            
+            if (powerDialerState.currentIndex >= powerDialerState.callList.length) {
+                // All numbers dialed
+                stopDialing();
+                updateCallStatus('Dialing Complete', 'All numbers have been called');
+                return;
+            }
+
+            const contact = powerDialerState.callList[powerDialerState.currentIndex];
+            powerDialerState.currentCall = contact;
+            
+            updateCallInterface(contact);
+            updateCallStatus('Calling...', `Dialing ${contact.phone}`);
+            
+            // Simulate call connection
+            setTimeout(() => {
+                simulateCallConnection(contact);
+            }, 3000);
+        }
+
+        function simulateCallConnection(contact) {
+            const outcomes = ['connected', 'no-answer', 'busy', 'voicemail'];
+            const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+            
+            if (outcome === 'connected') {
+                powerDialerState.connectedCount++;
+                updateCallStatus('Connected', `Talking to ${contact.name}`);
+                startCallTimer();
+                enableCallControls();
+                addCallLog(`Connected to ${contact.name} (${contact.phone})`);
+            } else {
+                powerDialerState.failedCount++;
+                updateCallStatus('Call Ended', `${outcome.replace('-', ' ')}`);
+                addCallLog(`Call ended - ${outcome.replace('-', ' ')} (0:00)`);
+                
+                // Move to next number after delay
+                setTimeout(() => {
+                    powerDialerState.currentIndex++;
+                    dialNextNumber();
+                }, 2000);
+            }
+            
+            updateCounters();
+        }
+
+        function skipCurrentCall() {
+            if (powerDialerState.currentCall) {
+                addCallLog(`Skipped ${powerDialerState.currentCall.name} (${powerDialerState.currentCall.phone})`);
+                powerDialerState.currentIndex++;
+                resetCallInterface();
+                setTimeout(() => {
+                    dialNextNumber();
+                }, 1000);
+            }
+        }
+
+        function startCallTimer() {
+            powerDialerState.callStartTime = Date.now();
+            powerDialerState.callTimer = setInterval(() => {
+                const elapsed = Date.now() - powerDialerState.callStartTime;
+                const minutes = Math.floor(elapsed / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                document.getElementById('callTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function stopCallTimer() {
+            if (powerDialerState.callTimer) {
+                clearInterval(powerDialerState.callTimer);
+                powerDialerState.callTimer = null;
+            }
+        }
+
+        function updateCallStatus(status, details) {
+            document.getElementById('callStatus').textContent = status;
+            document.getElementById('callStatusDetails').textContent = details;
+        }
+
+        function updateCallInterface(contact) {
+            document.getElementById('contactName').textContent = contact.name;
+            document.getElementById('contactCompany').textContent = contact.company || '';
+            document.getElementById('contactPhone').textContent = contact.phone;
+            document.getElementById('currentNumber').textContent = contact.phone;
+            
+            // Update avatar
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(contact.name)}&background=5B5FDE&color=fff&size=100`;
+            document.getElementById('contactAvatar').src = avatarUrl;
+        }
+
+        function resetCallInterface() {
+            document.getElementById('callTimer').textContent = '00:00';
+            document.getElementById('contactName').textContent = '--';
+            document.getElementById('contactCompany').textContent = '';
+            document.getElementById('contactPhone').textContent = '--';
+            document.getElementById('currentNumber').textContent = '--';
+            disableCallControls();
+            stopCallTimer();
+        }
+
+        function enableCallControls() {
+            document.getElementById('answerBtn').disabled = false;
+            document.getElementById('hangupBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = false;
+            document.getElementById('transferBtn').disabled = false;
+            document.getElementById('muteBtn').disabled = false;
+            document.getElementById('recordBtn').disabled = false;
+            document.getElementById('keypadBtn').disabled = false;
+            document.getElementById('speakerBtn').disabled = false;
+            document.getElementById('saveNotesBtn').disabled = false;
+            document.getElementById('markInterestedBtn').disabled = false;
+        }
+
+        function disableCallControls() {
+            document.getElementById('answerBtn').disabled = true;
+            document.getElementById('hangupBtn').disabled = true;
+            document.getElementById('pauseBtn').disabled = true;
+            document.getElementById('transferBtn').disabled = true;
+            document.getElementById('muteBtn').disabled = true;
+            document.getElementById('recordBtn').disabled = true;
+            document.getElementById('keypadBtn').disabled = true;
+            document.getElementById('speakerBtn').disabled = true;
+            document.getElementById('saveNotesBtn').disabled = true;
+            document.getElementById('markInterestedBtn').disabled = true;
+        }
+
+        function updateCounters() {
+            document.getElementById('connectedCount').textContent = powerDialerState.connectedCount;
+            document.getElementById('failedCount').textContent = powerDialerState.failedCount;
+            document.getElementById('remainingCount').textContent = powerDialerState.remainingCount - powerDialerState.currentIndex;
+        }
+
+        function addCallLog(message) {
+            const logContainer = document.getElementById('callLog');
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry mb-2';
+            logEntry.innerHTML = `
+                <small class="text-secondary">${time}</small>
+                <p class="mb-1">${message}</p>
+            `;
+            logContainer.insertBefore(logEntry, logContainer.firstChild);
+            
+            // Keep only last 10 entries
+            while (logContainer.children.length > 10) {
+                logContainer.removeChild(logContainer.lastChild);
+            }
+        }
+
+        function handleFileUpload(file) {
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Simulate file processing
+                setTimeout(() => {
+                    showValidationResults();
+                }, 1000);
+            };
+            reader.readAsText(file);
+        }
+
+        function showValidationResults() {
+            document.getElementById('validationResults').style.display = 'block';
+            document.getElementById('validCount').textContent = '1245';
+            document.getElementById('invalidCount').textContent = '2';
+            document.getElementById('dncCount').textContent = '0';
+            document.getElementById('totalCount').textContent = '1247';
+        }
+
+        function validateAndUpload() {
+            // Simulate validation and upload
+            const modal = bootstrap.Modal.getInstance(document.getElementById('uploadListModal'));
+            modal.hide();
+            
+            // Populate call list with sample data
+            powerDialerState.callList = [
+                { name: 'John Smith', phone: '+1 (555) 123-4567', company: 'Acme Corporation' },
+                { name: 'Sarah Wilson', phone: '+1 (555) 987-6543', company: 'Tech Solutions' },
+                { name: 'Mike Johnson', phone: '+1 (555) 456-7890', company: 'Sales Pro' },
+                { name: 'Lisa Brown', phone: '+1 (555) 321-6540', company: 'Marketing Inc' }
+            ];
+            
+            powerDialerState.currentIndex = 0;
+            powerDialerState.remainingCount = powerDialerState.callList.length;
+            
+            updateCounters();
+            addCallLog('Contact list uploaded successfully (1247 numbers)');
+        }
+
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(initializeCharts, 100);
+            initializePowerDialer();
         });
     </script>
 </body>
