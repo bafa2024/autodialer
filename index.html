@@ -623,6 +623,9 @@
                     <a href="#" class="sidebar-link" onclick="showDashboardSection('dialer')">
                         <i class="bi bi-telephone-outbound me-3"></i>Auto Dialer
                     </a>
+                    <a href="#" class="sidebar-link" onclick="showDashboardSection('power-dialer')">
+                        <i class="bi bi-phone me-3"></i>Power Dialer
+                    </a>
                     <a href="#" class="sidebar-link" onclick="showDashboardSection('ai-agents')">
                         <i class="bi bi-robot me-3"></i>AI Agents
                     </a>
@@ -859,6 +862,8 @@
                     </div>
                 </div>
 
+
+
                 <!-- Call Interface -->
                 <div class="row g-4">
                     <div class="col-md-8">
@@ -933,6 +938,325 @@
                             <p><strong>Lead Score:</strong> <span class="badge bg-success">85</span></p>
                             <p><strong>Last Contact:</strong> 2 weeks ago</p>
                             <button class="btn btn-outline-primary btn-sm w-100">View Full Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Power Dialer Section -->
+            <div id="power-dialer-section" class="dashboard-section">
+                <h4 class="mb-4">Power Dialer - Manual Calling</h4>
+                
+                <!-- Power Dialer Overview Stats -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                            <h3 class="fw-bold">156</h3>
+                            <p class="text-secondary mb-2">Calls Made Today</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 12% from yesterday
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <h3 class="fw-bold">72%</h3>
+                            <p class="text-secondary mb-2">Connection Rate</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 5% improvement
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="fw-bold">4:15</h3>
+                            <p class="text-secondary mb-2">Avg Talk Time</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 0:30 increase
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                <i class="bi bi-list-check"></i>
+                            </div>
+                            <h3 class="fw-bold">23</h3>
+                            <p class="text-secondary mb-2">Contacts in Queue</p>
+                            <small class="text-info">
+                                <i class="bi bi-clock"></i> Ready to call
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Management -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Contact Management</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addManualContactModal">
+                                <i class="bi bi-person-plus me-2"></i>Add Contact
+                            </button>
+                            <button class="btn btn-outline-success">
+                                <i class="bi bi-upload me-2"></i>Upload Excel/CSV
+                            </button>
+                            <button class="btn btn-outline-info">
+                                <i class="bi bi-diagram-3 me-2"></i>Import from CRM
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Search contacts...">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>All Status</option>
+                                <option>Ready to Call</option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                                <option>No Answer</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>All Lists</option>
+                                <option>Today's List</option>
+                                <option>Follow-up List</option>
+                                <option>New Leads</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary w-100">
+                                <i class="bi bi-funnel me-2"></i>Filter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact List Table -->
+                <div class="bg-white rounded shadow-sm mb-4">
+                    <div class="p-4 border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Contact List</h5>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-play-fill me-1"></i>Start Calling
+                                </button>
+                                <button class="btn btn-sm btn-outline-warning">
+                                    <i class="bi bi-pause-fill me-1"></i>Pause
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-stop-fill me-1"></i>Stop
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" class="form-check-input">
+                                    </th>
+                                    <th>Contact Info</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Last Call</th>
+                                    <th>Notes</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>John Smith</strong>
+                                            <br><small class="text-secondary">+1 (555) 123-4567</small>
+                                        </div>
+                                    </td>
+                                    <td>Acme Corporation</td>
+                                    <td><span class="badge bg-warning">Ready</span></td>
+                                    <td>Never</td>
+                                    <td>New lead from website</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="bi bi-telephone"></i> Call
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Sarah Wilson</strong>
+                                            <br><small class="text-secondary">+1 (555) 987-6543</small>
+                                        </div>
+                                    </td>
+                                    <td>Tech Solutions</td>
+                                    <td><span class="badge bg-success">Completed</span></td>
+                                    <td>2 hours ago</td>
+                                    <td>Interested in demo</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-telephone"></i> Redial
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Mike Johnson</strong>
+                                            <br><small class="text-secondary">+1 (555) 456-7890</small>
+                                        </div>
+                                    </td>
+                                    <td>Sales Pro</td>
+                                    <td><span class="badge bg-warning">Ready</span></td>
+                                    <td>Never</td>
+                                    <td>Cold lead</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="bi bi-telephone"></i> Call
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check-input">
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <strong>Lisa Brown</strong>
+                                            <br><small class="text-secondary">+1 (555) 321-6540</small>
+                                        </div>
+                                    </td>
+                                    <td>Marketing Inc</td>
+                                    <td><span class="badge bg-danger">No Answer</span></td>
+                                    <td>1 hour ago</td>
+                                    <td>Left voicemail</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-telephone"></i> Redial
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Call Interface -->
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="call-panel">
+                            <div class="text-center">
+                                <h4 class="mb-4">Power Dialer Interface</h4>
+                                <div class="mb-4">
+                                    <h2 class="display-4 fw-bold text-primary">Ready to Call</h2>
+                                    <p class="text-secondary">Select a contact from your list to start calling</p>
+                                </div>
+                                
+                                <!-- Manual Dial -->
+                                <div class="mb-4">
+                                    <h6 class="text-secondary mb-3">Or dial manually:</h6>
+                                    <div class="input-group mb-3" style="max-width: 300px; margin: 0 auto;">
+                                        <input type="tel" class="form-control form-control-lg text-center" placeholder="Enter phone number">
+                                        <button class="btn btn-primary btn-lg">
+                                            <i class="bi bi-telephone-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Call Controls -->
+                                <div class="d-flex justify-content-center gap-3 mb-4">
+                                    <button class="call-btn bg-success text-white" disabled>
+                                        <i class="bi bi-telephone-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-danger text-white" disabled>
+                                        <i class="bi bi-telephone-x-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-warning text-white" disabled>
+                                        <i class="bi bi-pause-fill"></i>
+                                    </button>
+                                    <button class="call-btn bg-primary text-white" disabled>
+                                        <i class="bi bi-arrow-left-right"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Call Timer -->
+                                <div class="mb-4">
+                                    <h2 class="display-4 fw-bold text-secondary">00:00</h2>
+                                    <p class="text-secondary">Call Duration</p>
+                                </div>
+
+                                <!-- Additional Controls -->
+                                <div class="d-flex justify-content-center gap-2">
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                        <i class="bi bi-mic-mute me-1"></i>Mute
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                        <i class="bi bi-record-circle me-1"></i>Record
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                        <i class="bi bi-keyboard me-1"></i>Keypad
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm" disabled>
+                                        <i class="bi bi-volume-up me-1"></i>Speaker
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Call Script -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h5 class="mb-3">Call Script</h5>
+                            <div class="border rounded p-3 mb-3">
+                                <h6 class="text-primary">Opening</h6>
+                                <p class="mb-0">Hi [Name], this is [Your Name] from AutoDial Pro. How are you today?</p>
+                            </div>
+                            <div class="border rounded p-3 mb-3">
+                                <h6 class="text-primary">Value Proposition</h6>
+                                <p class="mb-0">I'm calling because we help companies like yours increase sales productivity by 300%...</p>
+                            </div>
+                            <button class="btn btn-primary btn-sm w-100">View Full Script</button>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Quick Actions</h5>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-list-ul me-2"></i>View All Contacts
+                                </button>
+                                <button class="btn btn-outline-success">
+                                    <i class="bi bi-download me-2"></i>Export Results
+                                </button>
+                                <button class="btn btn-outline-warning">
+                                    <i class="bi bi-clock me-2"></i>Schedule Follow-up
+                                </button>
+                                <button class="btn btn-outline-info">
+                                    <i class="bi bi-gear me-2"></i>Power Dialer Settings
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1207,6 +1531,7 @@
                                     <option>Predictive (50+ simultaneous)</option>
                                     <option>Progressive (1:1 ratio)</option>
                                     <option>Power (Maximum speed)</option>
+                                    <option>Power Dialer (Manual calling)</option>
                                     <option>Preview (Manual review)</option>
                                 </select>
                             </div>
@@ -1675,6 +2000,42 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Manual Contact Modal for Power Dialer -->
+            <div class="modal fade" id="addManualContactModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Contact for Power Dialer</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" class="form-control" placeholder="Enter contact name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" placeholder="+1 (555) 123-4567" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" class="form-control" placeholder="Enter company name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" rows="3" placeholder="Add any notes about this contact..."></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Add & Call Now</button>
                         </div>
                     </div>
                 </div>
