@@ -2085,17 +2085,1478 @@
 
             <div id="crm-section" class="dashboard-section">
                 <h4 class="mb-4">CRM Integration</h4>
-                <p>CRM integration settings go here...</p>
+                
+                <!-- CRM Overview Stats -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-diagram-3"></i>
+                            </div>
+                            <h3 class="fw-bold">3</h3>
+                            <p class="text-secondary mb-2">Connected CRMs</p>
+                            <small class="text-success">
+                                <i class="bi bi-check-circle"></i> All active
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-arrow-left-right"></i>
+                            </div>
+                            <h3 class="fw-bold">15,234</h3>
+                            <p class="text-secondary mb-2">Records Synced</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 1,234 today
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="fw-bold">2 min</h3>
+                            <p class="text-secondary mb-2">Sync Interval</p>
+                            <small class="text-info">
+                                <i class="bi bi-gear"></i> Real-time enabled
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h3 class="fw-bold">99.9%</h3>
+                            <p class="text-secondary mb-2">Sync Success</p>
+                            <small class="text-success">
+                                <i class="bi bi-check-circle"></i> Last sync: 2 min ago
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connected CRMs -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary rounded p-2 me-3">
+                                    <i class="bi bi-cloud text-white"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Salesforce</h6>
+                                    <small class="text-success">Connected</small>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-secondary">Last sync: 2 minutes ago</small>
+                                <div class="progress mt-1" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary">Configure</button>
+                                <button class="btn btn-sm btn-outline-secondary">Test</button>
+                                <button class="btn btn-sm btn-outline-danger">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-warning rounded p-2 me-3">
+                                    <i class="bi bi-gear text-white"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">HubSpot</h6>
+                                    <small class="text-success">Connected</small>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-secondary">Last sync: 1 minute ago</small>
+                                <div class="progress mt-1" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary">Configure</button>
+                                <button class="btn btn-sm btn-outline-secondary">Test</button>
+                                <button class="btn btn-sm btn-outline-danger">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-info rounded p-2 me-3">
+                                    <i class="bi bi-puzzle text-white"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Zoho CRM</h6>
+                                    <small class="text-success">Connected</small>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-secondary">Last sync: 3 minutes ago</small>
+                                <div class="progress mt-1" style="height: 4px;">
+                                    <div class="progress-bar bg-success" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary">Configure</button>
+                                <button class="btn btn-sm btn-outline-secondary">Test</button>
+                                <button class="btn btn-sm btn-outline-danger">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New CRM Integration -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <h5 class="mb-3">Add New CRM Integration</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 text-center cursor-pointer" style="cursor: pointer;">
+                                <i class="bi bi-microsoft fs-2 text-primary mb-2"></i>
+                                <h6>Microsoft Dynamics</h6>
+                                <small class="text-secondary">Connect to Dynamics 365</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 text-center cursor-pointer" style="cursor: pointer;">
+                                <i class="bi bi-puzzle fs-2 text-warning mb-2"></i>
+                                <h6>Pipedrive</h6>
+                                <small class="text-secondary">Sales pipeline management</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="border rounded p-3 text-center cursor-pointer" style="cursor: pointer;">
+                                <i class="bi bi-gear fs-2 text-info mb-2"></i>
+                                <h6>Custom API</h6>
+                                <small class="text-secondary">Connect via REST API</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sync Configuration -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Sync Configuration</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Sync Frequency</label>
+                                <select class="form-select">
+                                    <option>Real-time (every 30 seconds)</option>
+                                    <option>Every 2 minutes</option>
+                                    <option>Every 5 minutes</option>
+                                    <option>Every 15 minutes</option>
+                                    <option>Manual sync only</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Data Direction</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Import contacts from CRM</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Export call results to CRM</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">Sync lead status changes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Sync contact updates</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Conflict Resolution</label>
+                                <select class="form-select">
+                                    <option>CRM data takes priority</option>
+                                    <option>AutoDial Pro data takes priority</option>
+                                    <option>Most recent data wins</option>
+                                    <option>Manual resolution required</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">Save Configuration</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Field Mapping</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>AutoDial Pro Field</th>
+                                            <th>CRM Field</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <td>First Name</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <td>Last Name</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>Email</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone</td>
+                                            <td>Phone</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Company</td>
+                                            <td>Company</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lead Status</td>
+                                            <td>Lead Status</td>
+                                            <td><span class="badge bg-warning">Custom</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Call Notes</td>
+                                            <td>Notes</td>
+                                            <td><span class="badge bg-success">Mapped</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm">Edit Field Mapping</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sync History -->
+                <div class="bg-white rounded shadow-sm">
+                    <div class="p-4 border-bottom">
+                        <h5 class="mb-0">Sync History</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>CRM System</th>
+                                    <th>Sync Type</th>
+                                    <th>Records Processed</th>
+                                    <th>Status</th>
+                                    <th>Duration</th>
+                                    <th>Timestamp</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-primary rounded p-1 me-2">
+                                                <i class="bi bi-cloud text-white" style="font-size: 12px;"></i>
+                                            </div>
+                                            Salesforce
+                                        </div>
+                                    </td>
+                                    <td>Bidirectional</td>
+                                    <td>1,234 records</td>
+                                    <td><span class="status-badge status-active">Success</span></td>
+                                    <td>45 seconds</td>
+                                    <td>2 minutes ago</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-info">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-warning rounded p-1 me-2">
+                                                <i class="bi bi-gear text-white" style="font-size: 12px;"></i>
+                                            </div>
+                                            HubSpot
+                                        </div>
+                                    </td>
+                                    <td>Import</td>
+                                    <td>856 records</td>
+                                    <td><span class="status-badge status-active">Success</span></td>
+                                    <td>32 seconds</td>
+                                    <td>1 minute ago</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-info">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-info rounded p-1 me-2">
+                                                <i class="bi bi-puzzle text-white" style="font-size: 12px;"></i>
+                                            </div>
+                                            Zoho CRM
+                                        </div>
+                                    </td>
+                                    <td>Export</td>
+                                    <td>567 records</td>
+                                    <td><span class="status-badge status-active">Success</span></td>
+                                    <td>28 seconds</td>
+                                    <td>3 minutes ago</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-info">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-primary rounded p-1 me-2">
+                                                <i class="bi bi-cloud text-white" style="font-size: 12px;"></i>
+                                            </div>
+                                            Salesforce
+                                        </div>
+                                    </td>
+                                    <td>Bidirectional</td>
+                                    <td>0 records</td>
+                                    <td><span class="status-badge status-pending">Failed</span></td>
+                                    <td>--</td>
+                                    <td>15 minutes ago</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-warning">Retry</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- API Configuration -->
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">API Configuration</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Webhook URL</label>
+                                <input type="url" class="form-control" value="https://api.autodialpro.com/webhooks/crm" readonly>
+                                <small class="text-secondary">Use this URL to receive real-time updates from your CRM</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">API Key</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" value="sk_live_1234567890abcdef" readonly>
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="bi bi-clipboard"></i>
+                                    </button>
+                                </div>
+                                <small class="text-secondary">Keep this key secure - it provides full access to your data</small>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Rate Limiting</label>
+                                <select class="form-select">
+                                    <option>100 requests per minute</option>
+                                    <option>500 requests per minute</option>
+                                    <option>1000 requests per minute</option>
+                                    <option>Unlimited</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-outline-primary">Regenerate API Key</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Data Export Options</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Export Format</label>
+                                <select class="form-select">
+                                    <option>JSON</option>
+                                    <option>XML</option>
+                                    <option>CSV</option>
+                                    <option>Excel</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Include Fields</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Contact Information</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Call History</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label">Campaign Data</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">AI Agent Interactions</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date Range</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="date" class="form-control" value="2024-01-01">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="date" class="form-control" value="2024-12-31">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Export Data</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="settings-section" class="dashboard-section">
-                <h4 class="mb-4">Settings</h4>
-                <p>System settings interface goes here...</p>
+                <h4 class="mb-4">System Settings</h4>
+                
+                <!-- Settings Navigation -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <div class="nav flex-column nav-pills" id="settings-tab" role="tablist">
+                                <button class="nav-link active text-start" data-bs-toggle="pill" data-bs-target="#general-settings">
+                                    <i class="bi bi-gear me-2"></i>General
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#dialer-settings">
+                                    <i class="bi bi-telephone me-2"></i>Dialer
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#ai-settings">
+                                    <i class="bi bi-robot me-2"></i>AI Agents
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#compliance-settings">
+                                    <i class="bi bi-shield-check me-2"></i>Compliance
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#notification-settings">
+                                    <i class="bi bi-bell me-2"></i>Notifications
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#security-settings">
+                                    <i class="bi bi-lock me-2"></i>Security
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-9">
+                        <div class="tab-content" id="settings-tabContent">
+                            <!-- General Settings -->
+                            <div class="tab-pane fade show active" id="general-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">General Settings</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Company Name</label>
+                                            <input type="text" class="form-control" value="AutoDial Pro Inc.">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Time Zone</label>
+                                            <select class="form-select">
+                                                <option>Eastern Time (ET)</option>
+                                                <option>Central Time (CT)</option>
+                                                <option>Mountain Time (MT)</option>
+                                                <option>Pacific Time (PT)</option>
+                                                <option>UTC</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Date Format</label>
+                                            <select class="form-select">
+                                                <option>MM/DD/YYYY</option>
+                                                <option>DD/MM/YYYY</option>
+                                                <option>YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Time Format</label>
+                                            <select class="form-select">
+                                                <option>12-hour (AM/PM)</option>
+                                                <option>24-hour</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Language</label>
+                                            <select class="form-select">
+                                                <option>English (US)</option>
+                                                <option>Spanish</option>
+                                                <option>French</option>
+                                                <option>German</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Currency</label>
+                                            <select class="form-select">
+                                                <option>USD ($)</option>
+                                                <option>EUR (€)</option>
+                                                <option>GBP (£)</option>
+                                                <option>CAD ($)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save General Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dialer Settings -->
+                            <div class="tab-pane fade" id="dialer-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Dialer Configuration</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Default Dialing Mode</label>
+                                            <select class="form-select">
+                                                <option>Predictive (50+ simultaneous)</option>
+                                                <option>Progressive (1:1 ratio)</option>
+                                                <option>Power (Maximum speed)</option>
+                                                <option>Preview (Manual review)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Maximum Simultaneous Calls</label>
+                                            <input type="number" class="form-control" value="50" min="1" max="100">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Call Timeout (seconds)</label>
+                                            <input type="number" class="form-control" value="30" min="10" max="60">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Retry Attempts</label>
+                                            <input type="number" class="form-control" value="3" min="0" max="10">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Retry Delay (minutes)</label>
+                                            <input type="number" class="form-control" value="15" min="5" max="1440">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Voicemail Detection</label>
+                                            <select class="form-select">
+                                                <option>Automatic (AI-powered)</option>
+                                                <option>Manual detection</option>
+                                                <option>Disabled</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Call Recording Settings</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Record all calls automatically</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Transcribe calls with AI</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Require consent before recording</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Dialer Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Settings -->
+                            <div class="tab-pane fade" id="ai-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">AI Agent Configuration</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Default AI Voice</label>
+                                            <select class="form-select">
+                                                <option>Sarah (Female, US English)</option>
+                                                <option>Mike (Male, US English)</option>
+                                                <option>Maria (Female, Spanish)</option>
+                                                <option>Pierre (Male, French)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Speech Rate</label>
+                                            <select class="form-select">
+                                                <option>Slow (0.8x)</option>
+                                                <option>Normal (1.0x)</option>
+                                                <option>Fast (1.2x)</option>
+                                                <option>Very Fast (1.5x)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Language Detection</label>
+                                            <select class="form-select">
+                                                <option>Automatic</option>
+                                                <option>Manual selection</option>
+                                                <option>Based on contact data</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Intent Recognition Sensitivity</label>
+                                            <select class="form-select">
+                                                <option>High (More transfers)</option>
+                                                <option>Medium (Balanced)</option>
+                                                <option>Low (Fewer transfers)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>AI Behavior Settings</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Transfer to human when confused</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Transfer when customer requests human</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Transfer on negative sentiment</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Leave voicemail messages</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save AI Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Compliance Settings -->
+                            <div class="tab-pane fade" id="compliance-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Compliance & Legal</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">DNC List Source</label>
+                                            <select class="form-select">
+                                                <option>Federal DNC Registry</option>
+                                                <option>State DNC Lists</option>
+                                                <option>Custom DNC List</option>
+                                                <option>Multiple Sources</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">DNC Check Frequency</label>
+                                            <select class="form-select">
+                                                <option>Before each call</option>
+                                                <option>Daily batch check</option>
+                                                <option>Weekly check</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">TCPA Compliance</label>
+                                            <select class="form-select">
+                                                <option>Strict (Written consent required)</option>
+                                                <option>Standard (Implied consent)</option>
+                                                <option>Relaxed (Business calls only)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Caller ID Display</label>
+                                            <select class="form-select">
+                                                <option>Company name and number</option>
+                                                <option>Company name only</option>
+                                                <option>Custom caller ID</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Compliance Features</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Automatic DNC screening</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Opt-out tracking</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Consent management</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">Litigation hold</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Required Disclosures</h6>
+                                        <div class="mb-3">
+                                            <label class="form-label">Call Purpose Disclosure</label>
+                                            <textarea class="form-control" rows="3">This call is for [PURPOSE]. You may opt out of future calls by saying 'stop' or pressing 9.</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Company Information</label>
+                                            <textarea class="form-control" rows="3">AutoDial Pro Inc., 123 Business St, San Francisco, CA 94105. Phone: 1-800-AUTODIAL</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Compliance Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="tab-pane fade" id="notification-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Notification Preferences</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email Notifications</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Daily summary reports</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Campaign completion alerts</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">System maintenance notices</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Error and failure alerts</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">In-App Notifications</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">New lead notifications</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Call transfer requests</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">System updates</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Performance alerts</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Alert Thresholds</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Low Connection Rate Alert (%)</label>
+                                                <input type="number" class="form-control" value="50" min="0" max="100">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">High Error Rate Alert (%)</label>
+                                                <input type="number" class="form-control" value="10" min="0" max="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Notification Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div class="tab-pane fade" id="security-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Security & Access Control</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Session Timeout (minutes)</label>
+                                            <input type="number" class="form-control" value="30" min="5" max="480">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Failed Login Attempts</label>
+                                            <input type="number" class="form-control" value="5" min="3" max="10">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Password Policy</label>
+                                            <select class="form-select">
+                                                <option>Strong (8+ chars, symbols, numbers)</option>
+                                                <option>Medium (6+ chars, numbers)</option>
+                                                <option>Basic (6+ chars)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Two-Factor Authentication</label>
+                                            <select class="form-select">
+                                                <option>Required for all users</option>
+                                                <option>Required for admins only</option>
+                                                <option>Optional</option>
+                                                <option>Disabled</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Data Protection</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Encrypt data at rest</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Encrypt data in transit (TLS)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Audit logging</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox">
+                                            <label class="form-check-label">IP whitelisting</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Data Retention</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Call Recordings (months)</label>
+                                                <input type="number" class="form-control" value="12" min="1" max="60">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Call Logs (months)</label>
+                                                <input type="number" class="form-control" value="24" min="1" max="120">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Security Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Information -->
+                <div class="bg-white p-4 rounded shadow-sm">
+                    <h5 class="mb-3">System Information</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="border rounded p-3 text-center">
+                                <h6 class="text-primary">Version</h6>
+                                <p class="mb-0">2.1.4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3 text-center">
+                                <h6 class="text-success">Status</h6>
+                                <p class="mb-0">Online</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3 text-center">
+                                <h6 class="text-info">Uptime</h6>
+                                <p class="mb-0">99.9%</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3 text-center">
+                                <h6 class="text-warning">Last Update</h6>
+                                <p class="mb-0">2 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-outline-primary me-2">Check for Updates</button>
+                        <button class="btn btn-outline-secondary me-2">Export Settings</button>
+                        <button class="btn btn-outline-danger">Reset to Defaults</button>
+                    </div>
+                </div>
             </div>
 
             <div id="profile-section" class="dashboard-section">
-                <h4 class="mb-4">Profile</h4>
-                <p>User profile management goes here...</p>
+                <h4 class="mb-4">Profile & Account</h4>
+                
+                <!-- Profile Overview -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="bg-white p-4 rounded shadow-sm text-center">
+                            <div class="mb-3">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=5B5FDE&color=fff&size=120" 
+                                     class="rounded-circle" alt="Profile Picture">
+                            </div>
+                            <h5 class="mb-1">Sarah Johnson</h5>
+                            <p class="text-secondary mb-2">Sales Manager</p>
+                            <div class="d-flex justify-content-center gap-2 mb-3">
+                                <span class="badge bg-success">Active</span>
+                                <span class="badge bg-primary">Admin</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-camera me-2"></i>Change Photo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Account Statistics</h5>
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="text-primary mb-1">1,234</h4>
+                                        <small class="text-secondary">Calls Made</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="text-success mb-1">68%</h4>
+                                        <small class="text-secondary">Success Rate</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="text-warning mb-1">89</h4>
+                                        <small class="text-secondary">Leads Generated</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="text-info mb-1">45</h4>
+                                        <small class="text-secondary">Days Active</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="progress mb-2" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                                <small class="text-secondary">Performance Score: 85%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Navigation -->
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="bg-white p-3 rounded shadow-sm">
+                            <div class="nav flex-column nav-pills" id="profile-tab" role="tablist">
+                                <button class="nav-link active text-start" data-bs-toggle="pill" data-bs-target="#personal-info">
+                                    <i class="bi bi-person me-2"></i>Personal Info
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#account-settings">
+                                    <i class="bi bi-gear me-2"></i>Account Settings
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#preferences">
+                                    <i class="bi bi-sliders me-2"></i>Preferences
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#activity-history">
+                                    <i class="bi bi-clock-history me-2"></i>Activity History
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#team-management">
+                                    <i class="bi bi-people me-2"></i>Team Management
+                                </button>
+                                <button class="nav-link text-start" data-bs-toggle="pill" data-bs-target="#billing">
+                                    <i class="bi bi-credit-card me-2"></i>Billing & Plans
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-9">
+                        <div class="tab-content" id="profile-tabContent">
+                            <!-- Personal Information -->
+                            <div class="tab-pane fade show active" id="personal-info">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Personal Information</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" value="Sarah">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" value="Johnson">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" value="sarah.johnson@autodialpro.com">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Job Title</label>
+                                                <input type="text" class="form-control" value="Sales Manager">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Department</label>
+                                                <input type="text" class="form-control" value="Sales">
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="form-label">Bio</label>
+                                                <textarea class="form-control" rows="3" placeholder="Tell us about yourself...">Experienced sales professional with 8+ years in B2B sales. Specialized in lead generation and customer relationship management.</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Account Settings -->
+                            <div class="tab-pane fade" id="account-settings">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Account Settings</h5>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6>Change Password</h6>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Current Password</label>
+                                                    <input type="password" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">New Password</label>
+                                                    <input type="password" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Confirm New Password</label>
+                                                    <input type="password" class="form-control">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Update Password</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Two-Factor Authentication</h6>
+                                            <div class="mb-3">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span>2FA Status</span>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" checked>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Authentication Method</label>
+                                                <select class="form-select">
+                                                    <option>Authenticator App</option>
+                                                    <option>SMS</option>
+                                                    <option>Email</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-outline-primary btn-sm">Configure 2FA</button>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6>Account Status</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Account Type</label>
+                                                <select class="form-select">
+                                                    <option>Administrator</option>
+                                                    <option>Manager</option>
+                                                    <option>Agent</option>
+                                                    <option>Viewer</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Account Status</label>
+                                                <select class="form-select">
+                                                    <option>Active</option>
+                                                    <option>Suspended</option>
+                                                    <option>Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Login History</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Today, 9:30 AM</td>
+                                                            <td><span class="badge bg-success">Success</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Yesterday, 8:15 AM</td>
+                                                            <td><span class="badge bg-success">Success</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Nov 12, 7:45 AM</td>
+                                                            <td><span class="badge bg-warning">Failed</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences -->
+                            <div class="tab-pane fade" id="preferences">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">User Preferences</h5>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <h6>Interface Preferences</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Theme</label>
+                                                <select class="form-select">
+                                                    <option>Light</option>
+                                                    <option>Dark</option>
+                                                    <option>Auto</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Language</label>
+                                                <select class="form-select">
+                                                    <option>English (US)</option>
+                                                    <option>Spanish</option>
+                                                    <option>French</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Time Zone</label>
+                                                <select class="form-select">
+                                                    <option>Eastern Time (ET)</option>
+                                                    <option>Central Time (CT)</option>
+                                                    <option>Mountain Time (MT)</option>
+                                                    <option>Pacific Time (PT)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Call Preferences</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Default Dialing Mode</label>
+                                                <select class="form-select">
+                                                    <option>Predictive</option>
+                                                    <option>Progressive</option>
+                                                    <option>Power</option>
+                                                    <option>Preview</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Call Script</label>
+                                                <select class="form-select">
+                                                    <option>Default Script</option>
+                                                    <option>Insurance Script</option>
+                                                    <option>Real Estate Script</option>
+                                                    <option>Custom Script</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label">Auto-start calls</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label">Show call timer</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox">
+                                                    <label class="form-check-label">Auto-pause on breaks</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Preferences</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Activity History -->
+                            <div class="tab-pane fade" id="activity-history">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Activity History</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date & Time</th>
+                                                    <th>Activity</th>
+                                                    <th>Details</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Today, 2:30 PM</td>
+                                                    <td>Call Completed</td>
+                                                    <td>John Smith - Acme Corp (5:23 min)</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Today, 1:45 PM</td>
+                                                    <td>Campaign Started</td>
+                                                    <td>Insurance Leads Q4</td>
+                                                    <td><span class="badge bg-primary">Active</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Today, 12:30 PM</td>
+                                                    <td>Lead Generated</td>
+                                                    <td>Mike Wilson - Tech Solutions</td>
+                                                    <td><span class="badge bg-warning">Qualified</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Yesterday, 4:15 PM</td>
+                                                    <td>Settings Updated</td>
+                                                    <td>Changed dialing mode to Predictive</td>
+                                                    <td><span class="badge bg-info">Updated</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Yesterday, 3:20 PM</td>
+                                                    <td>Call Failed</td>
+                                                    <td>Jane Doe - No answer (0:00 min)</td>
+                                                    <td><span class="badge bg-danger">Failed</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-outline-primary">Export Activity Log</button>
+                                        <button class="btn btn-outline-secondary">View Full History</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Team Management -->
+                            <div class="tab-pane fade" id="team-management">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Team Management</h5>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span>Team Members (8 total)</span>
+                                        <button class="btn btn-primary btn-sm">
+                                            <i class="bi bi-person-plus me-2"></i>Add Member
+                                        </button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Role</th>
+                                                    <th>Status</th>
+                                                    <th>Performance</th>
+                                                    <th>Last Active</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10B981&color=fff&size=32" 
+                                                                 class="rounded-circle me-2" alt="Mike Chen">
+                                                            <div>
+                                                                <strong>Mike Chen</strong>
+                                                                <br><small class="text-secondary">mike.chen@company.com</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-primary">Agent</span></td>
+                                                    <td><span class="badge bg-success">Active</span></td>
+                                                    <td>
+                                                        <div class="progress" style="height: 6px;">
+                                                            <div class="progress-bar bg-success" style="width: 78%"></div>
+                                                        </div>
+                                                        <small>78%</small>
+                                                    </td>
+                                                    <td>2 min ago</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button class="btn btn-outline-primary">View</button>
+                                                            <button class="btn btn-outline-warning">Edit</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://ui-avatars.com/api/?name=Emily+Davis&background=EF4444&color=fff&size=32" 
+                                                                 class="rounded-circle me-2" alt="Emily Davis">
+                                                            <div>
+                                                                <strong>Emily Davis</strong>
+                                                                <br><small class="text-secondary">emily.davis@company.com</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-warning">Manager</span></td>
+                                                    <td><span class="badge bg-success">Active</span></td>
+                                                    <td>
+                                                        <div class="progress" style="height: 6px;">
+                                                            <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                                        </div>
+                                                        <small>65%</small>
+                                                    </td>
+                                                    <td>15 min ago</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button class="btn btn-outline-primary">View</button>
+                                                            <button class="btn btn-outline-warning">Edit</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://ui-avatars.com/api/?name=David+Lee&background=6B7280&color=fff&size=32" 
+                                                                 class="rounded-circle me-2" alt="David Lee">
+                                                            <div>
+                                                                <strong>David Lee</strong>
+                                                                <br><small class="text-secondary">david.lee@company.com</small>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span class="badge bg-info">Agent</span></td>
+                                                    <td><span class="badge bg-secondary">Offline</span></td>
+                                                    <td>
+                                                        <div class="progress" style="height: 6px;">
+                                                            <div class="progress-bar bg-info" style="width: 82%"></div>
+                                                        </div>
+                                                        <small>82%</small>
+                                                    </td>
+                                                    <td>1 hour ago</td>
+                                                    <td>
+                                                        <div class="btn-group btn-group-sm">
+                                                            <button class="btn btn-outline-primary">View</button>
+                                                            <button class="btn btn-outline-warning">Edit</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Billing & Plans -->
+                            <div class="tab-pane fade" id="billing">
+                                <div class="bg-white p-4 rounded shadow-sm">
+                                    <h5 class="mb-3">Billing & Subscription</h5>
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="border rounded p-3">
+                                                <h6>Current Plan</h6>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="fw-bold">Enterprise Plan</span>
+                                                    <span class="badge bg-success">Active</span>
+                                                </div>
+                                                <p class="text-secondary mb-2">$299/month</p>
+                                                <small class="text-secondary">Next billing: Dec 14, 2024</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="border rounded p-3">
+                                                <h6>Usage This Month</h6>
+                                                <div class="mb-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Calls Made</span>
+                                                        <span>12,450 / 50,000</span>
+                                                    </div>
+                                                    <div class="progress" style="height: 6px;">
+                                                        <div class="progress-bar bg-primary" style="width: 25%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>AI Agents</span>
+                                                        <span>5 / 10</span>
+                                                    </div>
+                                                    <div class="progress" style="height: 6px;">
+                                                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h6>Payment Method</h6>
+                                        <div class="d-flex align-items-center p-3 border rounded">
+                                            <i class="bi bi-credit-card fs-4 me-3 text-primary"></i>
+                                            <div>
+                                                <strong>Visa ending in 4242</strong>
+                                                <br><small class="text-secondary">Expires 12/25</small>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <button class="btn btn-outline-primary btn-sm">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h6>Billing History</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Description</th>
+                                                        <th>Amount</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Nov 14, 2024</td>
+                                                        <td>Enterprise Plan - Monthly</td>
+                                                        <td>$299.00</td>
+                                                        <td><span class="badge bg-success">Paid</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Oct 14, 2024</td>
+                                                        <td>Enterprise Plan - Monthly</td>
+                                                        <td>$299.00</td>
+                                                        <td><span class="badge bg-success">Paid</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 14, 2024</td>
+                                                        <td>Enterprise Plan - Monthly</td>
+                                                        <td>$299.00</td>
+                                                        <td><span class="badge bg-success">Paid</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-outline-primary me-2">Download Invoice</button>
+                                        <button class="btn btn-outline-secondary me-2">Change Plan</button>
+                                        <button class="btn btn-outline-danger">Cancel Subscription</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
