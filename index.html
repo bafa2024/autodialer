@@ -1755,8 +1755,332 @@
             </div>
 
             <div id="analytics-section" class="dashboard-section">
-                <h4 class="mb-4">Analytics</h4>
-                <p>Analytics and reporting interface goes here...</p>
+                <h4 class="mb-4">Analytics & Reporting</h4>
+                
+                <!-- Analytics Overview Stats -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h3 class="fw-bold">68.5%</h3>
+                            <p class="text-secondary mb-2">Connection Rate</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 5.2% improvement
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <h3 class="fw-bold">32.1%</h3>
+                            <p class="text-secondary mb-2">Conversion Rate</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 8.7% increase
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="fw-bold">4:23</h3>
+                            <p class="text-secondary mb-2">Avg Talk Time</p>
+                            <small class="text-danger">
+                                <i class="bi bi-arrow-down"></i> 0:15 decrease
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                <i class="bi bi-robot"></i>
+                            </div>
+                            <h3 class="fw-bold">89.2%</h3>
+                            <p class="text-secondary mb-2">AI Success Rate</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 12.3% improvement
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Actions -->
+                <div class="bg-white p-4 rounded shadow-sm mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Report Controls</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary">
+                                <i class="bi bi-download me-2"></i>Export Report
+                            </button>
+                            <button class="btn btn-outline-success">
+                                <i class="bi bi-calendar me-2"></i>Date Range
+                            </button>
+                            <button class="btn btn-outline-info">
+                                <i class="bi bi-gear me-2"></i>Customize
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>Last 7 Days</option>
+                                <option>Last 30 Days</option>
+                                <option>Last 90 Days</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>All Campaigns</option>
+                                <option>Insurance Leads Q4</option>
+                                <option>Real Estate Follow-up</option>
+                                <option>Collection Calls</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>All Agents</option>
+                                <option>Human Agents</option>
+                                <option>AI Agents</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100">
+                                <i class="bi bi-search me-2"></i>Generate Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Call Volume & Performance Trend</h5>
+                            <canvas id="callVolumeChart" height="100"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Call Outcomes Distribution</h5>
+                            <canvas id="callOutcomesChart"></canvas>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span><i class="bi bi-circle-fill text-success me-2"></i>Connected</span>
+                                    <strong>68.5%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span><i class="bi bi-circle-fill text-warning me-2"></i>Voicemail</span>
+                                    <strong>18.2%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span><i class="bi bi-circle-fill text-danger me-2"></i>No Answer</span>
+                                    <strong>8.7%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span><i class="bi bi-circle-fill text-secondary me-2"></i>Busy/Invalid</span>
+                                    <strong>4.6%</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Agent Performance</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Agent</th>
+                                            <th>Calls</th>
+                                            <th>Connected</th>
+                                            <th>Conversion</th>
+                                            <th>Avg Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Sarah Johnson</strong></td>
+                                            <td>156</td>
+                                            <td>89%</td>
+                                            <td>34%</td>
+                                            <td>4:32</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Mike Chen</strong></td>
+                                            <td>142</td>
+                                            <td>72%</td>
+                                            <td>28%</td>
+                                            <td>3:45</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AI Agent 1</strong></td>
+                                            <td>234</td>
+                                            <td>91%</td>
+                                            <td>38%</td>
+                                            <td>2:15</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>AI Agent 2</strong></td>
+                                            <td>198</td>
+                                            <td>87%</td>
+                                            <td>35%</td>
+                                            <td>2:08</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Campaign Performance</h5>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Campaign</th>
+                                            <th>Contacts</th>
+                                            <th>Calls Made</th>
+                                            <th>Success Rate</th>
+                                            <th>ROI</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Insurance Q4</strong></td>
+                                            <td>5,000</td>
+                                            <td>2,847</td>
+                                            <td>68%</td>
+                                            <td>245%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Real Estate</strong></td>
+                                            <td>3,200</td>
+                                            <td>1,856</td>
+                                            <td>72%</td>
+                                            <td>189%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Collections</strong></td>
+                                            <td>8,500</td>
+                                            <td>4,200</td>
+                                            <td>45%</td>
+                                            <td>156%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Performance Analytics -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">AI Agent Analytics</h5>
+                            <canvas id="aiPerformanceChart" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h5 class="mb-3">Voicemail Detection Accuracy</h5>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Overall Accuracy</span>
+                                    <span>98.2%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 98.2%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Human Detection</span>
+                                    <span>97.8%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" style="width: 97.8%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Voicemail Detection</span>
+                                    <span>98.7%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" style="width: 98.7%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Answering Machine</span>
+                                    <span>99.1%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" style="width: 99.1%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Activity Feed -->
+                <div class="bg-white rounded shadow-sm">
+                    <div class="p-4 border-bottom">
+                        <h5 class="mb-0">Real-time Activity Feed</h5>
+                    </div>
+                    <div class="p-4">
+                        <div class="activity-feed">
+                            <div class="activity-item d-flex align-items-start mb-3">
+                                <div class="activity-icon bg-success rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-telephone text-white"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <strong>Sarah Johnson</strong> connected with <strong>John Smith</strong> from Acme Corp
+                                    <br><small class="text-secondary">2 minutes ago • Duration: 5:23 min</small>
+                                </div>
+                            </div>
+                            <div class="activity-item d-flex align-items-start mb-3">
+                                <div class="activity-icon bg-warning rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-robot text-white"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <strong>AI Agent 1</strong> detected voicemail for <strong>Mike Wilson</strong>
+                                    <br><small class="text-secondary">5 minutes ago • Left message</small>
+                                </div>
+                            </div>
+                            <div class="activity-item d-flex align-items-start mb-3">
+                                <div class="activity-icon bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-arrow-left-right text-white"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <strong>AI Agent 2</strong> transferred <strong>Lisa Brown</strong> to <strong>Mike Chen</strong>
+                                    <br><small class="text-secondary">8 minutes ago • Qualified lead</small>
+                                </div>
+                            </div>
+                            <div class="activity-item d-flex align-items-start mb-3">
+                                <div class="activity-icon bg-danger rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-telephone-x text-white"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <strong>David Lee</strong> - No answer from <strong>Robert Johnson</strong>
+                                    <br><small class="text-secondary">12 minutes ago • Scheduled follow-up</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="crm-section" class="dashboard-section">
@@ -1875,6 +2199,63 @@
                         plugins: {
                             legend: {
                                 display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Call Outcomes Chart (Analytics)
+            const callOutcomesCtx = document.getElementById('callOutcomesChart');
+            if (callOutcomesCtx) {
+                new Chart(callOutcomesCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Connected', 'Voicemail', 'No Answer', 'Busy/Invalid'],
+                        datasets: [{
+                            data: [68.5, 18.2, 8.7, 4.6],
+                            backgroundColor: ['#10B981', '#F59E0B', '#EF4444', '#6B7280']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // AI Performance Chart (Analytics)
+            const aiPerformanceCtx = document.getElementById('aiPerformanceChart');
+            if (aiPerformanceCtx) {
+                new Chart(aiPerformanceCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['AI Agent 1', 'AI Agent 2', 'AI Agent 3', 'AI Agent 4', 'AI Agent 5'],
+                        datasets: [{
+                            label: 'Calls Handled',
+                            data: [234, 198, 156, 142, 89],
+                            backgroundColor: '#5B5FDE'
+                        }, {
+                            label: 'Successful Transfers',
+                            data: [89, 76, 58, 45, 32],
+                            backgroundColor: '#10B981'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
                             }
                         }
                     }
