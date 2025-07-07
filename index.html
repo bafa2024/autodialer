@@ -398,7 +398,7 @@
                 <a class="navbar-brand fw-bold" href="javascript:void(0);" onclick="showPage('landing-page')">
                     <i class="bi bi-telephone-fill text-primary"></i> AutoDial Pro
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -1475,8 +1475,301 @@
             <!-- CRM Section -->
             <div id="crm-section" class="dashboard-section">
                 <h4 class="mb-4">CRM Integration</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>CRM integration settings go here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>CRM Integration Management</h5>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCrmModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Add New Integration
+                                </button>
+                            </div>
+                            
+                            <!-- Connected CRMs -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Connected CRMs</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <img src="https://via.placeholder.com/40x40/00A1E0/FFFFFF?text=SF" class="me-3" alt="Salesforce">
+                                                    <div>
+                                                        <h6 class="mb-0">Salesforce</h6>
+                                                        <small class="text-success">
+                                                            <i class="bi bi-circle-fill me-1"></i>Connected
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="d-flex justify-content-between small mb-1">
+                                                        <span>Last Sync:</span>
+                                                        <strong>5 minutes ago</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between small mb-1">
+                                                        <span>Contacts Synced:</span>
+                                                        <strong>12,847</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between small">
+                                                        <span>Calls Logged:</span>
+                                                        <strong>8,234</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                    <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <img src="https://via.placeholder.com/40x40/FF5733/FFFFFF?text=HS" class="me-3" alt="HubSpot">
+                                                    <div>
+                                                        <h6 class="mb-0">HubSpot</h6>
+                                                        <small class="text-warning">
+                                                            <i class="bi bi-circle-fill me-1"></i>Pending Setup
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <div class="d-flex justify-content-between small mb-1">
+                                                        <span>Status:</span>
+                                                        <strong>API Key Required</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between small mb-1">
+                                                        <span>Contacts:</span>
+                                                        <strong>0</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between small">
+                                                        <span>Calls:</span>
+                                                        <strong>0</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-sm btn-outline-primary flex-fill">Complete Setup</button>
+                                                    <button class="btn btn-sm btn-outline-secondary flex-fill">Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sync Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Sync Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Sync Frequency</label>
+                                        <select class="form-select" aria-label="Sync frequency selection">
+                                            <option>Real-time (Recommended)</option>
+                                            <option>Every 5 minutes</option>
+                                            <option>Every 15 minutes</option>
+                                            <option>Every hour</option>
+                                            <option>Manual only</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Sync Direction</label>
+                                        <select class="form-select" aria-label="Sync direction selection">
+                                            <option>Bidirectional</option>
+                                            <option>AutoDial → CRM only</option>
+                                            <option>CRM → AutoDial only</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="syncContacts" checked>
+                                            <label class="form-check-label" for="syncContacts">
+                                                Sync Contacts Automatically
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="syncCalls" checked>
+                                            <label class="form-check-label" for="syncCalls">
+                                                Log Call Activities
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="syncOutcomes" checked>
+                                            <label class="form-check-label" for="syncOutcomes">
+                                                Update Lead Status
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="syncNotes">
+                                            <label class="form-check-label" for="syncNotes">
+                                                Sync Call Notes and Dispositions
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Field Mapping -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Field Mapping</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>AutoDial Field</th>
+                                                <th>CRM Field</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>First Name</td>
+                                                <td>First Name</td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Last Name</td>
+                                                <td>Last Name</td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone Number</td>
+                                                <td>Phone</td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td>Email</td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Company</td>
+                                                <td>Company</td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lead Status</td>
+                                                <td>Lead Status</td>
+                                                <td><span class="badge bg-warning">Needs Review</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Map</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Sync Actions -->
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-arrow-repeat me-2"></i>Force Sync Now
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="bi bi-download me-2"></i>Export Sync Log
+                                </button>
+                                <button class="btn btn-outline-warning">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>Test Connection
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Sync Status -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Sync Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Last Sync:</span>
+                                    <strong>5 minutes ago</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Next Sync:</span>
+                                    <strong>In 2 minutes</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Sync Status:</span>
+                                    <strong class="text-success">Active</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Errors:</span>
+                                    <strong class="text-success">0</strong>
+                                </div>
+                            </div>
+                            <div class="progress mb-3" style="height: 10px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                            </div>
+                            <small class="text-muted">All systems operational</small>
+                        </div>
+                        
+                        <!-- Recent Sync Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Sync Activity</h6>
+                            <div class="small">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Contacts synced</span>
+                                    <strong class="text-success">+45</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Calls logged</span>
+                                    <strong class="text-primary">+23</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Status updates</span>
+                                    <strong class="text-info">+12</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Errors</span>
+                                    <strong class="text-success">0</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Available CRMs -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Available CRMs</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex align-items-center px-0">
+                                    <img src="https://via.placeholder.com/30x30/00A1E0/FFFFFF?text=SF" class="me-2" alt="Salesforce">
+                                    <span>Salesforce</span>
+                                    <span class="badge bg-success ms-auto">Connected</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center px-0">
+                                    <img src="https://via.placeholder.com/30x30/FF5733/FFFFFF?text=HS" class="me-2" alt="HubSpot">
+                                    <span>HubSpot</span>
+                                    <span class="badge bg-warning ms-auto">Setup</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center px-0">
+                                    <img src="https://via.placeholder.com/30x30/00D084/FFFFFF?text=PD" class="me-2" alt="Pipedrive">
+                                    <span>Pipedrive</span>
+                                    <span class="badge bg-secondary ms-auto">Available</span>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center px-0">
+                                    <img src="https://via.placeholder.com/30x30/FFC107/FFFFFF?text=Z" class="me-2" alt="Zoho">
+                                    <span>Zoho CRM</span>
+                                    <span class="badge bg-secondary ms-auto">Available</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1794,9 +2087,397 @@
 
             <!-- Profile Section -->
             <div id="profile-section" class="dashboard-section">
-                <h4 class="mb-4">Profile</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>User profile management goes here...</p>
+                <h4 class="mb-4">Profile Management</h4>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <!-- Profile Card -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="text-center mb-4">
+                                <div class="position-relative d-inline-block mb-3">
+                                    <img src="https://via.placeholder.com/120x120/5B5FDE/FFFFFF?text=SJ" 
+                                         class="rounded-circle" alt="Profile Picture" style="width: 120px; height: 120px;">
+                                    <button class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle" 
+                                            style="width: 32px; height: 32px;" aria-label="Change profile picture">
+                                        <i class="bi bi-camera"></i>
+                                    </button>
+                                </div>
+                                <h5 class="mb-1">Sarah Johnson</h5>
+                                <p class="text-muted mb-2">Senior Sales Manager</p>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            
+                            <!-- Quick Stats -->
+                            <div class="border-top pt-3">
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <h6 class="mb-1">1,234</h6>
+                                        <small class="text-muted">Calls Made</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <h6 class="mb-1">89%</h6>
+                                        <small class="text-muted">Success Rate</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <h6 class="mb-1">$45K</h6>
+                                        <small class="text-muted">Revenue</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Account Status -->
+                        <div class="bg-white p-4 rounded shadow-sm mt-4">
+                            <h6 class="mb-3">Account Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Plan:</span>
+                                    <strong>Professional</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Billing Cycle:</span>
+                                    <strong>Monthly</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Next Billing:</span>
+                                    <strong>Dec 15, 2024</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Status:</span>
+                                    <strong class="text-success">Active</strong>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-credit-card me-2"></i>Manage Billing
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <!-- Profile Tabs -->
+                        <div class="bg-white rounded shadow-sm">
+                            <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab">
+                                        <i class="bi bi-person me-2"></i>Personal Info
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="preferences-tab" data-bs-toggle="tab" data-bs-target="#preferences" type="button" role="tab">
+                                        <i class="bi bi-gear me-2"></i>Preferences
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                                        <i class="bi bi-shield me-2"></i>Security
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab">
+                                        <i class="bi bi-bell me-2"></i>Notifications
+                                    </button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content p-4" id="profileTabsContent">
+                                <!-- Personal Information Tab -->
+                                <div class="tab-pane fade show active" id="personal" role="tabpanel">
+                                    <h5 class="mb-4">Personal Information</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">First Name</label>
+                                                <input type="text" class="form-control" value="Sarah" aria-label="First name">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" value="Johnson" aria-label="Last name">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" value="sarah.johnson@company.com" aria-label="Email address">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Phone Number</label>
+                                                <input type="tel" class="form-control" value="+1 (555) 123-4567" aria-label="Phone number">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Job Title</label>
+                                                <input type="text" class="form-control" value="Senior Sales Manager" aria-label="Job title">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Department</label>
+                                                <input type="text" class="form-control" value="Sales" aria-label="Department">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Bio</label>
+                                                <textarea class="form-control" rows="3" placeholder="Tell us about yourself..." aria-label="Bio">Experienced sales professional with 8+ years in B2B sales and team management. Specialized in enterprise software solutions and building long-term client relationships.</textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-check-circle me-2"></i>Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <!-- Preferences Tab -->
+                                <div class="tab-pane fade" id="preferences" role="tabpanel">
+                                    <h5 class="mb-4">Preferences</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Time Zone</label>
+                                                <select class="form-select" aria-label="Time zone selection">
+                                                    <option>Eastern Time (ET)</option>
+                                                    <option>Central Time (CT)</option>
+                                                    <option>Mountain Time (MT)</option>
+                                                    <option>Pacific Time (PT)</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Language</label>
+                                                <select class="form-select" aria-label="Language selection">
+                                                    <option>English (US)</option>
+                                                    <option>Spanish</option>
+                                                    <option>French</option>
+                                                    <option>German</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Date Format</label>
+                                                <select class="form-select" aria-label="Date format selection">
+                                                    <option>MM/DD/YYYY</option>
+                                                    <option>DD/MM/YYYY</option>
+                                                    <option>YYYY-MM-DD</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Time Format</label>
+                                                <select class="form-select" aria-label="Time format selection">
+                                                    <option>12-hour (AM/PM)</option>
+                                                    <option>24-hour</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Default Dialing Mode</label>
+                                                <select class="form-select" aria-label="Default dialing mode selection">
+                                                    <option>Predictive</option>
+                                                    <option>Progressive</option>
+                                                    <option>Preview</option>
+                                                    <option>Power</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="autoLogin" checked>
+                                                    <label class="form-check-label" for="autoLogin">
+                                                        Remember me on this device
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="showTutorials">
+                                                    <label class="form-check-label" for="showTutorials">
+                                                        Show feature tutorials
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="compactMode">
+                                                    <label class="form-check-label" for="compactMode">
+                                                        Use compact mode
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-check-circle me-2"></i>Save Preferences
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <!-- Security Tab -->
+                                <div class="tab-pane fade" id="security" role="tabpanel">
+                                    <h5 class="mb-4">Security Settings</h5>
+                                    
+                                    <!-- Change Password -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">Change Password</h6>
+                                        <form>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Current Password</label>
+                                                    <input type="password" class="form-control" aria-label="Current password">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">New Password</label>
+                                                    <input type="password" class="form-control" aria-label="New password">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Confirm New Password</label>
+                                                    <input type="password" class="form-control" aria-label="Confirm new password">
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="bi bi-key me-2"></i>Update Password
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- Two-Factor Authentication -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">Two-Factor Authentication</h6>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="me-3">
+                                                <span class="badge bg-success">Enabled</span>
+                                            </div>
+                                            <div>
+                                                <strong>Authenticator App</strong>
+                                                <br>
+                                                <small class="text-muted">Last used: 2 hours ago</small>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm">
+                                            <i class="bi bi-gear me-2"></i>Manage 2FA
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Login History -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">Recent Login Activity</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date & Time</th>
+                                                        <th>Location</th>
+                                                        <th>Device</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Nov 14, 2024 2:30 PM</td>
+                                                        <td>New York, NY</td>
+                                                        <td>Chrome on Windows</td>
+                                                        <td><span class="badge bg-success">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nov 14, 2024 9:15 AM</td>
+                                                        <td>New York, NY</td>
+                                                        <td>Chrome on Windows</td>
+                                                        <td><span class="badge bg-success">Success</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nov 13, 2024 5:45 PM</td>
+                                                        <td>Unknown Location</td>
+                                                        <td>Mobile Browser</td>
+                                                        <td><span class="badge bg-warning">Suspicious</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Account Actions -->
+                                    <div class="border-top pt-3">
+                                        <h6 class="mb-3">Account Actions</h6>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="bi bi-download me-2"></i>Export Data
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="bi bi-trash me-2"></i>Delete Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Notifications Tab -->
+                                <div class="tab-pane fade" id="notifications" role="tabpanel">
+                                    <h5 class="mb-4">Notification Preferences</h5>
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <h6 class="mb-3">Email Notifications</h6>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="emailCampaignComplete" checked>
+                                                    <label class="form-check-label" for="emailCampaignComplete">
+                                                        Campaign completion reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="emailDailyReports" checked>
+                                                    <label class="form-check-label" for="emailDailyReports">
+                                                        Daily performance summaries
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="emailWeeklyReports">
+                                                    <label class="form-check-label" for="emailWeeklyReports">
+                                                        Weekly performance reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="emailSystemAlerts">
+                                                    <label class="form-check-label" for="emailSystemAlerts">
+                                                        System maintenance alerts
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <h6 class="mb-3">In-App Notifications</h6>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inAppNewLeads" checked>
+                                                    <label class="form-check-label" for="inAppNewLeads">
+                                                        New lead assignments
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inAppCallAlerts" checked>
+                                                    <label class="form-check-label" for="inAppCallAlerts">
+                                                        Call alerts and reminders
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inAppAchievements">
+                                                    <label class="form-check-label" for="inAppAchievements">
+                                                        Achievement notifications
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="inAppTeamUpdates">
+                                                    <label class="form-check-label" for="inAppTeamUpdates">
+                                                        Team activity updates
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <h6 class="mb-3">Notification Frequency</h6>
+                                                <select class="form-select" aria-label="Notification frequency selection">
+                                                    <option>Immediate</option>
+                                                    <option>Every 15 minutes</option>
+                                                    <option>Every hour</option>
+                                                    <option>Daily digest</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-check-circle me-2"></i>Save Notification Settings
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2487,22 +3168,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Upload Contact List</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
                             <label class="form-label">Select File (.csv or .xlsx)</label>
-                            <input type="file" class="form-control" accept=".csv,.xlsx,.xls">
+                            <input type="file" class="form-control" accept=".csv,.xlsx,.xls" aria-label="Select contact file">
                             <small class="text-muted">Maximum 2000 contacts per file</small>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">List Name</label>
-                            <input type="text" class="form-control" placeholder="e.g., Q1 Sales Leads">
+                            <input type="text" class="form-control" placeholder="e.g., Q1 Sales Leads" aria-label="List name">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">List Type</label>
-                            <select class="form-select">
+                            <select class="form-select" aria-label="List type selection">
                                 <option>Sales Prospects</option>
                                 <option>Customer Follow-up</option>
                                 <option>Lead Nurturing</option>
@@ -2525,18 +3206,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New AI Agent</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Agent Name</label>
-                                <input type="text" class="form-control" placeholder="e.g., Sales Agent Sarah">
+                                <input type="text" class="form-control" placeholder="e.g., Sales Agent Sarah" aria-label="Agent name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Agent Type</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Agent type selection">
                                     <option>Sales</option>
                                     <option>Support</option>
                                     <option>Lead Qualification</option>
@@ -2546,7 +3227,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Primary Language</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Primary language selection">
                                     <option>English (US)</option>
                                     <option>Spanish</option>
                                     <option>French</option>
@@ -2555,7 +3236,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Voice Selection</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Voice selection">
                                     <option>Sarah - Professional Female</option>
                                     <option>Mike - Friendly Male</option>
                                     <option>Emma - Warm Female</option>
@@ -2604,18 +3285,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New Campaign</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">Campaign Name</label>
-                                <input type="text" class="form-control" placeholder="e.g., Q1 Sales Outreach">
+                                <input type="text" class="form-control" placeholder="e.g., Q1 Sales Outreach" aria-label="Campaign name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Campaign Type</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Campaign type selection">
                                     <option>Sales Outreach</option>
                                     <option>Customer Follow-up</option>
                                     <option>Lead Nurturing</option>
@@ -2625,19 +3306,19 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Start Date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" aria-label="Start date">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">End Date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" aria-label="End date">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Campaign Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Describe the campaign goals and target audience..."></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Describe the campaign goals and target audience..." aria-label="Campaign description"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Dialing Mode</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Dialing mode selection">
                                     <option>Predictive</option>
                                     <option>Progressive</option>
                                     <option>Preview</option>
@@ -2646,7 +3327,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Target Contacts</label>
-                                <input type="number" class="form-control" placeholder="Number of contacts to target">
+                                <input type="number" class="form-control" placeholder="Number of contacts to target" aria-label="Target contacts">
                             </div>
                         </div>
                     </form>
@@ -2665,22 +3346,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Bulk Upload Contacts</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
                             <label class="form-label">Select File (.csv or .xlsx)</label>
-                            <input type="file" class="form-control" accept=".csv,.xlsx,.xls">
+                            <input type="file" class="form-control" accept=".csv,.xlsx,.xls" aria-label="Select contact file">
                             <small class="text-muted">Maximum 10,000 contacts per file</small>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">List Name</label>
-                            <input type="text" class="form-control" placeholder="e.g., Q1 Sales Leads">
+                            <input type="text" class="form-control" placeholder="e.g., Q1 Sales Leads" aria-label="List name">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Lead Source</label>
-                            <select class="form-select">
+                            <select class="form-select" aria-label="Lead source selection">
                                 <option>Website</option>
                                 <option>Phone Call</option>
                                 <option>Email Campaign</option>
@@ -2713,34 +3394,34 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add New Contact</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" required aria-label="First name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" required aria-label="Last name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="+1 (555) 000-0000" required>
+                                <input type="tel" class="form-control" placeholder="+1 (555) 000-0000" required aria-label="Phone number">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control">
+                                <input type="email" class="form-control" aria-label="Email address">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Company</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" aria-label="Company name">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Lead Source</label>
-                                <select class="form-select">
+                                <select class="form-select" aria-label="Lead source selection">
                                     <option>Website</option>
                                     <option>Phone Call</option>
                                     <option>Email Campaign</option>
@@ -2758,6 +3439,97 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary">Add Contact</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add CRM Integration Modal -->
+    <div class="modal fade" id="addCrmModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New CRM Integration</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">CRM Platform</label>
+                                <select class="form-select" aria-label="CRM platform selection">
+                                    <option>Salesforce</option>
+                                    <option>HubSpot</option>
+                                    <option>Pipedrive</option>
+                                    <option>Zoho CRM</option>
+                                    <option>Microsoft Dynamics</option>
+                                    <option>Oracle CRM</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Integration Name</label>
+                                <input type="text" class="form-control" placeholder="e.g., Main Salesforce Instance" aria-label="Integration name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">API Key / Access Token</label>
+                                <input type="password" class="form-control" placeholder="Enter your API key" aria-label="API key">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Instance URL (for Salesforce)</label>
+                                <input type="url" class="form-control" placeholder="https://yourinstance.salesforce.com" aria-label="Instance URL">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Sync Options</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="syncContactsNew" checked>
+                                    <label class="form-check-label" for="syncContactsNew">
+                                        Sync Contacts Automatically
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="syncCallsNew" checked>
+                                    <label class="form-check-label" for="syncCallsNew">
+                                        Log Call Activities
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="syncOutcomesNew" checked>
+                                    <label class="form-check-label" for="syncOutcomesNew">
+                                        Update Lead Status
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="syncNotesNew">
+                                    <label class="form-check-label" for="syncNotesNew">
+                                        Sync Call Notes and Dispositions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Sync Frequency</label>
+                                <select class="form-select" aria-label="Sync frequency selection">
+                                    <option>Real-time (Recommended)</option>
+                                    <option>Every 5 minutes</option>
+                                    <option>Every 15 minutes</option>
+                                    <option>Every hour</option>
+                                    <option>Manual only</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Sync Direction</label>
+                                <select class="form-select" aria-label="Sync direction selection">
+                                    <option>Bidirectional</option>
+                                    <option>AutoDial → CRM only</option>
+                                    <option>CRM → AutoDial only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Test Connection</button>
+                    <button type="button" class="btn btn-success">Add Integration</button>
                 </div>
             </div>
         </div>
