@@ -2483,9 +2483,433 @@
 
             <!-- Upload Contacts Section -->
             <div id="upload-contacts-section" class="dashboard-section">
-                <h4 class="mb-4">Upload Contacts</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Bulk contact upload interface goes here...</p>
+                <h4 class="mb-4">Bulk Contact Upload</h4>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Upload Contact List</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary me-2" onclick="downloadTemplate()">
+                                        <i class="bi bi-download me-2"></i>Download Template
+                                    </button>
+                                    <button class="btn btn-primary" onclick="showUploadHistory()">
+                                        <i class="bi bi-clock-history me-2"></i>Upload History
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Upload Steps -->
+                            <div class="mb-4">
+                                <div class="progress mb-3" style="height: 8px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 25%" id="uploadProgress"></div>
+                                </div>
+                                <div class="d-flex justify-content-between small text-muted">
+                                    <span>1. Upload File</span>
+                                    <span>2. Map Fields</span>
+                                    <span>3. Validate Data</span>
+                                    <span>4. Import Contacts</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 1: File Upload -->
+                            <div id="step1" class="upload-step active">
+                                <h6 class="mb-3">Step 1: Upload Your Contact File</h6>
+                                <div class="border-2 border-dashed border-secondary rounded p-5 text-center" 
+                                     style="border: 2px dashed #dee2e6; background-color: #f8f9fa;">
+                                    <i class="bi bi-cloud-upload fs-1 text-muted mb-3"></i>
+                                    <h5 class="mb-3">Drag & Drop your file here</h5>
+                                    <p class="text-muted mb-3">or click to browse</p>
+                                    <input type="file" class="form-control d-none" id="contactFile" accept=".csv,.xlsx,.xls" onchange="handleFileUpload(this)">
+                                    <button class="btn btn-primary" onclick="document.getElementById('contactFile').click()">
+                                        <i class="bi bi-folder2-open me-2"></i>Choose File
+                                    </button>
+                                    <div class="mt-3">
+                                        <small class="text-muted">
+                                            Supported formats: CSV, Excel (.xlsx, .xls)<br>
+                                            Maximum file size: 10MB | Maximum contacts: 10,000
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <!-- File Requirements -->
+                                <div class="mt-4">
+                                    <h6 class="mb-3">File Requirements</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="border rounded p-3">
+                                                <h6 class="mb-2">Required Fields</h6>
+                                                <ul class="list-unstyled small mb-0">
+                                                    <li><i class="bi bi-check-circle text-success me-2"></i>First Name</li>
+                                                    <li><i class="bi bi-check-circle text-success me-2"></i>Last Name</li>
+                                                    <li><i class="bi bi-check-circle text-success me-2"></i>Phone Number</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="border rounded p-3">
+                                                <h6 class="mb-2">Optional Fields</h6>
+                                                <ul class="list-unstyled small mb-0">
+                                                    <li><i class="bi bi-circle text-muted me-2"></i>Email Address</li>
+                                                    <li><i class="bi bi-circle text-muted me-2"></i>Company</li>
+                                                    <li><i class="bi bi-circle text-muted me-2"></i>Job Title</li>
+                                                    <li><i class="bi bi-circle text-muted me-2"></i>Notes</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Field Mapping -->
+                            <div id="step2" class="upload-step" style="display: none;">
+                                <h6 class="mb-3">Step 2: Map Your Fields</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>AutoDial Field</th>
+                                                <th>Your File Column</th>
+                                                <th>Sample Data</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="fieldMappingTable">
+                                            <tr>
+                                                <td><strong>First Name *</strong></td>
+                                                <td>
+                                                    <select class="form-select form-select-sm" aria-label="First name mapping">
+                                                        <option value="">Select column...</option>
+                                                        <option value="first_name" selected>First Name</option>
+                                                        <option value="fname">FName</option>
+                                                        <option value="firstname">FirstName</option>
+                                                    </select>
+                                                </td>
+                                                <td><small class="text-muted">John</small></td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Last Name *</strong></td>
+                                                <td>
+                                                    <select class="form-select form-select-sm" aria-label="Last name mapping">
+                                                        <option value="">Select column...</option>
+                                                        <option value="last_name" selected>Last Name</option>
+                                                        <option value="lname">LName</option>
+                                                        <option value="lastname">LastName</option>
+                                                    </select>
+                                                </td>
+                                                <td><small class="text-muted">Smith</small></td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Phone Number *</strong></td>
+                                                <td>
+                                                    <select class="form-select form-select-sm" aria-label="Phone number mapping">
+                                                        <option value="">Select column...</option>
+                                                        <option value="phone" selected>Phone</option>
+                                                        <option value="phone_number">Phone Number</option>
+                                                        <option value="mobile">Mobile</option>
+                                                    </select>
+                                                </td>
+                                                <td><small class="text-muted">+1 (555) 123-4567</small></td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email Address</td>
+                                                <td>
+                                                    <select class="form-select form-select-sm" aria-label="Email mapping">
+                                                        <option value="">Select column...</option>
+                                                        <option value="email" selected>Email</option>
+                                                        <option value="email_address">Email Address</option>
+                                                    </select>
+                                                </td>
+                                                <td><small class="text-muted">john.smith@email.com</small></td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Company</td>
+                                                <td>
+                                                    <select class="form-select form-select-sm" aria-label="Company mapping">
+                                                        <option value="">Select column...</option>
+                                                        <option value="company" selected>Company</option>
+                                                        <option value="organization">Organization</option>
+                                                    </select>
+                                                </td>
+                                                <td><small class="text-muted">ABC Corp</small></td>
+                                                <td><span class="badge bg-success">Mapped</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-primary" onclick="validateMapping()">
+                                        <i class="bi bi-check-circle me-2"></i>Validate Mapping
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="previousStep()">
+                                        <i class="bi bi-arrow-left me-2"></i>Previous
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3: Data Validation -->
+                            <div id="step3" class="upload-step" style="display: none;">
+                                <h6 class="mb-3">Step 3: Validate Your Data</h6>
+                                
+                                <!-- Validation Summary -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-primary mb-1">1,247</h4>
+                                            <small class="text-muted">Total Records</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-success mb-1">1,189</h4>
+                                            <small class="text-muted">Valid Records</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-warning mb-1">45</h4>
+                                            <small class="text-muted">Warnings</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="border rounded p-3 text-center">
+                                            <h4 class="text-danger mb-1">13</h4>
+                                            <small class="text-muted">Errors</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Validation Details -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">Validation Results</h6>
+                                    <div class="accordion" id="validationAccordion">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#errorsCollapse">
+                                                    <i class="bi bi-exclamation-triangle text-danger me-2"></i>
+                                                    Errors (13 records)
+                                                </button>
+                                            </h2>
+                                            <div id="errorsCollapse" class="accordion-collapse collapse show" data-bs-parent="#validationAccordion">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Row</th>
+                                                                    <th>Field</th>
+                                                                    <th>Issue</th>
+                                                                    <th>Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>15</td>
+                                                                    <td>Phone</td>
+                                                                    <td>Invalid format</td>
+                                                                    <td>abc123</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>23</td>
+                                                                    <td>Email</td>
+                                                                    <td>Invalid format</td>
+                                                                    <td>not-an-email</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>45</td>
+                                                                    <td>First Name</td>
+                                                                    <td>Missing required field</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#warningsCollapse">
+                                                    <i class="bi bi-exclamation-circle text-warning me-2"></i>
+                                                    Warnings (45 records)
+                                                </button>
+                                            </h2>
+                                            <div id="warningsCollapse" class="accordion-collapse collapse" data-bs-parent="#validationAccordion">
+                                                <div class="accordion-body">
+                                                    <p class="text-muted">Records with warnings will still be imported but may need attention.</p>
+                                                    <ul class="list-unstyled">
+                                                        <li><i class="bi bi-circle text-warning me-2"></i>23 records with duplicate phone numbers</li>
+                                                        <li><i class="bi bi-circle text-warning me-2"></i>18 records with missing email addresses</li>
+                                                        <li><i class="bi bi-circle text-warning me-2"></i>4 records with unusual phone number formats</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-success" onclick="proceedToImport()">
+                                        <i class="bi bi-check-circle me-2"></i>Proceed with Import
+                                    </button>
+                                    <button class="btn btn-outline-secondary" onclick="previousStep()">
+                                        <i class="bi bi-arrow-left me-2"></i>Previous
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="fixErrors()">
+                                        <i class="bi bi-tools me-2"></i>Fix Errors
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 4: Import Progress -->
+                            <div id="step4" class="upload-step" style="display: none;">
+                                <h6 class="mb-3">Step 4: Importing Contacts</h6>
+                                <div class="text-center">
+                                    <div class="mb-4">
+                                        <i class="bi bi-arrow-repeat fs-1 text-primary mb-3" style="animation: spin 2s linear infinite;"></i>
+                                        <h5>Importing your contacts...</h5>
+                                        <p class="text-muted">Please don't close this window</p>
+                                    </div>
+                                    
+                                    <div class="progress mb-3" style="height: 20px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                             role="progressbar" style="width: 65%" id="importProgress">
+                                            65%
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row g-3 text-center">
+                                        <div class="col-md-4">
+                                            <h6 class="text-success">1,189</h6>
+                                            <small class="text-muted">Imported</small>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-warning">45</h6>
+                                            <small class="text-muted">With Warnings</small>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="text-danger">13</h6>
+                                            <small class="text-muted">Failed</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Upload Settings -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Upload Settings</h6>
+                            <div class="mb-3">
+                                <label class="form-label">List Name</label>
+                                <input type="text" class="form-control" placeholder="e.g., Q1 Sales Leads" aria-label="List name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Lead Source</label>
+                                <select class="form-select" aria-label="Lead source selection">
+                                    <option>Website</option>
+                                    <option>Phone Call</option>
+                                    <option>Email Campaign</option>
+                                    <option>Referral</option>
+                                    <option>Social Media</option>
+                                    <option>Trade Show</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Campaign Assignment</label>
+                                <select class="form-select" aria-label="Campaign assignment">
+                                    <option>No Campaign</option>
+                                    <option>Q1 Sales Outreach</option>
+                                    <option>Customer Follow-up</option>
+                                    <option>Lead Nurturing</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="skipDuplicates" checked>
+                                    <label class="form-check-label" for="skipDuplicates">
+                                        Skip duplicate phone numbers
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="validateEmails">
+                                    <label class="form-check-label" for="validateEmails">
+                                        Validate email addresses
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="autoFormatPhones" checked>
+                                    <label class="form-check-label" for="autoFormatPhones">
+                                        Auto-format phone numbers
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Uploads -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Uploads</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Q1 Sales Leads</h6>
+                                            <small class="text-muted">1,247 contacts • 2 hours ago</small>
+                                        </div>
+                                        <span class="badge bg-success">Complete</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Customer Follow-up</h6>
+                                            <small class="text-muted">856 contacts • 1 day ago</small>
+                                        </div>
+                                        <span class="badge bg-success">Complete</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item px-0">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1">Trade Show Leads</h6>
+                                            <small class="text-muted">234 contacts • 3 days ago</small>
+                                        </div>
+                                        <span class="badge bg-warning">Partial</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Help & Tips -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Help & Tips</h6>
+                            <div class="small">
+                                <div class="mb-2">
+                                    <strong>File Format:</strong>
+                                    <p class="text-muted mb-1">Use CSV or Excel files with headers in the first row</p>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Phone Numbers:</strong>
+                                    <p class="text-muted mb-1">Include country code for international numbers</p>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Email Validation:</strong>
+                                    <p class="text-muted mb-1">Invalid emails will be flagged but can still be imported</p>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Duplicates:</strong>
+                                    <p class="text-muted mb-1">Enable duplicate checking to avoid importing existing contacts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -3844,6 +4268,174 @@
             });
             event.target.classList.add('active');
         }
+
+        // Bulk Upload Functions
+        function handleFileUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                // Validate file type and size
+                const validTypes = ['.csv', '.xlsx', '.xls'];
+                const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+                
+                if (!validTypes.includes(fileExtension)) {
+                    showNotification('Please select a valid file type (CSV, Excel)', 'error');
+                    return;
+                }
+                
+                if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                    showNotification('File size must be less than 10MB', 'error');
+                    return;
+                }
+                
+                // Simulate file processing
+                showNotification('File uploaded successfully!', 'success');
+                updateProgress(25);
+                
+                // Move to next step
+                setTimeout(() => {
+                    showStep(2);
+                }, 1000);
+            }
+        }
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.upload-step').forEach(step => {
+                step.style.display = 'none';
+            });
+            
+            // Show current step
+            const currentStep = document.getElementById('step' + stepNumber);
+            if (currentStep) {
+                currentStep.style.display = 'block';
+            }
+            
+            // Update progress bar
+            const progress = (stepNumber - 1) * 33.33;
+            updateProgress(progress);
+        }
+
+        function previousStep() {
+            const currentStep = getCurrentStep();
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        function getCurrentStep() {
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById('step' + i);
+                if (step && step.style.display !== 'none') {
+                    return i;
+                }
+            }
+            return 1;
+        }
+
+        function updateProgress(percentage) {
+            const progressBar = document.getElementById('uploadProgress');
+            if (progressBar) {
+                progressBar.style.width = percentage + '%';
+                progressBar.textContent = Math.round(percentage) + '%';
+            }
+        }
+
+        function validateMapping() {
+            // Simulate validation process
+            showNotification('Validating field mapping...', 'info');
+            
+            setTimeout(() => {
+                showNotification('Field mapping validated successfully!', 'success');
+                showStep(3);
+            }, 2000);
+        }
+
+        function proceedToImport() {
+            showStep(4);
+            
+            // Simulate import process
+            let progress = 0;
+            const importProgress = document.getElementById('importProgress');
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        showNotification('Import completed successfully!', 'success');
+                        // Reset to step 1
+                        setTimeout(() => {
+                            showStep(1);
+                            updateProgress(0);
+                        }, 2000);
+                    }, 1000);
+                }
+                
+                if (importProgress) {
+                    importProgress.style.width = progress + '%';
+                    importProgress.textContent = Math.round(progress) + '%';
+                }
+            }, 500);
+        }
+
+        function fixErrors() {
+            showNotification('Opening error correction interface...', 'info');
+            // This would typically open a modal or interface to fix validation errors
+        }
+
+        function downloadTemplate() {
+            // Create a sample CSV template
+            const csvContent = "First Name,Last Name,Phone Number,Email,Company,Job Title,Notes\nJohn,Smith,+1 (555) 123-4567,john.smith@email.com,ABC Corp,Sales Manager,Sample contact\nJane,Doe,+1 (555) 987-6543,jane.doe@email.com,XYZ Inc,Director,Another sample";
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'contact_template.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Template downloaded successfully!', 'success');
+        }
+
+        function showUploadHistory() {
+            showNotification('Opening upload history...', 'info');
+            // This would typically open a modal showing upload history
+        }
+
+        // Drag and drop functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.querySelector('.border-dashed');
+            
+            if (dropZone) {
+                dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    dropZone.style.backgroundColor = '#e9ecef';
+                    dropZone.style.borderColor = '#5B5FDE';
+                });
+                
+                dropZone.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    dropZone.style.backgroundColor = '#f8f9fa';
+                    dropZone.style.borderColor = '#dee2e6';
+                });
+                
+                dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    dropZone.style.backgroundColor = '#f8f9fa';
+                    dropZone.style.borderColor = '#dee2e6';
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const fileInput = document.getElementById('contactFile');
+                        fileInput.files = files;
+                        handleFileUpload(fileInput);
+                    }
+                });
+            }
+        });
     </script>
 </body>
 </html>
