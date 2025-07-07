@@ -42,6 +42,10 @@
                     <i class="bi bi-diagram-3 me-2"></i>
                     <span class="d-none d-md-inline">CRM Integration</span>
                 </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('crm-connection')">
+                    <i class="bi bi-link-45deg me-2"></i>
+                    <span class="d-none d-md-inline">CRM Connection</span>
+                </a>
                 <a class="sidebar-link" href="#" onclick="showDashboardSection('settings')">
                     <i class="bi bi-gear me-2"></i>
                     <span class="d-none d-md-inline">Settings</span>
@@ -49,6 +53,70 @@
                 <a class="sidebar-link" href="#" onclick="showDashboardSection('profile')">
                     <i class="bi bi-person me-2"></i>
                     <span class="d-none d-md-inline">Profile</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('upload-contacts')">
+                    <i class="bi bi-upload me-2"></i>
+                    <span class="d-none d-md-inline">Upload Contacts</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('manual-dial')">
+                    <i class="bi bi-telephone-plus me-2"></i>
+                    <span class="d-none d-md-inline">Manual Dial</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('dialing-ratio')">
+                    <i class="bi bi-sliders me-2"></i>
+                    <span class="d-none d-md-inline">Dialing Ratio</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('caller-id')">
+                    <i class="bi bi-telephone-inbound me-2"></i>
+                    <span class="d-none d-md-inline">Caller ID Management</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('call-queue')">
+                    <i class="bi bi-list-ol me-2"></i>
+                    <span class="d-none d-md-inline">Call Queue</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('call-recordings')">
+                    <i class="bi bi-record-circle me-2"></i>
+                    <span class="d-none d-md-inline">Call Recordings</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('call-dispositions')">
+                    <i class="bi bi-clipboard-check me-2"></i>
+                    <span class="d-none d-md-inline">Call Dispositions</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('agent-assist')">
+                    <i class="bi bi-chat-dots me-2"></i>
+                    <span class="d-none d-md-inline">Agent Assist</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('ai-agents')">
+                    <i class="bi bi-robot me-2"></i>
+                    <span class="d-none d-md-inline">AI Agents</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('voice-selection')">
+                    <i class="bi bi-mic me-2"></i>
+                    <span class="d-none d-md-inline">Voice Selection</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('conversation-designer')">
+                    <i class="bi bi-diagram-3 me-2"></i>
+                    <span class="d-none d-md-inline">Conversation Designer</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('reports-history')">
+                    <i class="bi bi-bar-chart-line me-2"></i>
+                    <span class="d-none d-md-inline">Reports & History</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('call-summarization')">
+                    <i class="bi bi-journal-text me-2"></i>
+                    <span class="d-none d-md-inline">Call Summarization</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('consent-capture')">
+                    <i class="bi bi-shield-check me-2"></i>
+                    <span class="d-none d-md-inline">Consent Capture</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('dnc-management')">
+                    <i class="bi bi-ban me-2"></i>
+                    <span class="d-none d-md-inline">DNC Management</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('access-controls')">
+                    <i class="bi bi-person-lock me-2"></i>
+                    <span class="d-none d-md-inline">Access Controls</span>
                 </a>
             </nav>
             
@@ -902,6 +970,39 @@
             </div>
         </div>
 
+        <!-- CRM Connection Section -->
+        <div id="crm-connection-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">CRM Integration</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="crmConnectionForm">
+                                <div class="mb-3">
+                                    <label for="crmProvider" class="form-label">Select CRM Provider</label>
+                                    <select class="form-select" id="crmProvider" required>
+                                        <option value="">Choose...</option>
+                                        <option value="salesforce">Salesforce</option>
+                                        <option value="hubspot">HubSpot</option>
+                                        <option value="zoho">Zoho</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="crmApiKey" class="form-label">API Key / Credentials</label>
+                                    <input type="text" class="form-control" id="crmApiKey" placeholder="Enter API Key or Credentials" required>
+                                </div>
+                                <button type="submit" class="btn btn-info w-100 text-white">Connect</button>
+                            </form>
+                            <div class="mt-3" id="crmConnectionStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Settings Section -->
         <div id="settings-section" class="dashboard-section">
             <div class="row g-3 g-md-4">
@@ -1030,6 +1131,610 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Contacts Section -->
+        <div id="upload-contacts-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Bulk Upload Contacts</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="uploadContactsForm">
+                                <div class="mb-3">
+                                    <label for="contactsFile" class="form-label">Select Excel or CSV File</label>
+                                    <input class="form-control" type="file" id="contactsFile" name="contactsFile" accept=".xlsx,.xls,.csv" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Upload</button>
+                            </form>
+                            <div class="progress mt-3 d-none" id="uploadProgress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" id="uploadProgressBar"></div>
+                            </div>
+                            <div class="mt-3" id="uploadMessage"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manual Dial Section -->
+        <div id="manual-dial-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Manual Dial Pad</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <input type="text" id="manualDialInput" class="form-control form-control-lg text-center" placeholder="Enter number" maxlength="15" readonly>
+                            </div>
+                            <div class="d-flex flex-wrap justify-content-center mb-3" id="manualDialPad">
+                                <!-- Dial pad buttons will be rendered by JS -->
+                            </div>
+                            <button class="btn btn-success w-100 mb-2" id="manualDialCallBtn">
+                                <i class="bi bi-telephone-outbound me-2"></i>Call
+                            </button>
+                            <div class="mt-2" id="manualDialStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialing Ratio Section -->
+        <div id="dialing-ratio-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">Dialing Ratio Control</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="dialingRatioForm">
+                                <div class="mb-3">
+                                    <label for="dialingRatioSelect" class="form-label">Select Dialing Ratio</label>
+                                    <select class="form-select" id="dialingRatioSelect" required>
+                                        <option value="1">1:1 (1 number per agent)</option>
+                                        <option value="2">2:1 (2 numbers per agent)</option>
+                                        <option value="3">3:1 (3 numbers per agent)</option>
+                                        <option value="4">4:1 (4 numbers per agent)</option>
+                                        <option value="5">5:1 (5 numbers per agent)</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-warning w-100 text-dark">Apply</button>
+                            </form>
+                            <div class="mt-3" id="dialingRatioStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Caller ID Management Section -->
+        <div id="caller-id-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0">Dynamic Caller ID Management</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="addCallerIdForm" class="mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="newCallerIdInput" placeholder="Add new Caller ID (e.g. +1XXXXXXXXXX)" maxlength="15" required>
+                                    <button class="btn btn-secondary" type="submit" title="Add Caller ID">Add</button>
+                                </div>
+                            </form>
+                            <div class="mb-3">
+                                <label class="form-label">Available Caller IDs</label>
+                                <ul class="list-group" id="callerIdList">
+                                    <!-- List items rendered by JS -->
+                                </ul>
+                            </div>
+                            <div class="mt-3" id="callerIdStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Queue Section -->
+        <div id="call-queue-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-dark text-white">
+                            <h5 class="mb-0">Call Queue & Routing</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <th>Status</th>
+                                            <th>Waiting Time</th>
+                                            <th>Assigned Agent</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="callQueueTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="callQueueStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Recordings Section -->
+        <div id="call-recordings-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">Call Recordings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date/Time</th>
+                                            <th>Phone Number</th>
+                                            <th>Agent</th>
+                                            <th>Duration</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="callRecordingsTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="callRecordingsStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call Dispositions Section -->
+        <div id="call-dispositions-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Call Disposition / Outcome Logging</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <th>Agent</th>
+                                            <th>Time</th>
+                                            <th>Disposition</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="callDispositionsTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="callDispositionsStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Assist Section -->
+        <div id="agent-assist-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Call Scripting / Agent Assist</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="mb-3">
+                                <label for="scriptCampaignSelect" class="form-label">Select Campaign/Script</label>
+                                <select class="form-select" id="scriptCampaignSelect">
+                                    <option value="insurance">Trucking Insurance</option>
+                                    <option value="realestate">Real Estate</option>
+                                    <option value="collections">Collections</option>
+                                </select>
+                            </form>
+                            <div class="mb-3" id="scriptPanel">
+                                <!-- Script content rendered by JS -->
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <button class="btn btn-outline-secondary" id="scriptPrevBtn" title="Previous Step">Previous</button>
+                                <button class="btn btn-outline-secondary" id="scriptNextBtn" title="Next Step">Next</button>
+                            </div>
+                            <div>
+                                <label for="agentNotes" class="form-label">Agent Notes</label>
+                                <textarea class="form-control" id="agentNotes" rows="2" placeholder="Type notes here..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- AI Agents Section (Training/Management) -->
+        <div id="ai-agents-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">AI Agent Training & Management</h5>
+                            <button class="btn btn-light btn-sm" id="createAIAgentBtn" title="Create AI Agent"><i class="bi bi-plus"></i> Create Agent</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive mb-3">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Language</th>
+                                            <th>Voice</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="aiAgentsTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="aiAgentsStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- AI Agent Modal/Form -->
+            <div id="aiAgentModal" class="modal d-none" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5); position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1050;">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="aiAgentModalTitle">Create/Edit AI Agent</h5>
+                            <button type="button" class="btn-close" id="closeAIAgentModal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="aiAgentForm">
+                                <div class="mb-2">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="aiAgentName" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Language</label>
+                                    <select class="form-select" id="aiAgentLanguage" required>
+                                        <option value="en">English</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="fr">French</option>
+                                        <option value="de">German</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Voice</label>
+                                    <select class="form-select" id="aiAgentVoice" required>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Speed</label>
+                                    <input type="range" class="form-range" id="aiAgentSpeed" min="0.5" max="2" step="0.1" value="1">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Pitch</label>
+                                    <input type="range" class="form-range" id="aiAgentPitch" min="0.5" max="2" step="0.1" value="1">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Tone</label>
+                                    <select class="form-select" id="aiAgentTone">
+                                        <option value="neutral">Neutral</option>
+                                        <option value="friendly">Friendly</option>
+                                        <option value="professional">Professional</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 mt-2">Save Agent</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Voice Selection Section -->
+        <div id="voice-selection-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Voice Selection & Customization</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="voiceSelectionForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Voice</label>
+                                    <select class="form-select" id="voiceSelect">
+                                        <option value="male-en">Male (English)</option>
+                                        <option value="female-en">Female (English)</option>
+                                        <option value="male-es">Male (Spanish)</option>
+                                        <option value="female-es">Female (Spanish)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Speed</label>
+                                    <input type="range" class="form-range" id="voiceSpeed" min="0.5" max="2" step="0.1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Pitch</label>
+                                    <input type="range" class="form-range" id="voicePitch" min="0.5" max="2" step="0.1" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Tone</label>
+                                    <select class="form-select" id="voiceTone">
+                                        <option value="neutral">Neutral</option>
+                                        <option value="friendly">Friendly</option>
+                                        <option value="professional">Professional</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-outline-primary w-50" id="previewVoiceBtn">Preview Voice</button>
+                                    <button type="submit" class="btn btn-primary w-50">Save as Default</button>
+                                </div>
+                            </form>
+                            <div class="mt-3" id="voiceSelectionStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Conversation Designer Section -->
+        <div id="conversation-designer-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Conversation Designer</h5>
+                            <button class="btn btn-light btn-sm" id="addNodeBtn" title="Add Node"><i class="bi bi-plus"></i> Add Node</button>
+                        </div>
+                        <div class="card-body">
+                            <div id="conversationFlow" class="mb-3">
+                                <!-- Visual flow/nodes rendered by JS -->
+                            </div>
+                            <div class="mt-3" id="conversationDesignerStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Node Modal/Form -->
+            <div id="nodeModal" class="modal d-none" tabindex="-1" style="display:block; background:rgba(0,0,0,0.5); position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1050;">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="nodeModalTitle">Add/Edit Node</h5>
+                            <button type="button" class="btn-close" id="closeNodeModal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="nodeForm">
+                                <div class="mb-2">
+                                    <label class="form-label">Node Label</label>
+                                    <input type="text" class="form-control" id="nodeLabel" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Node Type</label>
+                                    <select class="form-select" id="nodeType" required>
+                                        <option value="message">Message</option>
+                                        <option value="question">Question</option>
+                                        <option value="decision">Decision</option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Content</label>
+                                    <textarea class="form-control" id="nodeContent" rows="2" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 mt-2">Save Node</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Reports & History Section -->
+        <div id="reports-history-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Reports & History</h5>
+                            <div>
+                                <button class="btn btn-light btn-sm me-2" id="exportCallReportBtn" title="Export Call Report"><i class="bi bi-download"></i> Export Calls</button>
+                                <button class="btn btn-light btn-sm" id="exportAgentReportBtn" title="Export Agent Report"><i class="bi bi-download"></i> Export Agents</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs mb-3" id="reportsTabs">
+                                <li class="nav-item">
+                                    <button class="nav-link active" id="callReportTab" data-bs-toggle="tab" data-bs-target="#callReportTable">Call Reports</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" id="agentReportTab" data-bs-toggle="tab" data-bs-target="#agentReportTable">Agent Reports</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="callReportTable">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Agent</th>
+                                                    <th>Duration</th>
+                                                    <th>Outcome</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="callReportTableBody">
+                                                <!-- Rows rendered by JS -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="agentReportTable">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Agent</th>
+                                                    <th>Total Calls</th>
+                                                    <th>Connected</th>
+                                                    <th>Avg Duration</th>
+                                                    <th>Success Rate</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="agentReportTableBody">
+                                                <!-- Rows rendered by JS -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3" id="reportsHistoryStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Call Summarization Section -->
+        <div id="call-summarization-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Call Summarization</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <th>Agent</th>
+                                            <th>Time</th>
+                                            <th>Summary</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="callSummarizationTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="callSummarizationStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Consent Capture Section -->
+        <div id="consent-capture-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Consent Capture</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Phone Number</th>
+                                            <th>Agent</th>
+                                            <th>Time</th>
+                                            <th>Consent Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="consentCaptureTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="consentCaptureStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- DNC Management Section -->
+        <div id="dnc-management-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">DNC (Do Not Call) Management</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="addDncForm" class="mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="newDncInput" placeholder="Add number to DNC list (e.g. +1XXXXXXXXXX)" maxlength="15" required>
+                                    <button class="btn btn-danger" type="submit" title="Add to DNC">Add</button>
+                                </div>
+                            </form>
+                            <div class="mb-3">
+                                <label class="form-label">DNC Numbers</label>
+                                <ul class="list-group" id="dncList">
+                                    <!-- List items rendered by JS -->
+                                </ul>
+                            </div>
+                            <div class="mt-3" id="dncManagementStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Access Controls Section -->
+        <div id="access-controls-section" class="dashboard-section" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0">Access Controls</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="accessControlsTableBody">
+                                        <!-- Rows rendered by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3" id="accessControlsStatus"></div>
                         </div>
                     </div>
                 </div>
