@@ -1,0 +1,1095 @@
+<!-- Dashboard Page -->
+<div id="dashboard-page" class="page-content">
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-telephone-fill text-primary fs-4 me-2"></i>
+                <span class="fw-bold d-none d-md-inline">AutoDial Pro</span>
+                <span class="fw-bold d-inline d-md-none">AD Pro</span>
+            </div>
+        </div>
+        <div class="p-3">
+            <nav class="nav flex-column">
+                <a class="sidebar-link active" href="#" onclick="showDashboardSection('overview')">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    <span class="d-none d-md-inline">Dashboard</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('dialer')">
+                    <i class="bi bi-telephone-outbound me-2"></i>
+                    <span class="d-none d-md-inline">Dialer</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('power-dialer')">
+                    <i class="bi bi-lightning-charge me-2"></i>
+                    <span class="d-none d-md-inline">Power Dialer</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('campaigns')">
+                    <i class="bi bi-megaphone me-2"></i>
+                    <span class="d-none d-md-inline">Campaigns</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('contacts')">
+                    <i class="bi bi-people me-2"></i>
+                    <span class="d-none d-md-inline">Contacts</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('analytics')">
+                    <i class="bi bi-graph-up me-2"></i>
+                    <span class="d-none d-md-inline">Analytics</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('crm')">
+                    <i class="bi bi-diagram-3 me-2"></i>
+                    <span class="d-none d-md-inline">CRM Integration</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('settings')">
+                    <i class="bi bi-gear me-2"></i>
+                    <span class="d-none d-md-inline">Settings</span>
+                </a>
+                <a class="sidebar-link" href="#" onclick="showDashboardSection('profile')">
+                    <i class="bi bi-person me-2"></i>
+                    <span class="d-none d-md-inline">Profile</span>
+                </a>
+            </nav>
+            
+            <!-- Support Section -->
+            <div class="mt-5 p-3 bg-light rounded">
+                <p class="small mb-2 text-secondary">Need help?</p>
+                <button class="btn btn-sm btn-primary w-100">
+                    <i class="bi bi-headset me-2"></i>Contact Support
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4">
+            <div class="d-flex align-items-center mb-2 mb-sm-0">
+                <button class="btn btn-outline-secondary mobile-toggle me-2" onclick="toggleSidebar()">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h4 class="mb-0 d-none d-sm-inline">Dashboard</h4>
+                <h5 class="mb-0 d-inline d-sm-none">Dashboard</h5>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-danger ms-1">3</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">New call connected</a></li>
+                        <li><a class="dropdown-item" href="#">AI agent completed task</a></li>
+                        <li><a class="dropdown-item" href="#">System update available</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="d-none d-sm-inline ms-1">John Doe</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" onclick="showPage('landing-page')">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview-section" class="dashboard-section active">
+            <div class="row g-3 g-md-4 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">1,247</h3>
+                        <p class="text-secondary small mb-0">Calls Today</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success bg-opacity-10 text-success">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">892</h3>
+                        <p class="text-secondary small mb-0">Connected</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                            <i class="bi bi-robot"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">25</h3>
+                        <p class="text-secondary small mb-0">AI Agents</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info bg-opacity-10 text-info">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3 class="fw-bold mb-1">71.5%</h3>
+                        <p class="text-secondary small mb-0">Success Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Call Volume</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="callVolumeChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Agent Status</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="agentStatusChart" height="300"></canvas>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Available</span>
+                                    <span class="fw-bold">12</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>On Call</span>
+                                    <span class="fw-bold">8</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Break</span>
+                                    <span class="fw-bold">3</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Offline</span>
+                                    <span class="fw-bold">2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- AI Agents Section -->
+        <div id="ai-agents-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">AI Voice Agents</h5>
+                            <button class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus me-1"></i>Create Agent
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <div class="mb-3">
+                                                <i class="bi bi-robot text-primary fs-1"></i>
+                                            </div>
+                                            <h6>Sales Agent - Sarah</h6>
+                                            <p class="text-secondary small">English, Female, Professional</p>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Calls Today:</span>
+                                                <span class="fw-bold">156</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Success Rate:</span>
+                                                <span class="fw-bold text-success">78%</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <span>Status:</span>
+                                                <span class="badge bg-success">Active</span>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-primary btn-sm flex-fill">Edit</button>
+                                                <button class="btn btn-outline-secondary btn-sm flex-fill">Pause</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <div class="mb-3">
+                                                <i class="bi bi-robot text-primary fs-1"></i>
+                                            </div>
+                                            <h6>Support Agent - Mike</h6>
+                                            <p class="text-secondary small">English, Male, Friendly</p>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Calls Today:</span>
+                                                <span class="fw-bold">89</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Success Rate:</span>
+                                                <span class="fw-bold text-success">82%</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <span>Status:</span>
+                                                <span class="badge bg-success">Active</span>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-primary btn-sm flex-fill">Edit</button>
+                                                <button class="btn btn-outline-secondary btn-sm flex-fill">Pause</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <div class="mb-3">
+                                                <i class="bi bi-robot text-secondary fs-1"></i>
+                                            </div>
+                                            <h6>Follow-up Agent - Lisa</h6>
+                                            <p class="text-secondary small">English, Female, Warm</p>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Calls Today:</span>
+                                                <span class="fw-bold">0</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Success Rate:</span>
+                                                <span class="fw-bold text-secondary">--</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-3">
+                                                <span>Status:</span>
+                                                <span class="badge bg-secondary">Inactive</span>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <button class="btn btn-outline-primary btn-sm flex-fill">Edit</button>
+                                                <button class="btn btn-outline-success btn-sm flex-fill">Start</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts Section -->
+        <div id="contacts-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Contact Lists</h5>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadListModal">
+                                <i class="bi bi-upload me-1"></i>Upload List
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>List Name</th>
+                                            <th>Contacts</th>
+                                            <th>Valid</th>
+                                            <th>Last Updated</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sales Prospects Q1</td>
+                                            <td>1,247</td>
+                                            <td>1,245</td>
+                                            <td>2024-01-15</td>
+                                            <td><span class="status-badge status-active">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Follow-up</td>
+                                            <td>856</td>
+                                            <td>854</td>
+                                            <td>2024-01-14</td>
+                                            <td><span class="status-badge status-active">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lead Nurturing</td>
+                                            <td>2,341</td>
+                                            <td>2,338</td>
+                                            <td>2024-01-13</td>
+                                            <td><span class="status-badge status-pending">Processing</span></td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analytics-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Call Outcomes</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="callOutcomesChart" height="300"></canvas>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Connected</span>
+                                    <span class="fw-bold">68.5%</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Voicemail</span>
+                                    <span class="fw-bold">18.2%</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>No Answer</span>
+                                    <span class="fw-bold">8.7%</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Busy/Invalid</span>
+                                    <span class="fw-bold">4.6%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">AI Agent Performance</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="aiPerformanceChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Power Dialer Section -->
+        <div id="power-dialer-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Power Dialer</h5>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadListModal">
+                                <i class="bi bi-upload me-1"></i>Upload List
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3 mb-4">
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-success" id="connectedCount">1224</h4>
+                                        <small class="text-secondary">Connected</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-danger" id="failedCount">23</h4>
+                                        <small class="text-secondary">Failed</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-primary" id="remainingCount">23</h4>
+                                        <small class="text-secondary">Remaining</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-warning" id="callTimer">00:00</h4>
+                                        <small class="text-secondary">Current Call</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <div class="mb-3">
+                                    <button id="startDialingBtn" class="btn btn-success me-2">
+                                        <i class="bi bi-play-fill me-1"></i>Start Dialing
+                                    </button>
+                                    <button id="pauseDialingBtn" class="btn btn-warning me-2" disabled>
+                                        <i class="bi bi-pause-fill me-1"></i>Pause
+                                    </button>
+                                    <button id="stopDialingBtn" class="btn btn-danger me-2" disabled>
+                                        <i class="bi bi-stop-fill me-1"></i>Stop
+                                    </button>
+                                    <button id="skipCallBtn" class="btn btn-secondary" disabled>
+                                        <i class="bi bi-skip-forward me-1"></i>Skip
+                                    </button>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="badge bg-primary me-2">Current: <span id="currentNumber">--</span></span>
+                                    <span class="badge bg-secondary">Status: <span id="callStatus">Ready</span></span>
+                                </div>
+                                <p class="text-secondary small" id="callStatusDetails">Upload a contact list to begin dialing</p>
+                            </div>
+
+                            <div class="call-panel">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
+                                        <img id="contactAvatar" src="https://ui-avatars.com/api/?name=John+Doe&background=5B5FDE&color=fff&size=100" 
+                                             class="rounded-circle mb-2" alt="Contact Avatar">
+                                        <h5 id="contactName">--</h5>
+                                        <p class="text-secondary mb-0" id="contactCompany"></p>
+                                        <p class="fw-bold" id="contactPhone">--</p>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="row g-2 justify-content-center">
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="answerBtn" class="call-btn btn-success" disabled>
+                                                    <i class="bi bi-telephone"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Answer</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="hangupBtn" class="call-btn btn-danger" disabled>
+                                                    <i class="bi bi-telephone-x"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Hangup</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="pauseBtn" class="call-btn btn-warning" disabled>
+                                                    <i class="bi bi-pause"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Pause</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="transferBtn" class="call-btn btn-info" disabled>
+                                                    <i class="bi bi-arrow-left-right"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Transfer</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="muteBtn" class="call-btn btn-secondary" disabled>
+                                                    <i class="bi bi-mic-mute"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Mute</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="recordBtn" class="call-btn btn-outline-primary" disabled>
+                                                    <i class="bi bi-record-circle"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Record</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="keypadBtn" class="call-btn btn-outline-secondary" disabled>
+                                                    <i class="bi bi-grid-3x3"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Keypad</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="speakerBtn" class="call-btn btn-outline-info" disabled>
+                                                    <i class="bi bi-speaker"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Speaker</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="saveNotesBtn" class="call-btn btn-outline-success" disabled>
+                                                    <i class="bi bi-journal-text"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Notes</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="markInterestedBtn" class="call-btn btn-outline-warning" disabled>
+                                                    <i class="bi bi-star"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Interested</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Call Log</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="callLog" class="small">
+                                <div class="text-center text-secondary">
+                                    <i class="bi bi-clock-history fs-1"></i>
+                                    <p class="mt-2">No calls yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialer Section -->
+        <div id="dialer-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Auto Dialer</h5>
+                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadListModal">
+                                <i class="bi bi-upload me-1"></i>Upload List
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <!-- Dialer Mode Selection -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Select Dialing Mode</h6>
+                                <div class="row g-3">
+                                    <div class="col-6 col-md-3">
+                                        <div class="dialer-mode-card card border active">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-lightning-charge text-primary fs-2 mb-2"></i>
+                                                <h6>Predictive</h6>
+                                                <small class="text-secondary">Maximum efficiency</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="dialer-mode-card card border">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-arrow-right-circle text-secondary fs-2 mb-2"></i>
+                                                <h6>Progressive</h6>
+                                                <small class="text-secondary">Balanced approach</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="dialer-mode-card card border">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-eye text-secondary fs-2 mb-2"></i>
+                                                <h6>Preview</h6>
+                                                <small class="text-secondary">Review before call</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="dialer-mode-card card border">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-speedometer text-secondary fs-2 mb-2"></i>
+                                                <h6>Power</h6>
+                                                <small class="text-secondary">Fast dialing</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Power Dialer Content -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-success" id="connectedCount">1224</h4>
+                                        <small class="text-secondary">Connected</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-danger" id="failedCount">23</h4>
+                                        <small class="text-secondary">Failed</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-primary" id="remainingCount">23</h4>
+                                        <small class="text-secondary">Remaining</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="text-center">
+                                        <h4 class="fw-bold text-warning" id="callTimer">00:00</h4>
+                                        <small class="text-secondary">Current Call</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mb-4">
+                                <div class="mb-3">
+                                    <button id="startDialingBtn" class="btn btn-success me-2">
+                                        <i class="bi bi-play-fill me-1"></i>Start Dialing
+                                    </button>
+                                    <button id="pauseDialingBtn" class="btn btn-warning me-2" disabled>
+                                        <i class="bi bi-pause-fill me-1"></i>Pause
+                                    </button>
+                                    <button id="stopDialingBtn" class="btn btn-danger me-2" disabled>
+                                        <i class="bi bi-stop-fill me-1"></i>Stop
+                                    </button>
+                                    <button id="skipCallBtn" class="btn btn-secondary" disabled>
+                                        <i class="bi bi-skip-forward me-1"></i>Skip
+                                    </button>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="badge bg-primary me-2">Current: <span id="currentNumber">--</span></span>
+                                    <span class="badge bg-secondary">Status: <span id="callStatus">Ready</span></span>
+                                </div>
+                                <p class="text-secondary small" id="callStatusDetails">Upload a contact list to begin dialing</p>
+                            </div>
+
+                            <div class="call-panel">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
+                                        <img id="contactAvatar" src="https://ui-avatars.com/api/?name=John+Doe&background=5B5FDE&color=fff&size=100" 
+                                             class="rounded-circle mb-2" alt="Contact Avatar">
+                                        <h5 id="contactName">--</h5>
+                                        <p class="text-secondary mb-0" id="contactCompany"></p>
+                                        <p class="fw-bold" id="contactPhone">--</p>
+                                    </div>
+                                    <div class="col-12 col-md-8">
+                                        <div class="row g-2 justify-content-center">
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="answerBtn" class="call-btn btn-success" disabled>
+                                                    <i class="bi bi-telephone"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Answer</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="hangupBtn" class="call-btn btn-danger" disabled>
+                                                    <i class="bi bi-telephone-x"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Hangup</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="pauseBtn" class="call-btn btn-warning" disabled>
+                                                    <i class="bi bi-pause"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Pause</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="transferBtn" class="call-btn btn-info" disabled>
+                                                    <i class="bi bi-arrow-left-right"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Transfer</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="muteBtn" class="call-btn btn-secondary" disabled>
+                                                    <i class="bi bi-mic-mute"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Mute</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="recordBtn" class="call-btn btn-outline-primary" disabled>
+                                                    <i class="bi bi-record-circle"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Record</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="keypadBtn" class="call-btn btn-outline-secondary" disabled>
+                                                    <i class="bi bi-grid-3x3"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Keypad</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="speakerBtn" class="call-btn btn-outline-info" disabled>
+                                                    <i class="bi bi-speaker"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Speaker</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="saveNotesBtn" class="call-btn btn-outline-success" disabled>
+                                                    <i class="bi bi-journal-text"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Notes</small>
+                                            </div>
+                                            <div class="col-4 col-sm-3 col-md-2">
+                                                <button id="markInterestedBtn" class="call-btn btn-outline-warning" disabled>
+                                                    <i class="bi bi-star"></i>
+                                                </button>
+                                                <small class="d-block text-center mt-1">Interested</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Call Log</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="callLog" class="small">
+                                <div class="text-center text-secondary">
+                                    <i class="bi bi-clock-history fs-1"></i>
+                                    <p class="mt-2">No calls yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaigns Section -->
+        <div id="campaigns-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Campaigns</h5>
+                            <button class="btn btn-primary btn-sm">
+                                <i class="bi bi-plus me-1"></i>Create Campaign
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Campaign Name</th>
+                                            <th>Status</th>
+                                            <th>Contacts</th>
+                                            <th>Calls Made</th>
+                                            <th>Success Rate</th>
+                                            <th>Created</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Q1 Sales Outreach</td>
+                                            <td><span class="status-badge status-active">Active</span></td>
+                                            <td>1,247</td>
+                                            <td>892</td>
+                                            <td>71.5%</td>
+                                            <td>2024-01-15</td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Pause</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Follow-up</td>
+                                            <td><span class="status-badge status-pending">Paused</span></td>
+                                            <td>856</td>
+                                            <td>654</td>
+                                            <td>76.4%</td>
+                                            <td>2024-01-10</td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">Edit</button>
+                                                <button class="btn btn-outline-success btn-sm">Resume</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lead Nurturing</td>
+                                            <td><span class="status-badge status-inactive">Completed</span></td>
+                                            <td>2,341</td>
+                                            <td>2,341</td>
+                                            <td>68.2%</td>
+                                            <td>2024-01-05</td>
+                                            <td>
+                                                <button class="btn btn-outline-primary btn-sm me-1">View</button>
+                                                <button class="btn btn-outline-secondary btn-sm">Clone</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRM Integration Section -->
+        <div id="crm-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">CRM Integrations</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-box text-primary fs-1 mb-3"></i>
+                                            <h6>Salesforce</h6>
+                                            <p class="text-secondary small mb-3">Connect your Salesforce CRM</p>
+                                            <button class="btn btn-primary btn-sm">Connect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-box text-primary fs-1 mb-3"></i>
+                                            <h6>HubSpot</h6>
+                                            <p class="text-secondary small mb-3">Connect your HubSpot CRM</p>
+                                            <button class="btn btn-primary btn-sm">Connect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-box text-primary fs-1 mb-3"></i>
+                                            <h6>Pipedrive</h6>
+                                            <p class="text-secondary small mb-3">Connect your Pipedrive CRM</p>
+                                            <button class="btn btn-primary btn-sm">Connect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body text-center">
+                                            <i class="bi bi-box text-primary fs-1 mb-3"></i>
+                                            <h6>Zoho CRM</h6>
+                                            <p class="text-secondary small mb-3">Connect your Zoho CRM</p>
+                                            <button class="btn btn-primary btn-sm">Connect</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Connected CRMs</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                <span>Salesforce</span>
+                                <button class="btn btn-outline-danger btn-sm ms-auto">Disconnect</button>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle text-success me-2"></i>
+                                <span>HubSpot</span>
+                                <button class="btn btn-outline-danger btn-sm ms-auto">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Account Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" value="John">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" value="Doe">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="john.doe@company.com">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Company</label>
+                                        <input type="text" class="form-control" value="Acme Corporation">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Dialer Mode</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="dialer-mode-card card border mb-3 active">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-lightning-charge text-primary fs-1 mb-2"></i>
+                                    <h6>Power Dialer</h6>
+                                    <p class="text-secondary small mb-0">Automated dialing with AI agents</p>
+                                </div>
+                            </div>
+                            <div class="dialer-mode-card card border mb-3">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-telephone text-secondary fs-1 mb-2"></i>
+                                    <h6>Manual Dialer</h6>
+                                    <p class="text-secondary small mb-0">Manual call control</p>
+                                </div>
+                            </div>
+                            <div class="dialer-mode-card card border">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-clock text-secondary fs-1 mb-2"></i>
+                                    <h6>Preview Dialer</h6>
+                                    <p class="text-secondary small mb-0">Review before calling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile-section" class="dashboard-section">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=5B5FDE&color=fff&size=150" 
+                                 class="rounded-circle mb-3" alt="Profile Picture">
+                            <h5>John Doe</h5>
+                            <p class="text-secondary">Sales Manager</p>
+                            <p class="text-secondary small">Acme Corporation</p>
+                            <button class="btn btn-outline-primary btn-sm">Change Photo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Profile Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" value="John">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" value="Doe">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" value="john.doe@company.com">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Job Title</label>
+                                        <input type="text" class="form-control" value="Sales Manager">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Department</label>
+                                        <input type="text" class="form-control" value="Sales">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Bio</label>
+                                        <textarea class="form-control" rows="3">Experienced sales professional with 5+ years in B2B sales and lead generation.</textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upload List Modal -->
+<div class="modal fade" id="uploadListModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Contact List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Select File</label>
+                    <input type="file" class="form-control" id="fileUpload" accept=".csv,.xlsx,.xls">
+                    <small class="text-secondary">Supported formats: CSV, Excel (.xlsx, .xls)</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">List Name</label>
+                    <input type="text" class="form-control" placeholder="Enter list name">
+                </div>
+                <div id="validationResults" style="display: none;">
+                    <h6>Validation Results:</h6>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <div class="text-center p-2 bg-success bg-opacity-10 rounded">
+                                <h6 class="mb-0 text-success" id="validCount">0</h6>
+                                <small>Valid</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center p-2 bg-danger bg-opacity-10 rounded">
+                                <h6 class="mb-0 text-danger" id="invalidCount">0</h6>
+                                <small>Invalid</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center p-2 bg-warning bg-opacity-10 rounded">
+                                <h6 class="mb-0 text-warning" id="dncCount">0</h6>
+                                <small>DNC</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center p-2 bg-primary bg-opacity-10 rounded">
+                                <h6 class="mb-0 text-primary" id="totalCount">0</h6>
+                                <small>Total</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="uploadAndValidateBtn">Upload & Validate</button>
+            </div>
+        </div>
+    </div>
+</div> 
