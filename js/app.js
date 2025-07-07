@@ -7,17 +7,75 @@ function showPage(pageId) {
 }
 
 // Dashboard Section Navigation
-function showDashboardSection(sectionId) {
-    document.querySelectorAll('.dashboard-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    document.getElementById(sectionId + '-section').classList.add('active');
-
-    // Update sidebar active state
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    event.target.closest('.sidebar-link').classList.add('active');
+function showDashboardSection(section, link) {
+    document.querySelectorAll('.dashboard-section').forEach(sec => sec.style.display = 'none');
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    if (section === 'overview') {
+        document.getElementById('overview-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'upload-contacts') {
+        document.getElementById('upload-contacts-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'crm-connection') {
+        document.getElementById('crm-connection-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'manual-dial') {
+        document.getElementById('manual-dial-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'dialing-ratio') {
+        document.getElementById('dialing-ratio-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'caller-id') {
+        document.getElementById('caller-id-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'call-queue') {
+        document.getElementById('call-queue-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'call-recordings') {
+        document.getElementById('call-recordings-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'call-dispositions') {
+        document.getElementById('call-dispositions-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'agent-assist') {
+        document.getElementById('agent-assist-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'ai-agents') {
+        document.getElementById('ai-agents-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'voice-selection') {
+        document.getElementById('voice-selection-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'conversation-designer') {
+        document.getElementById('conversation-designer-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'reports-history') {
+        document.getElementById('reports-history-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'call-summarization') {
+        document.getElementById('call-summarization-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'consent-capture') {
+        document.getElementById('consent-capture-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'dnc-management') {
+        document.getElementById('dnc-management-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'access-controls') {
+        document.getElementById('access-controls-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'lead-form') {
+        document.getElementById('lead-form-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else if (section === 'pipeline') {
+        document.getElementById('pipeline-section').style.display = '';
+        if (link) link.classList.add('active');
+    } else {
+        const secId = section + '-section';
+        const secEl = document.getElementById(secId);
+        if (secEl) secEl.style.display = '';
+        if (link) link.classList.add('active');
+    }
 }
 
 // Show dashboard section logic
@@ -78,6 +136,12 @@ function showDashboardSection(section) {
     } else if (section === 'access-controls') {
         document.getElementById('access-controls-section').style.display = '';
         document.querySelector("[onclick=\"showDashboardSection('access-controls')\"]").classList.add('active');
+    } else if (section === 'lead-form') {
+        document.getElementById('lead-form-section').style.display = '';
+        document.querySelector("[onclick=\"showDashboardSection('lead-form')\"]").classList.add('active');
+    } else if (section === 'pipeline') {
+        document.getElementById('pipeline-section').style.display = '';
+        document.querySelector("[onclick=\"showDashboardSection('pipeline')\"]").classList.add('active');
     } else {
         const secId = section + '-section';
         const secEl = document.getElementById(secId);
@@ -1527,6 +1591,263 @@ const accessControlsObserver = new MutationObserver(() => {
     }
 });
 accessControlsObserver.observe(document.body, { childList: true, subtree: true });
+
+// Lead/Customer Form Logic
+function getLeads() {
+    return JSON.parse(localStorage.getItem('leads') || '[]');
+}
+function setLeads(leads) {
+    localStorage.setItem('leads', JSON.stringify(leads));
+}
+function renderLeadsTable() {
+    const tbody = document.getElementById('leadsTableBody');
+    if (!tbody) return;
+    const leads = getLeads();
+    tbody.innerHTML = '';
+    if (leads.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-muted text-center">No leads saved yet.</td></tr>';
+        return;
+    }
+    leads.forEach((lead, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${lead.name}</td>
+            <td>${lead.phone}</td>
+            <td>${lead.email}</td>
+            <td>${lead.company}</td>
+            <td>${lead.status}</td>
+            <td>${lead.notes}</td>
+            <td>
+                <button class='btn btn-sm btn-outline-primary me-1' data-edit-lead='${idx}' title='Edit Lead'><i class='bi bi-pencil'></i></button>
+                <button class='btn btn-sm btn-outline-danger' data-delete-lead='${idx}' title='Delete Lead'><i class='bi bi-trash'></i></button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    // Edit button logic
+    tbody.querySelectorAll('button[data-edit-lead]').forEach(btn => {
+        btn.onclick = function() {
+            const idx = +btn.getAttribute('data-edit-lead');
+            const leads = getLeads();
+            const lead = leads[idx];
+            document.getElementById('leadName').value = lead.name;
+            document.getElementById('leadPhone').value = lead.phone;
+            document.getElementById('leadEmail').value = lead.email;
+            document.getElementById('leadCompany').value = lead.company;
+            document.getElementById('leadStatus').value = lead.status;
+            document.getElementById('leadNotes').value = lead.notes;
+            document.getElementById('leadForm').dataset.editIdx = idx;
+        };
+    });
+    // Delete button logic
+    tbody.querySelectorAll('button[data-delete-lead]').forEach(btn => {
+        btn.onclick = function() {
+            const idx = +btn.getAttribute('data-delete-lead');
+            let leads = getLeads();
+            leads.splice(idx, 1);
+            setLeads(leads);
+            renderLeadsTable();
+            document.getElementById('leadFormStatus').innerHTML = `<span class='text-danger'>Lead deleted.</span>`;
+            setTimeout(() => { document.getElementById('leadFormStatus').innerHTML = ''; }, 2000);
+        };
+    });
+}
+function setupLeadForm() {
+    renderLeadsTable();
+    const form = document.getElementById('leadForm');
+    const status = document.getElementById('leadFormStatus');
+    if (form && status) {
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            let leads = getLeads();
+            const name = document.getElementById('leadName').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+            const email = document.getElementById('leadEmail').value.trim();
+            const company = document.getElementById('leadCompany').value.trim();
+            const leadStatus = document.getElementById('leadStatus').value;
+            const notes = document.getElementById('leadNotes').value.trim();
+            if (!name || !phone) {
+                status.innerHTML = '<span class="text-danger">Name and phone are required.</span>';
+                return;
+            }
+            if (form.dataset.editIdx) {
+                const idx = +form.dataset.editIdx;
+                leads[idx] = { name, phone, email, company, status: leadStatus, notes };
+                status.innerHTML = `<span class='text-success'>Lead updated.</span>`;
+                delete form.dataset.editIdx;
+            } else {
+                leads.push({ name, phone, email, company, status: leadStatus, notes });
+                status.innerHTML = `<span class='text-success'>Lead saved.</span>`;
+            }
+            setLeads(leads);
+            form.reset();
+            renderLeadsTable();
+            setTimeout(() => { status.innerHTML = ''; }, 2000);
+        };
+    }
+}
+// Re-setup lead form when section is shown
+const leadFormObserver = new MutationObserver(() => {
+    const section = document.getElementById('lead-form-section');
+    if (section && section.style.display !== 'none') {
+        setupLeadForm();
+    }
+});
+leadFormObserver.observe(document.body, { childList: true, subtree: true });
+
+// Pipeline/Follow-Up Logic
+const pipelineStages = ['New', 'Contacted', 'Interested', 'Follow-up', 'Customer', 'Lost'];
+function getPipelineLeads() {
+    // Use leads from lead form, or mock if none
+    let leads = JSON.parse(localStorage.getItem('leads') || '[]');
+    if (!leads.length) {
+        leads = [
+            { name: 'John Doe', phone: '+12345678901', email: '', company: '', status: 'New', notes: '' },
+            { name: 'Jane Smith', phone: '+19876543210', email: '', company: '', status: 'Interested', notes: '' },
+            { name: 'Carlos Diaz', phone: '+11234567890', email: '', company: '', status: 'Follow-up', notes: '' }
+        ];
+        localStorage.setItem('leads', JSON.stringify(leads));
+    }
+    return leads;
+}
+function setPipelineLeads(leads) {
+    localStorage.setItem('leads', JSON.stringify(leads));
+}
+function renderPipelineBoard() {
+    const board = document.getElementById('pipelineBoard');
+    if (!board) return;
+    const leads = getPipelineLeads();
+    board.innerHTML = pipelineStages.map(stage => {
+        const stageLeads = leads.filter(l => l.status === stage);
+        return `
+            <div class='flex-grow-1 min-width-250' style='min-width:250px;'>
+                <div class='bg-light p-2 rounded mb-2 text-center fw-bold'>${stage}</div>
+                <div class='d-flex flex-column gap-2'>
+                    ${stageLeads.map((lead, idx) => `
+                        <div class='card p-2 mb-1'>
+                            <div class='fw-bold'>${lead.name}</div>
+                            <div class='small text-secondary'>${lead.phone}</div>
+                            <div class='small'>${lead.company}</div>
+                            <div class='d-flex gap-1 mt-2'>
+                                ${pipelineStages.map((s, sidx) => s !== stage ? `<button class='btn btn-sm btn-outline-primary' data-move='${lead.phone}|${s}' title='Move to ${s}'>${s}</button>` : '').join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
+    // Move button logic
+    board.querySelectorAll('button[data-move]').forEach(btn => {
+        btn.onclick = function() {
+            const [phone, newStage] = btn.getAttribute('data-move').split('|');
+            let leads = getPipelineLeads();
+            const idx = leads.findIndex(l => l.phone === phone);
+            if (idx !== -1) {
+                leads[idx].status = newStage;
+                setPipelineLeads(leads);
+                renderPipelineBoard();
+                document.getElementById('pipelineStatus').innerHTML = `<span class='text-success'>Lead moved to '${newStage}'.</span>`;
+                setTimeout(() => { document.getElementById('pipelineStatus').innerHTML = ''; }, 2000);
+            }
+        };
+    });
+}
+function setupPipeline() {
+    renderPipelineBoard();
+}
+// Re-setup pipeline when section is shown
+const pipelineObserver = new MutationObserver(() => {
+    const section = document.getElementById('pipeline-section');
+    if (section && section.style.display !== 'none') {
+        setupPipeline();
+    }
+});
+pipelineObserver.observe(document.body, { childList: true, subtree: true });
+
+// Global Search Bar Logic
+function getAllSearchData() {
+    // Leads
+    const leads = JSON.parse(localStorage.getItem('leads') || '[]');
+    // Calls (use call reports)
+    const calls = [
+        { number: '+12345678901', agent: 'Alice Smith', time: '09:15', outcome: 'Interested' },
+        { number: '+19876543210', agent: 'Bob Lee', time: '09:10', outcome: 'Not Interested' },
+        { number: '+11234567890', agent: 'Carlos Diaz', time: '08:55', outcome: 'Follow-up' }
+    ];
+    // Agents (from access controls)
+    const agents = JSON.parse(localStorage.getItem('users') || '[{"name":"Alice Smith","email":"alice@example.com","role":"Admin","status":"Active"},{"name":"Bob Lee","email":"bob@example.com","role":"Manager","status":"Active"},{"name":"Carlos Diaz","email":"carlos@example.com","role":"Agent","status":"Inactive"}]');
+    // Campaigns (mock)
+    const campaigns = [
+        { name: 'Summer Promo', status: 'Active' },
+        { name: 'Insurance Renewal', status: 'Completed' },
+        { name: 'Real Estate Leads', status: 'Active' }
+    ];
+    return { leads, calls, agents, campaigns };
+}
+function renderGlobalSearchResults(results, category) {
+    const container = document.getElementById('globalSearchResults');
+    if (!container) return;
+    if (!results.length) {
+        container.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+        return;
+    }
+    if (category === 'leads') {
+        container.innerHTML = `<table class='table table-bordered'><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Status</th></tr></thead><tbody>${results.map(l => `<tr><td>${l.name}</td><td>${l.phone}</td><td>${l.email}</td><td>${l.status}</td></tr>`).join('')}</tbody></table>`;
+    } else if (category === 'calls') {
+        container.innerHTML = `<table class='table table-bordered'><thead><tr><th>Number</th><th>Agent</th><th>Time</th><th>Outcome</th></tr></thead><tbody>${results.map(c => `<tr><td>${c.number}</td><td>${c.agent}</td><td>${c.time}</td><td>${c.outcome}</td></tr>`).join('')}</tbody></table>`;
+    } else if (category === 'agents') {
+        container.innerHTML = `<table class='table table-bordered'><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr></thead><tbody>${results.map(a => `<tr><td>${a.name}</td><td>${a.email}</td><td>${a.role}</td><td>${a.status}</td></tr>`).join('')}</tbody></table>`;
+    } else if (category === 'campaigns') {
+        container.innerHTML = `<table class='table table-bordered'><thead><tr><th>Name</th><th>Status</th></tr></thead><tbody>${results.map(c => `<tr><td>${c.name}</td><td>${c.status}</td></tr>`).join('')}</tbody></table>`;
+    } else {
+        // All: show grouped
+        container.innerHTML =
+            (results.leads.length ? `<div class='mb-2'><strong>Leads</strong>${results.leads.map(l => `<div>${l.name} (${l.phone}) - ${l.status}</div>`).join('')}</div>` : '') +
+            (results.calls.length ? `<div class='mb-2'><strong>Calls</strong>${results.calls.map(c => `<div>${c.number} (${c.agent}) - ${c.outcome}</div>`).join('')}</div>` : '') +
+            (results.agents.length ? `<div class='mb-2'><strong>Agents</strong>${results.agents.map(a => `<div>${a.name} (${a.email}) - ${a.role}</div>`).join('')}</div>` : '') +
+            (results.campaigns.length ? `<div class='mb-2'><strong>Campaigns</strong>${results.campaigns.map(c => `<div>${c.name} - ${c.status}</div>`).join('')}</div>` : '');
+        if (!results.leads.length && !results.calls.length && !results.agents.length && !results.campaigns.length) {
+            container.innerHTML = '<div class="alert alert-warning">No results found.</div>';
+        }
+    }
+}
+function setupGlobalSearch() {
+    const input = document.getElementById('globalSearchInput');
+    const btn = document.getElementById('globalSearchBtn');
+    const cat = document.getElementById('globalSearchCategory');
+    btn.onclick = function() {
+        const q = input.value.trim().toLowerCase();
+        const category = cat.value;
+        const { leads, calls, agents, campaigns } = getAllSearchData();
+        if (!q) {
+            renderGlobalSearchResults([], category);
+            return;
+        }
+        if (category === 'leads') {
+            renderGlobalSearchResults(leads.filter(l => l.name.toLowerCase().includes(q) || l.phone.includes(q) || l.email.toLowerCase().includes(q)), 'leads');
+        } else if (category === 'calls') {
+            renderGlobalSearchResults(calls.filter(c => c.number.includes(q) || c.agent.toLowerCase().includes(q) || c.outcome.toLowerCase().includes(q)), 'calls');
+        } else if (category === 'agents') {
+            renderGlobalSearchResults(agents.filter(a => a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q) || a.role.toLowerCase().includes(q)), 'agents');
+        } else if (category === 'campaigns') {
+            renderGlobalSearchResults(campaigns.filter(c => c.name.toLowerCase().includes(q) || c.status.toLowerCase().includes(q)), 'campaigns');
+        } else {
+            renderGlobalSearchResults({
+                leads: leads.filter(l => l.name.toLowerCase().includes(q) || l.phone.includes(q) || l.email.toLowerCase().includes(q)),
+                calls: calls.filter(c => c.number.includes(q) || c.agent.toLowerCase().includes(q) || c.outcome.toLowerCase().includes(q)),
+                agents: agents.filter(a => a.name.toLowerCase().includes(q) || a.email.toLowerCase().includes(q) || a.role.toLowerCase().includes(q)),
+                campaigns: campaigns.filter(c => c.name.toLowerCase().includes(q) || c.status.toLowerCase().includes(q))
+            }, 'all');
+        }
+    };
+}
+// Setup global search on page load
+const globalSearchObserver = new MutationObserver(() => {
+    const input = document.getElementById('globalSearchInput');
+    if (input) setupGlobalSearch();
+});
+globalSearchObserver.observe(document.body, { childList: true, subtree: true });
 
 // Initialize charts when page loads
 document.addEventListener('DOMContentLoaded', function() {
