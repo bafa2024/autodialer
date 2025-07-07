@@ -2064,7 +2064,407 @@
                         <div id="integrations-settings" class="settings-tab">
                             <div class="bg-white p-4 rounded shadow-sm">
                                 <h5 class="mb-4">Integration Settings</h5>
-                                <p class="text-muted">Configure your third-party integrations here.</p>
+                                
+                                <!-- CRM Integrations -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">CRM Integrations</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/00A1E0/FFFFFF?text=SF" class="me-3" alt="Salesforce">
+                                                        <div>
+                                                            <h6 class="mb-0">Salesforce</h6>
+                                                            <small class="text-success">
+                                                                <i class="bi bi-circle-fill me-1"></i>Connected
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Last Sync:</span>
+                                                            <strong>5 minutes ago</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Contacts Synced:</span>
+                                                            <strong>12,847</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                        <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/FF5733/FFFFFF?text=HS" class="me-3" alt="HubSpot">
+                                                        <div>
+                                                            <h6 class="mb-0">HubSpot</h6>
+                                                            <small class="text-warning">
+                                                                <i class="bi bi-circle-fill me-1"></i>Setup Required
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Status:</span>
+                                                            <strong>API Key Required</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Contacts:</span>
+                                                            <strong>0</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Complete Setup</button>
+                                                        <button class="btn btn-sm btn-outline-secondary flex-fill">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- VoIP Integrations -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">VoIP Service Integrations</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/00D084/FFFFFF?text=VG" class="me-3" alt="Vonage">
+                                                        <div>
+                                                            <h6 class="mb-0">Vonage</h6>
+                                                            <small class="text-success">
+                                                                <i class="bi bi-circle-fill me-1"></i>Connected
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Phone Numbers:</span>
+                                                            <strong>5 Active</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Call Quality:</span>
+                                                            <strong class="text-success">Excellent</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                        <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/FF6B35/FFFFFF?text=TW" class="me-3" alt="Twilio">
+                                                        <div>
+                                                            <h6 class="mb-0">Twilio</h6>
+                                                            <small class="text-secondary">
+                                                                <i class="bi bi-circle-fill me-1"></i>Available
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Status:</span>
+                                                            <strong>Not Connected</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Features:</span>
+                                                            <strong>SMS, Voice, Video</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Connect</button>
+                                                        <button class="btn btn-sm btn-outline-secondary flex-fill">Learn More</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Email Marketing Integrations -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">Email Marketing Integrations</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/FF6B35/FFFFFF?text=MC" class="me-3" alt="Mailchimp">
+                                                        <div>
+                                                            <h6 class="mb-0">Mailchimp</h6>
+                                                            <small class="text-success">
+                                                                <i class="bi bi-circle-fill me-1"></i>Connected
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Audience:</span>
+                                                            <strong>15,234 contacts</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Last Sync:</span>
+                                                            <strong>1 hour ago</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                        <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/FF6B35/FFFFFF?text=CC" class="me-3" alt="Constant Contact">
+                                                        <div>
+                                                            <h6 class="mb-0">Constant Contact</h6>
+                                                            <small class="text-secondary">
+                                                                <i class="bi bi-circle-fill me-1"></i>Available
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Status:</span>
+                                                            <strong>Not Connected</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Features:</span>
+                                                            <strong>Email, SMS, Social</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Connect</button>
+                                                        <button class="btn btn-sm btn-outline-secondary flex-fill">Learn More</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Analytics Integrations -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">Analytics & Tracking</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/4285F4/FFFFFF?text=GA" class="me-3" alt="Google Analytics">
+                                                        <div>
+                                                            <h6 class="mb-0">Google Analytics</h6>
+                                                            <small class="text-success">
+                                                                <i class="bi bi-circle-fill me-1"></i>Connected
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Property:</span>
+                                                            <strong>autodial-pro.com</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Last Sync:</span>
+                                                            <strong>Real-time</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                        <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card border">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <img src="https://via.placeholder.com/40x40/FF6B35/FFFFFF?text=FB" class="me-3" alt="Facebook Pixel">
+                                                        <div>
+                                                            <h6 class="mb-0">Facebook Pixel</h6>
+                                                            <small class="text-success">
+                                                                <i class="bi bi-circle-fill me-1"></i>Connected
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="d-flex justify-content-between small mb-1">
+                                                            <span>Pixel ID:</span>
+                                                            <strong>123456789</strong>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between small">
+                                                            <span>Events Tracked:</span>
+                                                            <strong>15</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex gap-2">
+                                                        <button class="btn btn-sm btn-outline-primary flex-fill">Configure</button>
+                                                        <button class="btn btn-sm btn-outline-danger flex-fill">Disconnect</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- API Configuration -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">API Configuration</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">API Key</label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" value="sk_live_1234567890abcdef" aria-label="API key">
+                                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility(this)">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
+                                            </div>
+                                            <small class="text-muted">Your API key for third-party integrations</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Webhook URL</label>
+                                            <input type="url" class="form-control" value="https://api.autodial-pro.com/webhooks" aria-label="Webhook URL">
+                                            <small class="text-muted">Endpoint for receiving webhook notifications</small>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary">
+                                                <i class="bi bi-arrow-clockwise me-2"></i>Regenerate API Key
+                                            </button>
+                                            <button class="btn btn-outline-secondary">
+                                                <i class="bi bi-download me-2"></i>Download API Documentation
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Integration Settings -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">Global Integration Settings</h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Default Sync Frequency</label>
+                                            <select class="form-select" aria-label="Default sync frequency">
+                                                <option>Real-time</option>
+                                                <option>Every 5 minutes</option>
+                                                <option>Every 15 minutes</option>
+                                                <option>Every hour</option>
+                                                <option>Daily</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Error Notification</label>
+                                            <select class="form-select" aria-label="Error notification frequency">
+                                                <option>Immediate</option>
+                                                <option>After 3 failures</option>
+                                                <option>After 5 failures</option>
+                                                <option>Daily summary</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="autoRetry" checked>
+                                                <label class="form-check-label" for="autoRetry">
+                                                    Automatically retry failed syncs
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="syncLogs" checked>
+                                                <label class="form-check-label" for="syncLogs">
+                                                    Keep detailed sync logs (30 days)
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="dataValidation" checked>
+                                                <label class="form-check-label" for="dataValidation">
+                                                    Validate data before syncing
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Integration Logs -->
+                                <div class="mb-4">
+                                    <h6 class="mb-3">Recent Integration Activity</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Integration</th>
+                                                    <th>Action</th>
+                                                    <th>Status</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2 min ago</td>
+                                                    <td>Salesforce</td>
+                                                    <td>Contact Sync</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                    <td>45 contacts synced</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5 min ago</td>
+                                                    <td>Mailchimp</td>
+                                                    <td>Audience Update</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                    <td>23 new subscribers</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>15 min ago</td>
+                                                    <td>HubSpot</td>
+                                                    <td>API Connection</td>
+                                                    <td><span class="badge bg-warning">Warning</span></td>
+                                                    <td>Rate limit approaching</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1 hour ago</td>
+                                                    <td>Vonage</td>
+                                                    <td>Call Log Sync</td>
+                                                    <td><span class="badge bg-success">Success</span></td>
+                                                    <td>156 calls logged</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <button class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-clock-history me-2"></i>View Full Logs
+                                    </button>
+                                </div>
+                                
+                                <!-- Save Settings -->
+                                <div class="border-top pt-3">
+                                    <button class="btn btn-primary">
+                                        <i class="bi bi-check-circle me-2"></i>Save Integration Settings
+                                    </button>
+                                    <button class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-clockwise me-2"></i>Test All Connections
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
