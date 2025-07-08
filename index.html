@@ -8347,8 +8347,613 @@
             <!-- Access Controls Section -->
             <div id="access-controls-section" class="dashboard-section">
                 <h4 class="mb-4">Access Controls</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Access controls interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Access Control Management</h5>
+                                <div>
+                                    <span class="badge bg-success me-2">Secure</span>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="configureAccess()">
+                                        <i class="bi bi-gear me-2"></i>Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- User Management -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6>User Management</h6>
+                                    <div>
+                                        <button class="btn btn-outline-primary btn-sm me-2" onclick="importUsers()">
+                                            <i class="bi bi-upload me-1"></i>Import
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" onclick="addUser()">
+                                            <i class="bi bi-plus-circle me-1"></i>Add User
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Last Login</th>
+                                                <th>Permissions</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                            <span class="text-white fw-bold">JS</span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-bold">John Smith</div>
+                                                            <small class="text-muted">john.smith@company.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-primary">Admin</span></td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                    <div>Dec 15, 2024</div>
+                                                    <small class="text-muted">2:30 PM</small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info me-1">Full Access</span>
+                                                    <span class="badge bg-secondary me-1">Reports</span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="editUser('1')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning" onclick="suspendUser('1')">
+                                                            <i class="bi bi-pause-circle"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger" onclick="deleteUser('1')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm bg-success rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                            <span class="text-white fw-bold">SD</span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-bold">Sarah Davis</div>
+                                                            <small class="text-muted">sarah.davis@company.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-info">Manager</span></td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                    <div>Dec 15, 2024</div>
+                                                    <small class="text-muted">1:45 PM</small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info me-1">Limited</span>
+                                                    <span class="badge bg-secondary me-1">Reports</span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="editUser('2')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning" onclick="suspendUser('2')">
+                                                            <i class="bi bi-pause-circle"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger" onclick="deleteUser('2')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm bg-warning rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                            <span class="text-white fw-bold">MJ</span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-bold">Mike Johnson</div>
+                                                            <small class="text-muted">mike.johnson@company.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-secondary">Agent</span></td>
+                                                <td><span class="badge bg-warning">Suspended</span></td>
+                                                <td>
+                                                    <div>Dec 14, 2024</div>
+                                                    <small class="text-muted">4:20 PM</small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info me-1">Basic</span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="editUser('3')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-success" onclick="activateUser('3')">
+                                                            <i class="bi bi-play-circle"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger" onclick="deleteUser('3')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="avatar-sm bg-danger rounded-circle d-flex align-items-center justify-content-center me-2">
+                                                            <span class="text-white fw-bold">LW</span>
+                                                        </div>
+                                                        <div>
+                                                            <div class="fw-bold">Lisa Wilson</div>
+                                                            <small class="text-muted">lisa.wilson@company.com</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-secondary">Agent</span></td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                    <div>Dec 15, 2024</div>
+                                                    <small class="text-muted">2:15 PM</small>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info me-1">Basic</span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="editUser('4')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-warning" onclick="suspendUser('4')">
+                                                            <i class="bi bi-pause-circle"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-danger" onclick="deleteUser('4')">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Role-Based Permissions -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Role-Based Permissions</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Admin Role</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="adminFullAccess" checked disabled>
+                                                    <label class="form-check-label" for="adminFullAccess">
+                                                        Full System Access
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="adminUserMgmt" checked disabled>
+                                                    <label class="form-check-label" for="adminUserMgmt">
+                                                        User Management
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="adminReports" checked disabled>
+                                                    <label class="form-check-label" for="adminReports">
+                                                        All Reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="adminSettings" checked disabled>
+                                                    <label class="form-check-label" for="adminSettings">
+                                                        System Settings
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Manager Role</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="managerTeamAccess">
+                                                    <label class="form-check-label" for="managerTeamAccess">
+                                                        Team Management
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="managerReports" checked>
+                                                    <label class="form-check-label" for="managerReports">
+                                                        Team Reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="managerLeads">
+                                                    <label class="form-check-label" for="managerLeads">
+                                                        Lead Management
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="managerCalls">
+                                                    <label class="form-check-label" for="managerCalls">
+                                                        Call Management
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Agent Role</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="agentCalls" checked>
+                                                    <label class="form-check-label" for="agentCalls">
+                                                        Make Calls
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="agentLeads">
+                                                    <label class="form-check-label" for="agentLeads">
+                                                        View Assigned Leads
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="agentReports">
+                                                    <label class="form-check-label" for="agentReports">
+                                                        Personal Reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="agentSettings">
+                                                    <label class="form-check-label" for="agentSettings">
+                                                        Personal Settings
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Viewer Role</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="viewerReports">
+                                                    <label class="form-check-label" for="viewerReports">
+                                                        View Reports
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="viewerAnalytics">
+                                                    <label class="form-check-label" for="viewerAnalytics">
+                                                        View Analytics
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="viewerDashboard">
+                                                    <label class="form-check-label" for="viewerDashboard">
+                                                        View Dashboard
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="viewerReadOnly">
+                                                    <label class="form-check-label" for="viewerReadOnly">
+                                                        Read-Only Access
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Authentication Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Authentication Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Password Policy</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="passwordComplexity" checked>
+                                            <label class="form-check-label" for="passwordComplexity">
+                                                Require complex passwords
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="passwordExpiry" checked>
+                                            <label class="form-check-label" for="passwordExpiry">
+                                                Password expiry (90 days)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="passwordHistory">
+                                            <label class="form-check-label" for="passwordHistory">
+                                                Prevent password reuse
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Session Management</label>
+                                        <div class="mb-2">
+                                            <label class="form-label">Session Timeout</label>
+                                            <select class="form-select" id="sessionTimeout">
+                                                <option value="15">15 minutes</option>
+                                                <option value="30" selected>30 minutes</option>
+                                                <option value="60">1 hour</option>
+                                                <option value="120">2 hours</option>
+                                                <option value="480">8 hours</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="concurrentSessions">
+                                            <label class="form-check-label" for="concurrentSessions">
+                                                Allow multiple sessions
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="forceLogout">
+                                            <label class="form-check-label" for="forceLogout">
+                                                Force logout on security events
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Two-Factor Authentication</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enable2FA" checked>
+                                            <label class="form-check-label" for="enable2FA">
+                                                Enable 2FA for all users
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="admin2FA" checked>
+                                            <label class="form-check-label" for="admin2FA">
+                                                Require 2FA for admins
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="backupCodes">
+                                            <label class="form-check-label" for="backupCodes">
+                                                Generate backup codes
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Login Security</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="loginAttempts" checked>
+                                            <label class="form-check-label" for="loginAttempts">
+                                                Limit login attempts (5)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="ipWhitelist">
+                                            <label class="form-check-label" for="ipWhitelist">
+                                                IP address whitelist
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="geoRestriction">
+                                            <label class="form-check-label" for="geoRestriction">
+                                                Geographic restrictions
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Security Policies -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Security Policies</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Data Access</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dataEncryption" checked>
+                                            <label class="form-check-label" for="dataEncryption">
+                                                Encrypt sensitive data
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dataMasking" checked>
+                                            <label class="form-check-label" for="dataMasking">
+                                                Mask sensitive information
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dataRetention">
+                                            <label class="form-check-label" for="dataRetention">
+                                                Enforce data retention policies
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Audit & Monitoring</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="auditLogging" checked>
+                                            <label class="form-check-label" for="auditLogging">
+                                                Log all access attempts
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="securityAlerts" checked>
+                                            <label class="form-check-label" for="securityAlerts">
+                                                Security event alerts
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="complianceReports" checked>
+                                            <label class="form-check-label" for="complianceReports">
+                                                Generate compliance reports
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveAccessSettings()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="runSecurityAudit()">
+                                    <i class="bi bi-shield-check me-2"></i>Security Audit
+                                </button>
+                                <button class="btn btn-outline-info" onclick="exportAccessReport()">
+                                    <i class="bi bi-download me-2"></i>Export Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Access Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Access Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Total Users:</span>
+                                    <strong>24</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Active Users:</span>
+                                    <strong class="text-success">22 (92%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Suspended Users:</span>
+                                    <strong class="text-warning">2 (8%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Failed Logins:</span>
+                                    <strong class="text-danger">5 (today)</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 92%"></div>
+                                </div>
+                                <small class="text-muted">Active user rate: 92%</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Admins:</span>
+                                    <strong class="text-primary">3 (13%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Managers:</span>
+                                    <strong class="text-info">5 (21%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Agents:</span>
+                                    <strong class="text-secondary">14 (58%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Viewers:</span>
+                                    <strong class="text-muted">2 (8%)</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="addUser()">
+                                    <i class="bi bi-plus-circle me-2"></i>Add User
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="bulkUserImport()">
+                                    <i class="bi bi-upload me-2"></i>Bulk Import
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="securityAudit()">
+                                    <i class="bi bi-shield-check me-2"></i>Security Audit
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="accessAnalytics()">
+                                    <i class="bi bi-graph-up me-2"></i>Analytics
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">2 min ago</small>
+                                    <div>User login: john.smith@company.com</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Failed login attempt: unknown@company.com</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">10 min ago</small>
+                                    <div>User suspended: mike.johnson@company.com</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">15 min ago</small>
+                                    <div>Permission updated: sarah.davis@company.com</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Security Status -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Security Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Overall Security:</span>
+                                    <strong class="text-success">95.2%</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 95.2%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>2FA Adoption:</span>
+                                    <strong class="text-success">100%</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Security Score:</span>
+                                    <strong class="text-success">A+</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-shield-check me-2"></i>View Security Report
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
