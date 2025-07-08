@@ -151,6 +151,32 @@
             background-color: var(--primary-color);
             color: white;
         }
+        
+        .voicemail-detection-link {
+            background-color: #fff3cd !important;
+            border-left: 4px solid #ffc107 !important;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .voicemail-detection-link:hover {
+            background-color: #ffeaa7 !important;
+            transform: translateX(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .voicemail-detection-link::before {
+            content: "NEW";
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            background-color: #dc3545;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
 
         .stat-card {
             background: white;
@@ -602,6 +628,9 @@
                     </a>
                     <a class="sidebar-link" onclick="showDashboardSection('campaigns', this)">
                         <i class="bi bi-megaphone me-3"></i>Campaigns
+                    </a>
+                    <a class="sidebar-link voicemail-detection-link" onclick="showDashboardSection('voicemail-detection', this)" style="background-color: #fff3cd; border-left: 4px solid #ffc107;">
+                        <i class="bi bi-mic-mute me-3 text-warning"></i>🎯 Voicemail Detection Setup
                     </a>
                     <a class="sidebar-link" onclick="showDashboardSection('contacts', this)">
                         <i class="bi bi-people me-3"></i>Contacts
@@ -4056,6 +4085,372 @@
                 </div>
             </div>
 
+            <!-- Voicemail Detection Section -->
+            <div id="voicemail-detection-section" class="dashboard-section">
+                <h4 class="mb-4">Voicemail Detection (AMD)</h4>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Answering Machine Detection Configuration</h5>
+                                <span class="badge bg-success">98.5% Accuracy</span>
+                            </div>
+                            
+                            <!-- Detection Methods -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Detection Methods</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="detectionMethod" id="aiDetection" checked>
+                                                    <label class="form-check-label" for="aiDetection">
+                                                        <strong>AI-Powered Detection</strong>
+                                                    </label>
+                                                </div>
+                                                <small class="text-muted">Uses machine learning to analyze audio patterns and detect voicemail vs human responses</small>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-success">98.5% Accuracy</span>
+                                                    <span class="badge bg-info">Real-time</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="detectionMethod" id="toneDetection">
+                                                    <label class="form-check-label" for="toneDetection">
+                                                        <strong>Tone-Based Detection</strong>
+                                                    </label>
+                                                </div>
+                                                <small class="text-muted">Analyzes audio tones and frequencies to identify voicemail beeps and greetings</small>
+                                                <div class="mt-2">
+                                                    <span class="badge bg-warning">92% Accuracy</span>
+                                                    <span class="badge bg-secondary">Legacy</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Detection Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Detection Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Detection Sensitivity</label>
+                                        <select class="form-select" aria-label="Detection sensitivity">
+                                            <option value="high">High (Conservative)</option>
+                                            <option value="medium" selected>Medium (Balanced)</option>
+                                            <option value="low">Low (Aggressive)</option>
+                                        </select>
+                                        <small class="text-muted">Higher sensitivity = more likely to detect voicemail</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Detection Timeout</label>
+                                        <select class="form-select" aria-label="Detection timeout">
+                                            <option value="3">3 seconds</option>
+                                            <option value="5" selected>5 seconds</option>
+                                            <option value="8">8 seconds</option>
+                                            <option value="10">10 seconds</option>
+                                        </select>
+                                        <small class="text-muted">Maximum time to wait for detection</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Confidence Threshold</label>
+                                        <div class="d-flex align-items-center">
+                                            <input type="range" class="form-range" min="70" max="99" value="85" id="confidenceThreshold">
+                                            <span class="ms-3 text-muted">85%</span>
+                                        </div>
+                                        <small class="text-muted">Minimum confidence level to classify as voicemail</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Retry Detection</label>
+                                        <select class="form-select" aria-label="Retry detection">
+                                            <option value="0">Never</option>
+                                            <option value="1">Once</option>
+                                            <option value="2" selected>Twice</option>
+                                            <option value="3">Three times</option>
+                                        </select>
+                                        <small class="text-muted">Number of detection attempts per call</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Voicemail Handling -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Voicemail Handling</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Action on Voicemail Detection</label>
+                                        <select class="form-select" aria-label="Voicemail action">
+                                            <option value="hangup">Hang up immediately</option>
+                                            <option value="leave_message" selected>Leave a message</option>
+                                            <option value="transfer_ai">Transfer to AI agent</option>
+                                            <option value="schedule_callback">Schedule callback</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Message Type</label>
+                                        <select class="form-label" aria-label="Message type">
+                                            <option value="custom">Custom message</option>
+                                            <option value="template" selected>Template message</option>
+                                            <option value="ai_generated">AI-generated message</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Voicemail Message</label>
+                                        <textarea class="form-control" rows="3" placeholder="Enter your voicemail message...">Hi, this is [Company Name] calling about your recent inquiry. Please call us back at [Phone Number] or visit our website. Thank you!</textarea>
+                                        <small class="text-muted">Use [Company Name], [Phone Number], [Agent Name] for dynamic content</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Message Length</label>
+                                        <select class="form-select" aria-label="Message length">
+                                            <option value="short">Short (15-30 seconds)</option>
+                                            <option value="medium" selected>Medium (30-60 seconds)</option>
+                                            <option value="long">Long (60+ seconds)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Caller ID for Voicemail</label>
+                                        <select class="form-select" aria-label="Voicemail caller ID">
+                                            <option value="main">Main business number</option>
+                                            <option value="local" selected>Local number</option>
+                                            <option value="toll_free">Toll-free number</option>
+                                            <option value="custom">Custom number</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Advanced Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableLearning" checked>
+                                            <label class="form-check-label" for="enableLearning">
+                                                Enable machine learning improvements
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="logDetections" checked>
+                                            <label class="form-check-label" for="logDetections">
+                                                Log all detection attempts for analysis
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="adaptiveThreshold">
+                                            <label class="form-check-label" for="adaptiveThreshold">
+                                                Use adaptive confidence thresholds
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="timeBasedDetection" checked>
+                                            <label class="form-check-label" for="timeBasedDetection">
+                                                Adjust detection based on time of day
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Detection Status -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Detection Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Current Accuracy:</span>
+                                    <strong class="text-success">98.5%</strong>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-success" style="width: 98.5%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Detection Speed:</span>
+                                    <strong>2.3 seconds</strong>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-info" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>False Positives:</span>
+                                    <strong class="text-warning">1.2%</strong>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-warning" style="width: 1.2%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>System Status:</span>
+                                <strong class="text-success">Active</strong>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Detections -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Detections</h6>
+                            <div class="small">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Human Detected</span>
+                                    <strong class="text-success">+45</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Voicemail Detected</span>
+                                    <strong class="text-info">+23</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Uncertain</span>
+                                    <strong class="text-warning">+3</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Failed Detection</span>
+                                    <strong class="text-danger">+1</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Detection Analytics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Today's Analytics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Total Calls:</span>
+                                    <strong>1,247</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Voicemails:</span>
+                                    <strong>623 (50%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Live Humans:</span>
+                                    <strong>589 (47%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Uncertain:</span>
+                                    <strong>35 (3%)</strong>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-graph-up me-2"></i>View Detailed Analytics
+                            </button>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="testVoicemailDetection()">
+                                    <i class="bi bi-play-circle me-2"></i>Test Detection
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="calibrateVoicemailSystem()">
+                                    <i class="bi bi-gear me-2"></i>Calibrate System
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="exportVoicemailData()">
+                                    <i class="bi bi-download me-2"></i>Export Data
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="resetVoicemailSettings()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Reset Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detection History -->
+                <div class="row g-4 mt-4">
+                    <div class="col-12">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h6>Detection History</h6>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm me-2">
+                                        <i class="bi bi-filter me-2"></i>Filter
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-download me-2"></i>Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Phone Number</th>
+                                            <th>Detection Result</th>
+                                            <th>Confidence</th>
+                                            <th>Duration</th>
+                                            <th>Action Taken</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2:30 PM</td>
+                                            <td>+1 (555) 123-4567</td>
+                                            <td><span class="badge bg-success">Human</span></td>
+                                            <td>96.2%</td>
+                                            <td>2.1s</td>
+                                            <td>Connected to Agent</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2:28 PM</td>
+                                            <td>+1 (555) 987-6543</td>
+                                            <td><span class="badge bg-info">Voicemail</span></td>
+                                            <td>98.7%</td>
+                                            <td>1.8s</td>
+                                            <td>Left Message</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2:25 PM</td>
+                                            <td>+1 (555) 456-7890</td>
+                                            <td><span class="badge bg-warning">Uncertain</span></td>
+                                            <td>72.3%</td>
+                                            <td>5.2s</td>
+                                            <td>Retry Detection</td>
+                                            <td><span class="badge bg-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2:22 PM</td>
+                                            <td>+1 (555) 321-6540</td>
+                                            <td><span class="badge bg-success">Human</span></td>
+                                            <td>94.8%</td>
+                                            <td>2.4s</td>
+                                            <td>Connected to Agent</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2:20 PM</td>
+                                            <td>+1 (555) 789-0123</td>
+                                            <td><span class="badge bg-info">Voicemail</span></td>
+                                            <td>99.1%</td>
+                                            <td>1.5s</td>
+                                            <td>Left Message</td>
+                                            <td><span class="badge bg-success">Success</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Caller ID Section -->
             <div id="caller-id-section" class="dashboard-section">
                 <h4 class="mb-4">Caller ID Management</h4>
@@ -5580,6 +5975,116 @@
                 icon.classList.add('bi-eye');
             }
         }
+
+        // Voicemail Detection Functions
+        function updateConfidenceThreshold() {
+            const slider = document.getElementById('confidenceThreshold');
+            const display = slider.nextElementSibling;
+            if (slider && display) {
+                display.textContent = slider.value + '%';
+            }
+        }
+
+        function testVoicemailDetection() {
+            showNotification('Starting voicemail detection test...', 'info');
+            
+            // Simulate test process
+            setTimeout(() => {
+                showNotification('Test completed! Accuracy: 98.5%', 'success');
+            }, 3000);
+        }
+
+        function calibrateVoicemailSystem() {
+            showNotification('Starting system calibration...', 'info');
+            
+            // Simulate calibration process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    showNotification('System calibration completed successfully!', 'success');
+                }
+            }, 500);
+        }
+
+        function exportVoicemailData() {
+            showNotification('Preparing data export...', 'info');
+            
+            // Simulate export process
+            setTimeout(() => {
+                const csvContent = "Date,Phone Number,Detection Result,Confidence,Duration,Action\n2024-01-15 14:30,+1 (555) 123-4567,Human,96.2%,2.1s,Connected\n2024-01-15 14:28,+1 (555) 987-6543,Voicemail,98.7%,1.8s,Left Message";
+                
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'voicemail_detection_data.csv';
+                a.click();
+                window.URL.revokeObjectURL(url);
+                
+                showNotification('Data exported successfully!', 'success');
+            }, 2000);
+        }
+
+        function resetVoicemailSettings() {
+            if (confirm('Are you sure you want to reset all voicemail detection settings to default?')) {
+                showNotification('Resetting settings...', 'info');
+                
+                // Reset form elements
+                const confidenceSlider = document.getElementById('confidenceThreshold');
+                if (confidenceSlider) {
+                    confidenceSlider.value = 85;
+                    updateConfidenceThreshold();
+                }
+                
+                // Reset other form elements to defaults
+                setTimeout(() => {
+                    showNotification('Settings reset to default values!', 'success');
+                }, 1000);
+            }
+        }
+
+        // Initialize voicemail detection event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Confidence threshold slider
+            const confidenceSlider = document.getElementById('confidenceThreshold');
+            if (confidenceSlider) {
+                confidenceSlider.addEventListener('input', updateConfidenceThreshold);
+            }
+
+            // Detection method radio buttons
+            const detectionMethods = document.querySelectorAll('input[name="detectionMethod"]');
+            detectionMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    const accuracy = this.id === 'aiDetection' ? '98.5%' : '92%';
+                    const statusBadge = document.querySelector('.badge.bg-success');
+                    if (statusBadge) {
+                        statusBadge.textContent = accuracy + ' Accuracy';
+                    }
+                });
+            });
+            
+            // Highlight voicemail detection link on page load
+            setTimeout(() => {
+                const voicemailLink = document.querySelector('.voicemail-detection-link');
+                if (voicemailLink) {
+                    voicemailLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    voicemailLink.style.animation = 'pulse 2s infinite';
+                }
+            }, 1000);
+        });
+        
+        // Add pulse animation for voicemail detection link
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+                70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
