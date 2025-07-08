@@ -112,7 +112,7 @@
         /* Dashboard Styles */
         .sidebar {
             background: white;
-            min-height: 100vh;
+            height: 100vh;
             box-shadow: 2px 0 4px rgba(0,0,0,0.05);
             position: fixed;
             width: 250px;
@@ -120,6 +120,7 @@
             left: 0;
             z-index: 100;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .main-content {
@@ -139,6 +140,7 @@
             border-radius: 8px;
             margin: 4px 8px;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .sidebar-link:hover {
@@ -357,20 +359,28 @@
 
         /* Scrollbar styling */
         .sidebar::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         .sidebar::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: #f8f9fa;
+            border-radius: 4px;
         }
 
         .sidebar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
+            background: #c1c1c1;
+            border-radius: 4px;
+            border: 1px solid #f8f9fa;
         }
 
         .sidebar::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #a8a8a8;
+        }
+
+        /* Firefox scrollbar styling */
+        .sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #c1c1c1 #f8f9fa;
         }
 
         /* Settings Tabs */
@@ -612,7 +622,7 @@
     <div id="dashboard-page" class="page-content">
         <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
-            <div class="p-4">
+            <div class="p-4 pb-5">
                 <h5 class="fw-bold mb-4">
                     <i class="bi bi-telephone-fill text-primary"></i> AutoDial Pro
                 </h5>
