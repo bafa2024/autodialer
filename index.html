@@ -695,10 +695,13 @@
                     <a class="sidebar-link" onclick="showDashboardSection('pipeline', this)">
                         <i class="bi bi-kanban me-3"></i>Pipeline/Follow-Up
                     </a>
+                    <a class="sidebar-link" onclick="showDashboardSection('contact-support', this)">
+                        <i class="bi bi-headset me-3"></i>Contact Support
+                    </a>
                 </nav>
                 <div class="mt-5 p-3 bg-light rounded">
                     <p class="small mb-2 text-secondary">Need help?</p>
-                    <button class="btn btn-sm btn-primary w-100">
+                    <button class="btn btn-sm btn-primary w-100" onclick="showDashboardSection('contact-support', this)">
                         <i class="bi bi-headset me-2"></i>Contact Support
                     </button>
                 </div>
@@ -10198,6 +10201,96 @@
             }, 1000);
         });
         
+        // Contact Support Functions
+        function openLiveChat() {
+            showNotification('Opening live chat...', 'info');
+            // This would typically open a live chat widget
+            setTimeout(() => {
+                showNotification('Live chat connected! A support agent will be with you shortly.', 'success');
+            }, 2000);
+        }
+
+        function createTicket() {
+            showNotification('Creating new support ticket...', 'info');
+            // This would typically open a modal or form for creating tickets
+            setTimeout(() => {
+                showNotification('Ticket created successfully! Ticket #TKT-2024-004', 'success');
+            }, 1500);
+        }
+
+        function viewAllTickets() {
+            showNotification('Loading all tickets...', 'info');
+            // This would typically show all tickets in a modal or new page
+            setTimeout(() => {
+                showNotification('All tickets loaded successfully!', 'success');
+            }, 1000);
+        }
+
+        function searchKnowledgeBase() {
+            showNotification('Opening knowledge base search...', 'info');
+            // This would typically open a search interface
+            setTimeout(() => {
+                showNotification('Knowledge base search ready!', 'success');
+            }, 1000);
+        }
+
+        function refreshTickets() {
+            showNotification('Refreshing tickets...', 'info');
+            // This would typically reload ticket data
+            setTimeout(() => {
+                showNotification('Tickets refreshed successfully!', 'success');
+            }, 1000);
+        }
+
+        function viewTicket(ticketId) {
+            showNotification(`Opening ticket ${ticketId}...`, 'info');
+            // This would typically open a modal with ticket details
+            setTimeout(() => {
+                showNotification(`Ticket ${ticketId} details loaded!`, 'success');
+            }, 1000);
+        }
+
+        function replyTicket(ticketId) {
+            showNotification(`Opening reply form for ticket ${ticketId}...`, 'info');
+            // This would typically open a reply form
+            setTimeout(() => {
+                showNotification(`Reply form ready for ticket ${ticketId}!`, 'success');
+            }, 1000);
+        }
+
+        function reopenTicket(ticketId) {
+            if (confirm(`Are you sure you want to reopen ticket ${ticketId}?`)) {
+                showNotification(`Reopening ticket ${ticketId}...`, 'info');
+                setTimeout(() => {
+                    showNotification(`Ticket ${ticketId} reopened successfully!`, 'success');
+                }, 1000);
+            }
+        }
+
+        function saveDraft() {
+            showNotification('Saving draft...', 'info');
+            // This would typically save the current form as a draft
+            setTimeout(() => {
+                showNotification('Draft saved successfully!', 'success');
+            }, 1000);
+        }
+
+        function viewKnowledgeBase() {
+            showNotification('Opening knowledge base...', 'info');
+            // This would typically open the knowledge base
+            setTimeout(() => {
+                showNotification('Knowledge base loaded!', 'success');
+            }, 1000);
+        }
+
+        function scheduleCall() {
+            showNotification('Opening call scheduler...', 'info');
+            // This would typically open a calendar/scheduler interface
+            setTimeout(() => {
+                showNotification('Call scheduler ready!', 'success');
+            }, 1000);
+        }
+        
         // Add pulse animation for voicemail detection link
         const style = document.createElement('style');
         style.textContent = `
@@ -10208,6 +10301,96 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Contact Support Functions
+        function openLiveChat() {
+            showNotification('Opening live chat...', 'info');
+            // This would typically open a live chat widget
+            setTimeout(() => {
+                showNotification('Live chat connected! A support agent will be with you shortly.', 'success');
+            }, 2000);
+        }
+
+        function createTicket() {
+            showNotification('Creating new support ticket...', 'info');
+            // This would typically open a modal or form for creating tickets
+            setTimeout(() => {
+                showNotification('Ticket created successfully! Ticket #TKT-2024-004', 'success');
+            }, 1500);
+        }
+
+        function viewAllTickets() {
+            showNotification('Loading all tickets...', 'info');
+            // This would typically show all tickets in a modal or new page
+            setTimeout(() => {
+                showNotification('All tickets loaded successfully!', 'success');
+            }, 1000);
+        }
+
+        function searchKnowledgeBase() {
+            showNotification('Opening knowledge base search...', 'info');
+            // This would typically open a search interface
+            setTimeout(() => {
+                showNotification('Knowledge base search ready!', 'success');
+            }, 1000);
+        }
+
+        function refreshTickets() {
+            showNotification('Refreshing tickets...', 'info');
+            // This would typically reload ticket data
+            setTimeout(() => {
+                showNotification('Tickets refreshed successfully!', 'success');
+            }, 1000);
+        }
+
+        function viewTicket(ticketId) {
+            showNotification(`Opening ticket ${ticketId}...`, 'info');
+            // This would typically open a modal with ticket details
+            setTimeout(() => {
+                showNotification(`Ticket ${ticketId} details loaded!`, 'success');
+            }, 1000);
+        }
+
+        function replyTicket(ticketId) {
+            showNotification(`Opening reply form for ticket ${ticketId}...`, 'info');
+            // This would typically open a reply form
+            setTimeout(() => {
+                showNotification(`Reply form ready for ticket ${ticketId}!`, 'success');
+            }, 1000);
+        }
+
+        function reopenTicket(ticketId) {
+            if (confirm(`Are you sure you want to reopen ticket ${ticketId}?`)) {
+                showNotification(`Reopening ticket ${ticketId}...`, 'info');
+                setTimeout(() => {
+                    showNotification(`Ticket ${ticketId} reopened successfully!`, 'success');
+                }, 1000);
+            }
+        }
+
+        function saveDraft() {
+            showNotification('Saving draft...', 'info');
+            // This would typically save the current form as a draft
+            setTimeout(() => {
+                showNotification('Draft saved successfully!', 'success');
+            }, 1000);
+        }
+
+        function viewKnowledgeBase() {
+            showNotification('Opening knowledge base...', 'info');
+            // This would typically open the knowledge base
+            setTimeout(() => {
+                showNotification('Knowledge base loaded!', 'success');
+            }, 1000);
+        }
+
+        function scheduleCall() {
+            showNotification('Opening call scheduler...', 'info');
+            // This would typically open a calendar/scheduler interface
+            setTimeout(() => {
+                showNotification('Call scheduler ready!', 'success');
+            }, 1000);
+        }
     </script>
 </body>
 </html>
