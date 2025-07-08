@@ -5276,16 +5276,730 @@
             <!-- Call Recordings Section -->
             <div id="call-recordings-section" class="dashboard-section">
                 <h4 class="mb-4">Call Recordings</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Call recordings interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Call Recording Management</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm me-2" onclick="exportRecordings()">
+                                        <i class="bi bi-download me-2"></i>Export
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" onclick="bulkDownload()">
+                                        <i class="bi bi-cloud-download me-2"></i>Bulk Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Search and Filters -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Search recordings..." id="recordingSearch">
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="recordingFilter">
+                                        <option value="">All Recordings</option>
+                                        <option value="today">Today</option>
+                                        <option value="week">This Week</option>
+                                        <option value="month">This Month</option>
+                                        <option value="completed">Completed Calls</option>
+                                        <option value="voicemail">Voicemail Messages</option>
+                                        <option value="missed">Missed Calls</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="agentFilter">
+                                        <option value="">All Agents</option>
+                                        <option value="human">Human Agents</option>
+                                        <option value="ai">AI Agents</option>
+                                        <option value="sarah">Agent Sarah</option>
+                                        <option value="mike">Agent Mike</option>
+                                        <option value="lisa">Agent Lisa</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-outline-secondary w-100" onclick="applyFilters()">
+                                        <i class="bi bi-funnel me-2"></i>Filter
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Recordings Table -->
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <input type="checkbox" class="form-check-input" id="selectAllRecordings">
+                                            </th>
+                                            <th>Date & Time</th>
+                                            <th>Phone Number</th>
+                                            <th>Agent</th>
+                                            <th>Duration</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input recording-checkbox">
+                                            </td>
+                                            <td>
+                                                <div>Dec 15, 2024</div>
+                                                <small class="text-muted">2:30 PM</small>
+                                            </td>
+                                            <td>+1 (555) 123-4567</td>
+                                            <td>
+                                                <div>Agent Sarah</div>
+                                                <small class="text-muted">AI Agent</small>
+                                            </td>
+                                            <td>4:32</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="playRecording('recording1')">
+                                                        <i class="bi bi-play-circle"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary" onclick="downloadRecording('recording1')">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info" onclick="viewDetails('recording1')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input recording-checkbox">
+                                            </td>
+                                            <td>
+                                                <div>Dec 15, 2024</div>
+                                                <small class="text-muted">2:28 PM</small>
+                                            </td>
+                                            <td>+1 (555) 987-6543</td>
+                                            <td>
+                                                <div>Agent Mike</div>
+                                                <small class="text-muted">Human Agent</small>
+                                            </td>
+                                            <td>1:45</td>
+                                            <td><span class="badge bg-info">Voicemail</span></td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="playRecording('recording2')">
+                                                        <i class="bi bi-play-circle"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary" onclick="downloadRecording('recording2')">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info" onclick="viewDetails('recording2')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input recording-checkbox">
+                                            </td>
+                                            <td>
+                                                <div>Dec 15, 2024</div>
+                                                <small class="text-muted">2:25 PM</small>
+                                            </td>
+                                            <td>+1 (555) 456-7890</td>
+                                            <td>
+                                                <div>Agent Lisa</div>
+                                                <small class="text-muted">AI Agent</small>
+                                            </td>
+                                            <td>0:12</td>
+                                            <td><span class="badge bg-warning">Missed</span></td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="playRecording('recording3')">
+                                                        <i class="bi bi-play-circle"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary" onclick="downloadRecording('recording3')">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info" onclick="viewDetails('recording3')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input recording-checkbox">
+                                            </td>
+                                            <td>
+                                                <div>Dec 15, 2024</div>
+                                                <small class="text-muted">2:22 PM</small>
+                                            </td>
+                                            <td>+1 (555) 321-6540</td>
+                                            <td>
+                                                <div>Agent Sarah</div>
+                                                <small class="text-muted">AI Agent</small>
+                                            </td>
+                                            <td>6:18</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                            <td><span class="badge bg-warning">Processing</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-secondary" disabled>
+                                                        <i class="bi bi-hourglass-split"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info" onclick="viewDetails('recording4')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input recording-checkbox">
+                                            </td>
+                                            <td>
+                                                <div>Dec 15, 2024</div>
+                                                <small class="text-muted">2:20 PM</small>
+                                            </td>
+                                            <td>+1 (555) 789-0123</td>
+                                            <td>
+                                                <div>Agent Mike</div>
+                                                <small class="text-muted">Human Agent</small>
+                                            </td>
+                                            <td>2:45</td>
+                                            <td><span class="badge bg-info">Voicemail</span></td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button class="btn btn-outline-primary" onclick="playRecording('recording5')">
+                                                        <i class="bi bi-play-circle"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary" onclick="downloadRecording('recording5')">
+                                                        <i class="bi bi-download"></i>
+                                                    </button>
+                                                    <button class="btn btn-outline-info" onclick="viewDetails('recording5')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <div class="text-muted">
+                                    Showing 1-5 of 1,247 recordings
+                                </div>
+                                <nav>
+                                    <ul class="pagination pagination-sm mb-0">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">250</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Recording Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recording Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Total Recordings:</span>
+                                    <strong>1,247</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Storage Used:</span>
+                                    <strong>2.4 GB</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Available Storage:</span>
+                                    <strong>47.6 GB</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 4.8%"></div>
+                                </div>
+                                <small class="text-muted">4.8% of storage used</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Completed Calls:</span>
+                                    <strong>892 (72%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Voicemails:</span>
+                                    <strong>289 (23%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Missed Calls:</span>
+                                    <strong>66 (5%)</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bulk Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Bulk Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="bulkDownload()">
+                                    <i class="bi bi-cloud-download me-2"></i>Download Selected
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="bulkExport()">
+                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Export Metadata
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="bulkDelete()">
+                                    <i class="bi bi-trash me-2"></i>Delete Selected
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Filters -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Filters</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-success btn-sm" onclick="filterByType('completed')">
+                                    <i class="bi bi-check-circle me-2"></i>Completed Calls
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="filterByType('voicemail')">
+                                    <i class="bi bi-mic me-2"></i>Voicemail Messages
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="filterByType('missed')">
+                                    <i class="bi bi-x-circle me-2"></i>Missed Calls
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" onclick="filterByAgent('ai')">
+                                    <i class="bi bi-robot me-2"></i>AI Agent Calls
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="filterByAgent('human')">
+                                    <i class="bi bi-person me-2"></i>Human Agent Calls
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 min ago</small>
+                                    <div>Recording downloaded: +1 (555) 123-4567</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">3 min ago</small>
+                                    <div>New recording available: +1 (555) 987-6543</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Bulk export completed (50 recordings)</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">10 min ago</small>
+                                    <div>Storage cleanup completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Call Dispositions Section -->
             <div id="call-dispositions-section" class="dashboard-section">
                 <h4 class="mb-4">Call Dispositions</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Call dispositions interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Call Disposition Management</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm me-2" onclick="exportDispositions()">
+                                        <i class="bi bi-download me-2"></i>Export
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" onclick="addDisposition()">
+                                        <i class="bi bi-plus-circle me-2"></i>Add Disposition
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Disposition Categories -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Disposition Categories</h6>
+                                <div class="row g-3">
+                                    <!-- Positive Dispositions -->
+                                    <div class="col-md-6">
+                                        <div class="card border-success">
+                                            <div class="card-header bg-success text-white">
+                                                <h6 class="mb-0"><i class="bi bi-check-circle me-2"></i>Positive Outcomes</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Sale Completed</span>
+                                                        <span class="badge bg-success rounded-pill">45</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Appointment Scheduled</span>
+                                                        <span class="badge bg-success rounded-pill">23</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Lead Qualified</span>
+                                                        <span class="badge bg-success rounded-pill">67</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Follow-up Required</span>
+                                                        <span class="badge bg-success rounded-pill">34</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Neutral Dispositions -->
+                                    <div class="col-md-6">
+                                        <div class="card border-warning">
+                                            <div class="card-header bg-warning text-dark">
+                                                <h6 class="mb-0"><i class="bi bi-dash-circle me-2"></i>Neutral Outcomes</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Not Interested</span>
+                                                        <span class="badge bg-warning rounded-pill">89</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Call Back Later</span>
+                                                        <span class="badge bg-warning rounded-pill">56</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Wrong Number</span>
+                                                        <span class="badge bg-warning rounded-pill">12</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>No Answer</span>
+                                                        <span class="badge bg-warning rounded-pill">78</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Negative Dispositions -->
+                                    <div class="col-md-6">
+                                        <div class="card border-danger">
+                                            <div class="card-header bg-danger text-white">
+                                                <h6 class="mb-0"><i class="bi bi-x-circle me-2"></i>Negative Outcomes</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Do Not Call</span>
+                                                        <span class="badge bg-danger rounded-pill">15</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Hang Up</span>
+                                                        <span class="badge bg-danger rounded-pill">23</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Complaint</span>
+                                                        <span class="badge bg-danger rounded-pill">3</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Disconnected</span>
+                                                        <span class="badge bg-danger rounded-pill">8</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- System Dispositions -->
+                                    <div class="col-md-6">
+                                        <div class="card border-info">
+                                            <div class="card-header bg-info text-white">
+                                                <h6 class="mb-0"><i class="bi bi-gear me-2"></i>System Outcomes</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Voicemail Left</span>
+                                                        <span class="badge bg-info rounded-pill">156</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Call Failed</span>
+                                                        <span class="badge bg-info rounded-pill">34</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Busy Signal</span>
+                                                        <span class="badge bg-info rounded-pill">67</span>
+                                                    </div>
+                                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <span>Invalid Number</span>
+                                                        <span class="badge bg-info rounded-pill">12</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Custom Dispositions -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Custom Dispositions</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Disposition Name</th>
+                                                <th>Category</th>
+                                                <th>Description</th>
+                                                <th>Auto Actions</th>
+                                                <th>Usage</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>High Value Lead</td>
+                                                <td><span class="badge bg-success">Positive</span></td>
+                                                <td>Qualified lead with high purchase intent</td>
+                                                <td>Schedule follow-up, Send email</td>
+                                                <td>23 times</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Competitor Mention</td>
+                                                <td><span class="badge bg-warning">Neutral</span></td>
+                                                <td>Customer mentioned competitor pricing</td>
+                                                <td>Flag for review, Send competitive info</td>
+                                                <td>8 times</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Technical Issue</td>
+                                                <td><span class="badge bg-danger">Negative</span></td>
+                                                <td>Customer reported technical problems</td>
+                                                <td>Create support ticket, Escalate</td>
+                                                <td>5 times</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="bi bi-plus-circle me-2"></i>Add Custom Disposition
+                                </button>
+                            </div>
+                            
+                            <!-- Disposition Workflow -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Disposition Workflow</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Default Disposition</label>
+                                        <select class="form-select" id="defaultDisposition">
+                                            <option value="not_interested" selected>Not Interested</option>
+                                            <option value="call_back">Call Back Later</option>
+                                            <option value="no_answer">No Answer</option>
+                                            <option value="voicemail">Voicemail Left</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Auto-Classification</label>
+                                        <select class="form-select" id="autoClassification">
+                                            <option value="enabled" selected>Enabled</option>
+                                            <option value="disabled">Disabled</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="requireDisposition" checked>
+                                            <label class="form-check-label" for="requireDisposition">
+                                                Require disposition before ending call
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="autoFollowUp" checked>
+                                            <label class="form-check-label" for="autoFollowUp">
+                                                Automatically schedule follow-ups based on disposition
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveDispositionSettings()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="resetDispositions()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Reset to Default
+                                </button>
+                                <button class="btn btn-outline-info" onclick="exportDispositionReport()">
+                                    <i class="bi bi-download me-2"></i>Export Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Disposition Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Disposition Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Total Calls Today:</span>
+                                    <strong>1,247</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Dispositioned:</span>
+                                    <strong class="text-success">1,189 (95%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Pending:</span>
+                                    <strong class="text-warning">58 (5%)</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 95%"></div>
+                                </div>
+                                <small class="text-muted">Disposition completion rate: 95%</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Positive Outcomes:</span>
+                                    <strong class="text-success">169 (14%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Neutral Outcomes:</span>
+                                    <strong class="text-warning">235 (19%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Negative Outcomes:</span>
+                                    <strong class="text-danger">49 (4%)</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>System Outcomes:</span>
+                                    <strong class="text-info">269 (22%)</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="addDisposition()">
+                                    <i class="bi bi-plus-circle me-2"></i>Add Disposition
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="bulkUpdateDispositions()">
+                                    <i class="bi bi-pencil-square me-2"></i>Bulk Update
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="viewDispositionLogs()">
+                                    <i class="bi bi-file-text me-2"></i>View Logs
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="dispositionAnalytics()">
+                                    <i class="bi bi-graph-up me-2"></i>Analytics
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Dispositions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Dispositions</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">2 min ago</small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>+1 (555) 123-4567</span>
+                                        <span class="badge bg-success">Sale Completed</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>+1 (555) 987-6543</span>
+                                        <span class="badge bg-warning">Not Interested</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">8 min ago</small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>+1 (555) 456-7890</span>
+                                        <span class="badge bg-info">Voicemail Left</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">12 min ago</small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>+1 (555) 321-6540</span>
+                                        <span class="badge bg-success">Appointment Scheduled</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Performance Summary -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Performance Summary</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Conversion Rate:</span>
+                                    <strong class="text-success">13.6%</strong>
+                                </div>
+                                <div class="progress mb-2" style="height: 10px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 13.6%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Average Call Duration:</span>
+                                    <strong>3:24</strong>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Follow-up Rate:</span>
+                                    <strong class="text-info">28.7%</strong>
+                                </div>
+                                <div class="progress mb-2" style="height: 10px;">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 28.7%"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100">
+                                <i class="bi bi-graph-up me-2"></i>View Detailed Analytics
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
