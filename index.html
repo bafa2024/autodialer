@@ -115,16 +115,17 @@
             height: 100vh;
             box-shadow: 2px 0 4px rgba(0,0,0,0.05);
             position: fixed;
-            width: 250px;
+            width: 300px;
             top: 0;
             left: 0;
             z-index: 100;
             overflow-y: auto;
             overflow-x: hidden;
+            padding: 20px;
         }
 
         .main-content {
-            margin-left: 250px;
+            margin-left: 300px;
             padding: 20px;
             background-color: var(--light-bg);
             min-height: 100vh;
@@ -133,51 +134,31 @@
         .sidebar-link {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            color: var(--text-secondary);
+            padding: 10px 15px;
+            color: #333;
             text-decoration: none;
-            transition: all 0.3s;
-            border-radius: 8px;
-            margin: 4px 8px;
+            transition: background-color 0.2s;
+            border-radius: 0;
+            margin: 0;
             cursor: pointer;
             white-space: nowrap;
+            border-bottom: 1px solid #eee;
         }
 
         .sidebar-link:hover {
-            background-color: var(--light-bg);
-            color: var(--primary-color);
+            background-color: #f5f5f5;
+            color: #333;
             text-decoration: none;
         }
 
         .sidebar-link.active {
-            background-color: var(--primary-color);
-            color: white;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border-left: 3px solid #1976d2;
         }
         
         .voicemail-detection-link {
-            background-color: #fff3cd !important;
-            border-left: 4px solid #ffc107 !important;
-            font-weight: 600;
-            position: relative;
-        }
-        
-        .voicemail-detection-link:hover {
-            background-color: #ffeaa7 !important;
-            transform: translateX(5px);
-            transition: all 0.3s ease;
-        }
-        
-        .voicemail-detection-link::before {
-            content: "NEW";
-            position: absolute;
-            top: -5px;
-            right: 10px;
-            background-color: #dc3545;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-weight: bold;
+            /* Normal styling - same as other menu items */
         }
 
         .stat-card {
@@ -639,8 +620,8 @@
                     <a class="sidebar-link" onclick="showDashboardSection('campaigns', this)">
                         <i class="bi bi-megaphone me-3"></i>Campaigns
                     </a>
-                    <a class="sidebar-link voicemail-detection-link" onclick="showDashboardSection('voicemail-detection', this)" style="background-color: #fff3cd; border-left: 4px solid #ffc107;">
-                        <i class="bi bi-mic-mute me-3 text-warning"></i>🎯 Voicemail Detection Setup
+                    <a class="sidebar-link" onclick="showDashboardSection('voicemail-detection', this)">
+                        <i class="bi bi-mic-mute me-3"></i>Voicemail Detection Setup
                     </a>
                     <a class="sidebar-link" onclick="showDashboardSection('contacts', this)">
                         <i class="bi bi-people me-3"></i>Contacts
@@ -4082,16 +4063,351 @@
             <!-- Manual Dial Section -->
             <div id="manual-dial-section" class="dashboard-section">
                 <h4 class="mb-4">Manual Dial</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Manual dialing interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Manual Call Dialer</h5>
+                                <span class="badge bg-primary">Ready</span>
+                            </div>
+                            
+                            <!-- Phone Number Input -->
+                            <div class="mb-4">
+                                <label class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+1</span>
+                                    <input type="tel" class="form-control form-control-lg" id="manualPhoneNumber" placeholder="(555) 123-4567" maxlength="14">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="formatPhoneNumber()">
+                                        <i class="bi bi-123"></i>
+                                    </button>
+                                </div>
+                                <small class="text-muted">Enter the phone number you want to call</small>
+                            </div>
+                            
+                            <!-- Caller ID Selection -->
+                            <div class="mb-4">
+                                <label class="form-label">Caller ID</label>
+                                <select class="form-select" id="manualCallerId">
+                                    <option value="">Select Caller ID</option>
+                                    <option value="main">Main Business (555-123-4567)</option>
+                                    <option value="local1">Local Number (555-987-6543)</option>
+                                    <option value="tollfree">Toll-Free (1-800-123-4567)</option>
+                                    <option value="custom">Custom Number</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Call Options -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Call Options</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableRecording" checked>
+                                            <label class="form-check-label" for="enableRecording">
+                                                Record this call
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableAMD">
+                                            <label class="form-check-label" for="enableAMD">
+                                                Enable voicemail detection
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableScript">
+                                            <label class="form-check-label" for="enableScript">
+                                                Show call script
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableNotes">
+                                            <label class="form-check-label" for="enableNotes">
+                                                Enable call notes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Call Script -->
+                            <div class="mb-4" id="scriptSection" style="display: none;">
+                                <label class="form-label">Call Script</label>
+                                <select class="form-select mb-2" id="scriptSelect">
+                                    <option value="">Select a script</option>
+                                    <option value="sales">Sales Introduction</option>
+                                    <option value="support">Customer Support</option>
+                                    <option value="followup">Follow-up Call</option>
+                                    <option value="custom">Custom Script</option>
+                                </select>
+                                <textarea class="form-control" rows="4" id="scriptContent" placeholder="Your call script will appear here..."></textarea>
+                            </div>
+                            
+                            <!-- Call Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-success btn-lg flex-fill" onclick="makeManualCall()">
+                                    <i class="bi bi-telephone-fill me-2"></i>Start Call
+                                </button>
+                                <button class="btn btn-outline-secondary btn-lg" onclick="clearManualForm()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Recent Calls -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Recent Calls</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>(555) 123-4567</strong>
+                                        <br><small class="text-muted">2 minutes ago</small>
+                                    </div>
+                                    <span class="badge bg-success">Connected</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>(555) 987-6543</strong>
+                                        <br><small class="text-muted">15 minutes ago</small>
+                                    </div>
+                                    <span class="badge bg-warning">Voicemail</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>(555) 456-7890</strong>
+                                        <br><small class="text-muted">1 hour ago</small>
+                                    </div>
+                                    <span class="badge bg-danger">No Answer</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="loadLastCall()">
+                                    <i class="bi bi-arrow-repeat me-2"></i>Redial Last Number
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="showContactPicker()">
+                                    <i class="bi bi-person me-2"></i>Pick from Contacts
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="showCallHistory()">
+                                    <i class="bi bi-clock-history me-2"></i>Call History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Dialing Ratio Section -->
             <div id="dialing-ratio-section" class="dashboard-section">
-                <h4 class="mb-4">Dialing Ratio</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Dialing ratio control interface goes here...</p>
+                <h4 class="mb-4">Dialing Ratio Control</h4>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Predictive Dialing Configuration</h5>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            
+                            <!-- Ratio Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Dialing Ratio Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Calls per Available Agent</label>
+                                        <select class="form-select" id="dialingRatio">
+                                            <option value="1">1:1 (Conservative)</option>
+                                            <option value="2" selected>2:1 (Balanced)</option>
+                                            <option value="3">3:1 (Aggressive)</option>
+                                            <option value="4">4:1 (Very Aggressive)</option>
+                                            <option value="5">5:1 (Maximum)</option>
+                                            <option value="custom">Custom Ratio</option>
+                                        </select>
+                                        <small class="text-muted">Higher ratios increase dialing speed but may cause wait times</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Custom Ratio (if selected)</label>
+                                        <input type="number" class="form-control" id="customRatio" min="1" max="10" step="0.5" placeholder="2.5" disabled>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Maximum Simultaneous Calls</label>
+                                        <input type="number" class="form-control" id="maxSimultaneousCalls" value="50" min="1" max="200">
+                                        <small class="text-muted">Total calls that can be dialing at once</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Agent Wait Time Limit</label>
+                                        <select class="form-select" id="waitTimeLimit">
+                                            <option value="5">5 seconds</option>
+                                            <option value="10" selected>10 seconds</option>
+                                            <option value="15">15 seconds</option>
+                                            <option value="20">20 seconds</option>
+                                            <option value="30">30 seconds</option>
+                                        </select>
+                                        <small class="text-muted">Maximum time an agent waits for a call</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Campaign-Specific Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Campaign-Specific Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Campaign Type</label>
+                                        <select class="form-select" id="campaignType">
+                                            <option value="cold">Cold Calling</option>
+                                            <option value="warm" selected>Warm Leads</option>
+                                            <option value="followup">Follow-up</option>
+                                            <option value="support">Customer Support</option>
+                                            <option value="sales">Sales</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Expected Answer Rate</label>
+                                        <div class="d-flex align-items-center">
+                                            <input type="range" class="form-range" min="5" max="50" value="25" id="expectedAnswerRate">
+                                            <span class="ms-3 text-muted">25%</span>
+                                        </div>
+                                        <small class="text-muted">Used to optimize dialing speed</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Peak Hours Adjustment</label>
+                                        <select class="form-select" id="peakHoursAdjustment">
+                                            <option value="none">No adjustment</option>
+                                            <option value="increase" selected>Increase ratio during peak hours</option>
+                                            <option value="decrease">Decrease ratio during peak hours</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Timezone Awareness</label>
+                                        <select class="form-select" id="timezoneAwareness">
+                                            <option value="enabled" selected>Enabled</option>
+                                            <option value="disabled">Disabled</option>
+                                        </select>
+                                        <small class="text-muted">Adjust dialing based on recipient timezone</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Controls -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Advanced Controls</h6>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="adaptiveRatio" checked>
+                                            <label class="form-check-label" for="adaptiveRatio">
+                                                Enable adaptive ratio adjustment
+                                            </label>
+                                            <small class="text-muted d-block">Automatically adjust ratio based on answer rates and agent availability</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="loadBalancing" checked>
+                                            <label class="form-check-label" for="loadBalancing">
+                                                Enable load balancing across agents
+                                            </label>
+                                            <small class="text-muted d-block">Distribute calls evenly among available agents</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="queueManagement">
+                                            <label class="form-check-label" for="queueManagement">
+                                                Enable call queuing
+                                            </label>
+                                            <small class="text-muted d-block">Queue calls when no agents are available</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="performanceMonitoring" checked>
+                                            <label class="form-check-label" for="performanceMonitoring">
+                                                Monitor performance metrics
+                                            </label>
+                                            <small class="text-muted d-block">Track and optimize dialing efficiency</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveDialingRatio()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="resetDialingRatio()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>Reset to Default
+                                </button>
+                                <button class="btn btn-outline-info" onclick="testDialingRatio()">
+                                    <i class="bi bi-play-circle me-2"></i>Test Configuration
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Current Status -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Current Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Active Agents:</span>
+                                    <strong>8/10</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Current Ratio:</span>
+                                    <strong>2:1</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Dialing Calls:</span>
+                                    <strong>16</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Connected Calls:</span>
+                                    <strong>3</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Answer Rate:</span>
+                                    <strong class="text-success">18.8%</strong>
+                                </div>
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                            </div>
+                            <small class="text-muted">System efficiency: 75%</small>
+                        </div>
+                        
+                        <!-- Quick Presets -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Quick Presets</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="setPreset('conservative')">
+                                    Conservative (1:1)
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="setPreset('balanced')">
+                                    Balanced (2:1)
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="setPreset('aggressive')">
+                                    Aggressive (3:1)
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="setPreset('maximum')">
+                                    Maximum (5:1)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -4461,19 +4777,499 @@
                 </div>
             </div>
 
-            <!-- Caller ID Section -->
+            <!-- Caller ID Management Section -->
             <div id="caller-id-section" class="dashboard-section">
                 <h4 class="mb-4">Caller ID Management</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Caller ID management interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Dynamic Caller ID Configuration</h5>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            
+                            <!-- Registered Caller IDs -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Registered Caller IDs</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Phone Number</th>
+                                                <th>Display Name</th>
+                                                <th>Status</th>
+                                                <th>Type</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>+1 (555) 123-4567</td>
+                                                <td>Main Office</td>
+                                                <td><span class="badge bg-success">Verified</span></td>
+                                                <td>Primary</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Remove</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>+1 (555) 987-6543</td>
+                                                <td>Sales Team</td>
+                                                <td><span class="badge bg-success">Verified</span></td>
+                                                <td>Secondary</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Remove</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>+1 (800) 555-0123</td>
+                                                <td>Toll Free</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>Toll Free</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Remove</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="bi bi-plus-circle me-2"></i>Add New Caller ID
+                                </button>
+                            </div>
+                            
+                            <!-- Rotation Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Caller ID Rotation</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Rotation Strategy</label>
+                                        <select class="form-select" id="rotationStrategy">
+                                            <option value="round_robin" selected>Round Robin</option>
+                                            <option value="random">Random</option>
+                                            <option value="geographic">Geographic Matching</option>
+                                            <option value="time_based">Time-Based</option>
+                                            <option value="campaign_based">Campaign-Based</option>
+                                            <option value="fixed">Fixed (No Rotation)</option>
+                                        </select>
+                                        <small class="text-muted">How caller IDs are selected for outgoing calls</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Rotation Frequency</label>
+                                        <select class="form-select" id="rotationFrequency">
+                                            <option value="per_call">Per Call</option>
+                                            <option value="per_hour" selected>Per Hour</option>
+                                            <option value="per_day">Per Day</option>
+                                            <option value="per_campaign">Per Campaign</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Maximum Calls per ID</label>
+                                        <input type="number" class="form-control" id="maxCallsPerId" value="100" min="1" max="1000">
+                                        <small class="text-muted">Maximum calls before switching to next ID</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Cooldown Period</label>
+                                        <select class="form-select" id="cooldownPeriod">
+                                            <option value="0">No cooldown</option>
+                                            <option value="1">1 hour</option>
+                                            <option value="4" selected>4 hours</option>
+                                            <option value="8">8 hours</option>
+                                            <option value="24">24 hours</option>
+                                        </select>
+                                        <small class="text-muted">Time between using the same caller ID</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Geographic Matching -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Geographic Matching</h6>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableGeographicMatching" checked>
+                                            <label class="form-check-label" for="enableGeographicMatching">
+                                                Enable geographic caller ID matching
+                                            </label>
+                                            <small class="text-muted d-block">Use local area codes when possible to improve answer rates</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Matching Radius</label>
+                                        <select class="form-select" id="matchingRadius">
+                                            <option value="exact">Exact area code</option>
+                                            <option value="neighboring" selected>Neighboring area codes</option>
+                                            <option value="state">Same state</option>
+                                            <option value="region">Same region</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Fallback Strategy</label>
+                                        <select class="form-select" id="fallbackStrategy">
+                                            <option value="toll_free" selected>Toll-free number</option>
+                                            <option value="main_number">Main business number</option>
+                                            <option value="random">Random available ID</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Compliance Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Compliance & Verification</h6>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableVerification" checked>
+                                            <label class="form-check-label" for="enableVerification">
+                                                Enable automatic caller ID verification
+                                            </label>
+                                            <small class="text-muted d-block">Verify caller IDs are properly registered and compliant</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableSpamFiltering" checked>
+                                            <label class="form-check-label" for="enableSpamFiltering">
+                                                Enable spam filtering protection
+                                            </label>
+                                            <small class="text-muted d-block">Monitor and prevent caller IDs from being flagged as spam</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Verification Frequency</label>
+                                        <select class="form-select" id="verificationFrequency">
+                                            <option value="daily" selected>Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="manual">Manual only</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Alert Threshold</label>
+                                        <select class="form-select" id="alertThreshold">
+                                            <option value="immediate">Immediate</option>
+                                            <option value="5" selected>5 failed calls</option>
+                                            <option value="10">10 failed calls</option>
+                                            <option value="20">20 failed calls</option>
+                                        </select>
+                                        <small class="text-muted">When to alert about potential issues</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveCallerIdSettings()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="testCallerIds()">
+                                    <i class="bi bi-play-circle me-2"></i>Test Caller IDs
+                                </button>
+                                <button class="btn btn-outline-info" onclick="exportCallerIdReport()">
+                                    <i class="bi bi-download me-2"></i>Export Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Usage Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Usage Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total Caller IDs:</span>
+                                    <strong>3</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Active Today:</span>
+                                    <strong class="text-success">3</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Calls Made Today:</span>
+                                    <strong>1,247</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Answer Rate:</span>
+                                    <strong class="text-success">18.8%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Spam Reports:</span>
+                                    <strong class="text-warning">2</strong>
+                                </div>
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 85%"></div>
+                            </div>
+                            <small class="text-muted">System health: 85%</small>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="addCallerId()">
+                                    <i class="bi bi-plus-circle me-2"></i>Add Caller ID
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="verifyAllCallerIds()">
+                                    <i class="bi bi-check-circle me-2"></i>Verify All IDs
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="viewCallerIdLogs()">
+                                    <i class="bi bi-file-text me-2"></i>View Logs
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="testCallerIdRotation()">
+                                    <i class="bi bi-arrow-repeat me-2"></i>Test Rotation
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">2 min ago</small>
+                                    <div>Caller ID +1 (555) 123-4567 used for call</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>New caller ID +1 (800) 555-0123 added</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">15 min ago</small>
+                                    <div>Caller ID verification completed</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 hour ago</small>
+                                    <div>Rotation strategy updated to Round Robin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Call Queue Section -->
             <div id="call-queue-section" class="dashboard-section">
-                <h4 class="mb-4">Call Queue</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Call queue management interface goes here...</p>
+                <h4 class="mb-4">Call Queue Management</h4>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Call Queue Configuration</h5>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            
+                            <!-- Queue Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Queue Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Queue Strategy</label>
+                                        <select class="form-select" id="queueStrategy">
+                                            <option value="fifo" selected>First In, First Out (FIFO)</option>
+                                            <option value="lifo">Last In, First Out (LIFO)</option>
+                                            <option value="priority">Priority Based</option>
+                                            <option value="skill_based">Skill Based</option>
+                                            <option value="round_robin">Round Robin</option>
+                                        </select>
+                                        <small class="text-muted">How calls are distributed from the queue</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Maximum Queue Size</label>
+                                        <input type="number" class="form-control" id="maxQueueSize" value="100" min="1" max="1000">
+                                        <small class="text-muted">Maximum number of calls in queue</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Queue Timeout</label>
+                                        <select class="form-select" id="queueTimeout">
+                                            <option value="5">5 minutes</option>
+                                            <option value="10" selected>10 minutes</option>
+                                            <option value="15">15 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="60">1 hour</option>
+                                        </select>
+                                        <small class="text-muted">Maximum time a call can wait in queue</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Agent Selection</label>
+                                        <select class="form-select" id="agentSelection">
+                                            <option value="least_busy" selected>Least Busy</option>
+                                            <option value="most_skilled">Most Skilled</option>
+                                            <option value="longest_idle">Longest Idle</option>
+                                            <option value="random">Random</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Queue Actions -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Queue Actions</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Action on Queue Full</label>
+                                        <select class="form-select" id="queueFullAction">
+                                            <option value="reject" selected>Reject new calls</option>
+                                            <option value="voicemail">Send to voicemail</option>
+                                            <option value="callback">Schedule callback</option>
+                                            <option value="ai_agent">Transfer to AI agent</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Action on Timeout</label>
+                                        <select class="form-select" id="timeoutAction">
+                                            <option value="voicemail" selected>Send to voicemail</option>
+                                            <option value="callback">Schedule callback</option>
+                                            <option value="ai_agent">Transfer to AI agent</option>
+                                            <option value="hangup">Hang up</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Hold Music</label>
+                                        <select class="form-select" id="holdMusic">
+                                            <option value="default" selected>Default Hold Music</option>
+                                            <option value="custom">Custom Audio</option>
+                                            <option value="announcement">Announcement</option>
+                                            <option value="none">No Audio</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Position Announcements</label>
+                                        <select class="form-select" id="positionAnnouncements">
+                                            <option value="none">No announcements</option>
+                                            <option value="periodic" selected>Periodic updates</option>
+                                            <option value="position">Queue position</option>
+                                            <option value="estimated_wait">Estimated wait time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Priority Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Priority Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enablePriority" checked>
+                                            <label class="form-check-label" for="enablePriority">
+                                                Enable priority queuing
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">VIP Customer Priority</label>
+                                        <select class="form-select" id="vipPriority">
+                                            <option value="high" selected>High Priority</option>
+                                            <option value="medium">Medium Priority</option>
+                                            <option value="low">Low Priority</option>
+                                            <option value="none">No Priority</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Callback Priority</label>
+                                        <select class="form-select" id="callbackPriority">
+                                            <option value="high" selected>High Priority</option>
+                                            <option value="medium">Medium Priority</option>
+                                            <option value="low">Low Priority</option>
+                                            <option value="normal">Normal Priority</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveQueueSettings()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="clearQueue()">
+                                    <i class="bi bi-trash me-2"></i>Clear Queue
+                                </button>
+                                <button class="btn btn-outline-info" onclick="exportQueueReport()">
+                                    <i class="bi bi-download me-2"></i>Export Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Current Queue Status -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Current Queue Status</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Calls in Queue:</span>
+                                    <strong class="text-primary">12</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Available Agents:</span>
+                                    <strong class="text-success">8</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Average Wait Time:</span>
+                                    <strong>2:34</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Longest Wait:</span>
+                                    <strong class="text-warning">8:45</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Queue Health:</span>
+                                    <strong class="text-success">Good</strong>
+                                </div>
+                            </div>
+                            <div class="progress mb-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                            </div>
+                            <small class="text-muted">Queue efficiency: 75%</small>
+                        </div>
+                        
+                        <!-- Queue Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="pauseQueue()">
+                                    <i class="bi bi-pause-circle me-2"></i>Pause Queue
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="resumeQueue()">
+                                    <i class="bi bi-play-circle me-2"></i>Resume Queue
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="viewQueueLogs()">
+                                    <i class="bi bi-file-text me-2"></i>View Logs
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Queue Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 min ago</small>
+                                    <div>Call connected to Agent Sarah</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">3 min ago</small>
+                                    <div>New call added to queue</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Call timed out - sent to voicemail</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">8 min ago</small>
+                                    <div>Agent Mike became available</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -4799,16 +5595,607 @@
             <!-- Conversation Designer Section -->
             <div id="conversation-designer-section" class="dashboard-section">
                 <h4 class="mb-4">Conversation Designer</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Conversation designer interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>AI Conversation Flow Builder</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary me-2" onclick="saveConversation()">
+                                        <i class="bi bi-save me-2"></i>Save
+                                    </button>
+                                    <button class="btn btn-primary" onclick="testConversation()">
+                                        <i class="bi bi-play-circle me-2"></i>Test Flow
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Flow Builder -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Conversation Flow</h6>
+                                <div class="border rounded p-3" style="min-height: 400px;">
+                                    <!-- Start Node -->
+                                    <div class="card border-primary mb-3" style="max-width: 300px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-play-circle-fill text-primary me-2"></i>
+                                                <h6 class="mb-0">Start</h6>
+                                            </div>
+                                            <small class="text-muted">Conversation begins here</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Greeting Node -->
+                                    <div class="card border-success mb-3" style="max-width: 300px; margin-left: 20px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-chat-dots text-success me-2"></i>
+                                                <h6 class="mb-0">Greeting</h6>
+                                            </div>
+                                            <p class="small mb-2">"Hello, this is [Company Name] calling about your recent inquiry..."</p>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                <button class="btn btn-outline-secondary btn-sm">Copy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Question Node -->
+                                    <div class="card border-info mb-3" style="max-width: 300px; margin-left: 40px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-question-circle text-info me-2"></i>
+                                                <h6 class="mb-0">Interest Check</h6>
+                                            </div>
+                                            <p class="small mb-2">"Are you still interested in our trucking insurance services?"</p>
+                                            <div class="d-flex gap-1 mb-2">
+                                                <span class="badge bg-success">Yes</span>
+                                                <span class="badge bg-danger">No</span>
+                                                <span class="badge bg-warning">Maybe</span>
+                                            </div>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                <button class="btn btn-outline-secondary btn-sm">Copy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Branch Nodes -->
+                                    <div class="row" style="margin-left: 60px;">
+                                        <div class="col-md-4">
+                                            <div class="card border-success mb-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-check-circle text-success me-2"></i>
+                                                        <h6 class="mb-0">Qualified</h6>
+                                                    </div>
+                                                    <p class="small mb-2">Transfer to human agent</p>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-danger mb-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-x-circle text-danger me-2"></i>
+                                                        <h6 class="mb-0">Not Interested</h6>
+                                                    </div>
+                                                    <p class="small mb-2">Thank and end call</p>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card border-warning mb-3">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-clock text-warning me-2"></i>
+                                                        <h6 class="mb-0">Follow-up</h6>
+                                                    </div>
+                                                    <p class="small mb-2">Schedule callback</p>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Node Templates -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Add New Node</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="card border-dashed h-100" style="cursor: pointer;" onclick="addNode('greeting')">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-chat-dots fs-3 text-muted mb-2"></i>
+                                                <h6>Greeting</h6>
+                                                <small class="text-muted">Welcome message</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card border-dashed h-100" style="cursor: pointer;" onclick="addNode('question')">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-question-circle fs-3 text-muted mb-2"></i>
+                                                <h6>Question</h6>
+                                                <small class="text-muted">Ask customer</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card border-dashed h-100" style="cursor: pointer;" onclick="addNode('condition')">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-diagram-3 fs-3 text-muted mb-2"></i>
+                                                <h6>Condition</h6>
+                                                <small class="text-muted">If/else logic</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card border-dashed h-100" style="cursor: pointer;" onclick="addNode('action')">
+                                            <div class="card-body text-center">
+                                                <i class="bi bi-gear fs-3 text-muted mb-2"></i>
+                                                <h6>Action</h6>
+                                                <small class="text-muted">Perform action</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Flow Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Flow Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Flow Name</label>
+                                        <input type="text" class="form-control" value="Trucking Insurance Qualification" id="flowName">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Language</label>
+                                        <select class="form-select" id="flowLanguage">
+                                            <option value="en" selected>English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Voice</label>
+                                        <select class="form-select" id="flowVoice">
+                                            <option value="sarah" selected>Sarah (Female)</option>
+                                            <option value="mike">Mike (Male)</option>
+                                            <option value="lisa">Lisa (Female)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tone</label>
+                                        <select class="form-select" id="flowTone">
+                                            <option value="professional" selected>Professional</option>
+                                            <option value="friendly">Friendly</option>
+                                            <option value="casual">Casual</option>
+                                            <option value="formal">Formal</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveConversation()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Flow
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="exportConversation()">
+                                    <i class="bi bi-download me-2"></i>Export
+                                </button>
+                                <button class="btn btn-outline-info" onclick="duplicateConversation()">
+                                    <i class="bi bi-files me-2"></i>Duplicate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Flow Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Flow Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total Nodes:</span>
+                                    <strong>7</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Average Duration:</span>
+                                    <strong>2:34</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Success Rate:</span>
+                                    <strong class="text-success">78.5%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Drop-off Rate:</span>
+                                    <strong class="text-warning">12.3%</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="addGreetingNode()">
+                                    <i class="bi bi-chat-dots me-2"></i>Add Greeting
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="addQuestionNode()">
+                                    <i class="bi bi-question-circle me-2"></i>Add Question
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="addConditionNode()">
+                                    <i class="bi bi-diagram-3 me-2"></i>Add Condition
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="addActionNode()">
+                                    <i class="bi bi-gear me-2"></i>Add Action
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Flows -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Flows</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Sales Qualification</strong>
+                                            <br><small class="text-muted">5 nodes • 2:15 avg</small>
+                                        </div>
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Support Ticket</strong>
+                                            <br><small class="text-muted">8 nodes • 3:42 avg</small>
+                                        </div>
+                                        <span class="badge bg-warning">Draft</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Appointment Booking</strong>
+                                            <br><small class="text-muted">6 nodes • 1:58 avg</small>
+                                        </div>
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Reports History Section -->
             <div id="reports-history-section" class="dashboard-section">
                 <h4 class="mb-4">Reports & History</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Reports and history interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Analytics & Reporting</h5>
+                                <div>
+                                    <button class="btn btn-outline-primary me-2" onclick="exportReport()">
+                                        <i class="bi bi-download me-2"></i>Export
+                                    </button>
+                                    <button class="btn btn-primary" onclick="scheduleReport()">
+                                        <i class="bi bi-calendar-plus me-2"></i>Schedule Report
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Report Filters -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-3">
+                                    <label class="form-label">Date Range</label>
+                                    <select class="form-select" id="reportDateRange">
+                                        <option value="today" selected>Today</option>
+                                        <option value="yesterday">Yesterday</option>
+                                        <option value="week">This Week</option>
+                                        <option value="month">This Month</option>
+                                        <option value="quarter">This Quarter</option>
+                                        <option value="year">This Year</option>
+                                        <option value="custom">Custom Range</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Campaign</label>
+                                    <select class="form-select" id="reportCampaign">
+                                        <option value="all" selected>All Campaigns</option>
+                                        <option value="trucking">Trucking Insurance</option>
+                                        <option value="real_estate">Real Estate</option>
+                                        <option value="business_loan">Business Loan</option>
+                                        <option value="support">Customer Support</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Agent</label>
+                                    <select class="form-select" id="reportAgent">
+                                        <option value="all" selected>All Agents</option>
+                                        <option value="sarah">Sarah Johnson</option>
+                                        <option value="mike">Mike Smith</option>
+                                        <option value="lisa">Lisa Chen</option>
+                                        <option value="ai">AI Agents</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Report Type</label>
+                                    <select class="form-select" id="reportType">
+                                        <option value="summary" selected>Summary Report</option>
+                                        <option value="detailed">Detailed Report</option>
+                                        <option value="performance">Performance Report</option>
+                                        <option value="conversion">Conversion Report</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Metrics -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-3">
+                                    <div class="card border-primary">
+                                        <div class="card-body text-center">
+                                            <h3 class="text-primary mb-1">1,247</h3>
+                                            <p class="text-muted mb-0">Total Calls</p>
+                                            <small class="text-success">+12.5% vs last period</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-success">
+                                        <div class="card-body text-center">
+                                            <h3 class="text-success mb-1">234</h3>
+                                            <p class="text-muted mb-0">Connected Calls</p>
+                                            <small class="text-success">+8.3% vs last period</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-warning">
+                                        <div class="card-body text-center">
+                                            <h3 class="text-warning mb-1">18.8%</h3>
+                                            <p class="text-muted mb-0">Answer Rate</p>
+                                            <small class="text-success">+2.1% vs last period</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card border-info">
+                                        <div class="card-body text-center">
+                                            <h3 class="text-info mb-1">89</h3>
+                                            <p class="text-muted mb-0">Conversions</p>
+                                            <small class="text-success">+15.2% vs last period</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Charts Row -->
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Call Volume Trend</h6>
+                                            <div class="chart-placeholder" style="height: 200px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                                <div class="text-center">
+                                                    <i class="bi bi-graph-up fs-1 text-muted"></i>
+                                                    <p class="text-muted mt-2">Call Volume Chart</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border">
+                                        <div class="card-body">
+                                            <h6 class="card-title">Answer Rate by Hour</h6>
+                                            <div class="chart-placeholder" style="height: 200px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                                                <div class="text-center">
+                                                    <i class="bi bi-bar-chart fs-1 text-muted"></i>
+                                                    <p class="text-muted mt-2">Hourly Answer Rate</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Detailed Table -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Call History</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Date/Time</th>
+                                                <th>Phone Number</th>
+                                                <th>Agent</th>
+                                                <th>Duration</th>
+                                                <th>Status</th>
+                                                <th>Disposition</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div>Nov 14, 2024</div>
+                                                    <small class="text-muted">2:34 PM</small>
+                                                </td>
+                                                <td>(555) 123-4567</td>
+                                                <td>Sarah Johnson</td>
+                                                <td>4:23</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td><span class="badge bg-success">Interested</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="viewCallDetails('1')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>Nov 14, 2024</div>
+                                                    <small class="text-muted">2:15 PM</small>
+                                                </td>
+                                                <td>(555) 987-6543</td>
+                                                <td>Mike Smith</td>
+                                                <td>1:45</td>
+                                                <td><span class="badge bg-warning">Voicemail</span></td>
+                                                <td><span class="badge bg-warning">Call Back</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="viewCallDetails('2')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>Nov 14, 2024</div>
+                                                    <small class="text-muted">1:58 PM</small>
+                                                </td>
+                                                <td>(555) 456-7890</td>
+                                                <td>AI Agent - Sarah</td>
+                                                <td>8:12</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td><span class="badge bg-success">Qualified</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="viewCallDetails('3')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>Nov 14, 2024</div>
+                                                    <small class="text-muted">1:42 PM</small>
+                                                </td>
+                                                <td>(555) 321-6540</td>
+                                                <td>Lisa Chen</td>
+                                                <td>0:15</td>
+                                                <td><span class="badge bg-danger">No Answer</span></td>
+                                                <td><span class="badge bg-secondary">No Answer</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="viewCallDetails('4')">
+                                                        <i class="bi bi-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <nav aria-label="Report pagination">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Quick Stats -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Performance Summary</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Avg Call Duration:</span>
+                                    <strong>3:24</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Conversion Rate:</span>
+                                    <strong class="text-success">7.1%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Voicemail Rate:</span>
+                                    <strong class="text-warning">45.2%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>No Answer Rate:</span>
+                                    <strong class="text-danger">36.0%</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Report Templates -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Report Templates</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="loadReportTemplate('daily')">
+                                    <i class="bi bi-calendar-day me-2"></i>Daily Summary
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="loadReportTemplate('weekly')">
+                                    <i class="bi bi-calendar-week me-2"></i>Weekly Report
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="loadReportTemplate('monthly')">
+                                    <i class="bi bi-calendar-month me-2"></i>Monthly Report
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="loadReportTemplate('agent')">
+                                    <i class="bi bi-person me-2"></i>Agent Performance
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Scheduled Reports -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Scheduled Reports</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Daily Summary</strong>
+                                            <br><small class="text-muted">Every day at 6:00 PM</small>
+                                        </div>
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Weekly Report</strong>
+                                            <br><small class="text-muted">Every Monday at 9:00 AM</small>
+                                        </div>
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Agent Performance</strong>
+                                            <br><small class="text-muted">Every Friday at 5:00 PM</small>
+                                        </div>
+                                        <span class="badge bg-warning">Paused</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -4831,8 +6218,259 @@
             <!-- DNC Management Section -->
             <div id="dnc-management-section" class="dashboard-section">
                 <h4 class="mb-4">DNC Management</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>DNC management interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Do Not Call List Management</h5>
+                                <span class="badge bg-success">Compliant</span>
+                            </div>
+                            
+                            <!-- DNC Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">DNC Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">DNC Check Frequency</label>
+                                        <select class="form-select" id="dncCheckFrequency">
+                                            <option value="before_call" selected>Before Each Call</option>
+                                            <option value="daily">Daily Batch Check</option>
+                                            <option value="weekly">Weekly Check</option>
+                                            <option value="manual">Manual Check Only</option>
+                                        </select>
+                                        <small class="text-muted">When to check against DNC lists</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">DNC Sources</label>
+                                        <select class="form-select" id="dncSources">
+                                            <option value="all" selected>All Sources</option>
+                                            <option value="federal">Federal DNC Only</option>
+                                            <option value="state">State DNC Only</option>
+                                            <option value="internal">Internal DNC Only</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Auto-Add to DNC</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoAddToDNC" checked>
+                                            <label class="form-check-label" for="autoAddToDNC">
+                                                Automatically add when consent denied
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">DNC Expiration</label>
+                                        <select class="form-select" id="dncExpiration">
+                                            <option value="never" selected>Never Expire</option>
+                                            <option value="1_year">1 Year</option>
+                                            <option value="2_years">2 Years</option>
+                                            <option value="5_years">5 Years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- DNC List Management -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6>DNC List</h6>
+                                    <div>
+                                        <button class="btn btn-outline-primary btn-sm me-2" onclick="importDNCList()">
+                                            <i class="bi bi-upload me-1"></i>Import
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" onclick="addToDNC()">
+                                            <i class="bi bi-plus-circle me-1"></i>Add Number
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Phone Number</th>
+                                                <th>Source</th>
+                                                <th>Date Added</th>
+                                                <th>Reason</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>(555) 123-4567</td>
+                                                <td><span class="badge bg-danger">Federal</span></td>
+                                                <td>Nov 10, 2024</td>
+                                                <td>Federal DNC List</td>
+                                                <td><span class="badge bg-danger">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-warning" onclick="removeFromDNC('1')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>(555) 987-6543</td>
+                                                <td><span class="badge bg-warning">Internal</span></td>
+                                                <td>Nov 12, 2024</td>
+                                                <td>Consent Denied</td>
+                                                <td><span class="badge bg-danger">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-warning" onclick="removeFromDNC('2')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>(555) 456-7890</td>
+                                                <td><span class="badge bg-info">State</span></td>
+                                                <td>Nov 08, 2024</td>
+                                                <td>State DNC List</td>
+                                                <td><span class="badge bg-danger">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-warning" onclick="removeFromDNC('3')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>(555) 321-6540</td>
+                                                <td><span class="badge bg-warning">Internal</span></td>
+                                                <td>Nov 14, 2024</td>
+                                                <td>Customer Request</td>
+                                                <td><span class="badge bg-danger">Active</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-warning" onclick="removeFromDNC('4')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- DNC Compliance -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Compliance Monitoring</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Compliance Alerts</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dncAlerts" checked>
+                                            <label class="form-check-label" for="dncAlerts">
+                                                Send alerts for DNC violations
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dncReports" checked>
+                                            <label class="form-check-label" for="dncReports">
+                                                Generate compliance reports
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dncLogging" checked>
+                                            <label class="form-check-label" for="dncLogging">
+                                                Log all DNC checks
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Violation Handling</label>
+                                        <select class="form-select" id="violationHandling">
+                                            <option value="block" selected>Block call immediately</option>
+                                            <option value="warn">Show warning</option>
+                                            <option value="log">Log only</option>
+                                        </select>
+                                        <small class="text-muted">What to do when DNC violation detected</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="saveDNCSettings()">
+                                    <i class="bi bi-check-circle me-2"></i>Save Settings
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="exportDNCList()">
+                                    <i class="bi bi-download me-2"></i>Export List
+                                </button>
+                                <button class="btn btn-outline-info" onclick="runDNCComplianceCheck()">
+                                    <i class="bi bi-shield-check me-2"></i>Compliance Check
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- DNC Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">DNC Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total DNC Numbers:</span>
+                                    <strong>2,456</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Federal DNC:</span>
+                                    <strong>1,234</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>State DNC:</span>
+                                    <strong>567</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Internal DNC:</span>
+                                    <strong>655</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Compliance Rate:</span>
+                                    <strong class="text-success">100%</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="checkSingleNumber()">
+                                    <i class="bi bi-search me-2"></i>Check Number
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="syncDNCLists()">
+                                    <i class="bi bi-arrow-repeat me-2"></i>Sync Lists
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="cleanupDNCLists()">
+                                    <i class="bi bi-trash me-2"></i>Cleanup Lists
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="viewDNCReport()">
+                                    <i class="bi bi-file-text me-2"></i>View Report
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Added to DNC: (555) 321-6540</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 hour ago</small>
+                                    <div>Synced federal DNC list</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">3 hours ago</small>
+                                    <div>Compliance check completed</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 day ago</small>
+                                    <div>Updated state DNC lists</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
