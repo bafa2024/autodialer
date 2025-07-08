@@ -6006,8 +6006,383 @@
             <!-- Agent Assist Section -->
             <div id="agent-assist-section" class="dashboard-section">
                 <h4 class="mb-4">Agent Assist</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Agent assist interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>Real-Time Agent Assistance</h5>
+                                <div>
+                                    <span class="badge bg-success me-2">AI Active</span>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="configureAgentAssist()">
+                                        <i class="bi bi-gear me-2"></i>Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Active Call Assistance -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Active Call Assistance</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card border-primary">
+                                            <div class="card-header bg-primary text-white">
+                                                <h6 class="mb-0"><i class="bi bi-telephone me-2"></i>Current Call</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Phone Number:</span>
+                                                        <strong>+1 (555) 123-4567</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Call Duration:</span>
+                                                        <strong>4:32</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Customer Name:</span>
+                                                        <strong>John Smith</strong>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Call Type:</span>
+                                                        <strong>Sales Inquiry</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="progress mb-2">
+                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                                                </div>
+                                                <small class="text-muted">Call progress: 75% complete</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="card border-info">
+                                            <div class="card-header bg-info text-white">
+                                                <h6 class="mb-0"><i class="bi bi-lightbulb me-2"></i>AI Suggestions</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item">
+                                                        <div class="d-flex justify-content-between align-items-start">
+                                                            <div>
+                                                                <strong>Objection Handler</strong>
+                                                                <small class="text-muted d-block">Customer mentioned price concern</small>
+                                                            </div>
+                                                            <button class="btn btn-sm btn-outline-primary">Use</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="d-flex justify-content-between align-items-start">
+                                                            <div>
+                                                                <strong>Upsell Opportunity</strong>
+                                                                <small class="text-muted d-block">Customer shows interest in premium features</small>
+                                                            </div>
+                                                            <button class="btn btn-sm btn-outline-success">Use</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <div class="d-flex justify-content-between align-items-start">
+                                                            <div>
+                                                                <strong>Closing Script</strong>
+                                                                <small class="text-muted d-block">Ready to close the sale</small>
+                                                            </div>
+                                                            <button class="btn btn-sm btn-outline-warning">Use</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Call Scripts -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Call Scripts & Responses</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Opening Scripts</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Professional Greeting</strong></div>
+                                                        <small class="text-muted">"Hello, this is [Name] from [Company]..."</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Warm Introduction</strong></div>
+                                                        <small class="text-muted">"Hi there! I hope you're having a great day..."</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Direct Approach</strong></div>
+                                                        <small class="text-muted">"Good morning! I'm calling about..."</small>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Objection Handlers</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Price Objection</strong></div>
+                                                        <small class="text-muted">"I understand your concern about cost..."</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Time Objection</strong></div>
+                                                        <small class="text-muted">"I appreciate you're busy, this will only take..."</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Not Interested</strong></div>
+                                                        <small class="text-muted">"I completely understand. However..."</small>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Closing Scripts</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Direct Close</strong></div>
+                                                        <small class="text-muted">"Based on what we've discussed..."</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Assumptive Close</strong></div>
+                                                        <small class="text-muted">"When would you like to get started?"</small>
+                                                    </button>
+                                                    <button class="list-group-item list-group-item-action">
+                                                        <div><strong>Alternative Close</strong></div>
+                                                        <small class="text-muted">"Would you prefer option A or B?"</small>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer Information -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Customer Information</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Contact Details</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-2">
+                                                    <strong>Name:</strong> John Smith
+                                                </div>
+                                                <div class="mb-2">
+                                                    <strong>Phone:</strong> +1 (555) 123-4567
+                                                </div>
+                                                <div class="mb-2">
+                                                    <strong>Email:</strong> john.smith@email.com
+                                                </div>
+                                                <div class="mb-2">
+                                                    <strong>Company:</strong> ABC Corporation
+                                                </div>
+                                                <div class="mb-2">
+                                                    <strong>Location:</strong> New York, NY
+                                                </div>
+                                                <div>
+                                                    <strong>Lead Source:</strong> Website Inquiry
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="card border">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Interaction History</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="list-group list-group-flush">
+                                                    <div class="list-group-item">
+                                                        <small class="text-muted">Dec 15, 2024 - 2:30 PM</small>
+                                                        <div>Current call - Sales inquiry about premium package</div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <small class="text-muted">Dec 10, 2024 - 10:15 AM</small>
+                                                        <div>Email sent - Product brochure and pricing</div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <small class="text-muted">Dec 8, 2024 - 3:45 PM</small>
+                                                        <div>Website visit - Viewed pricing page for 5 minutes</div>
+                                                    </div>
+                                                    <div class="list-group-item">
+                                                        <small class="text-muted">Dec 5, 2024 - 9:30 AM</small>
+                                                        <div>Initial contact - Downloaded whitepaper</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Performance Insights -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Performance Insights</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <div class="h4 text-success mb-1">78%</div>
+                                            <small class="text-muted">Success Rate</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <div class="h4 text-info mb-1">4:32</div>
+                                            <small class="text-muted">Avg Call Duration</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <div class="h4 text-warning mb-1">12</div>
+                                            <small class="text-muted">Calls Today</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <div class="h4 text-primary mb-1">$2,450</div>
+                                            <small class="text-muted">Revenue Today</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="transferCall()">
+                                    <i class="bi bi-arrow-left-right me-2"></i>Transfer Call
+                                </button>
+                                <button class="btn btn-outline-success" onclick="scheduleFollowUp()">
+                                    <i class="bi bi-calendar-plus me-2"></i>Schedule Follow-up
+                                </button>
+                                <button class="btn btn-outline-info" onclick="addNote()">
+                                    <i class="bi bi-pencil me-2"></i>Add Note
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="escalateCall()">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>Escalate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Real-Time Metrics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Real-Time Metrics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Call Quality Score:</span>
+                                    <strong class="text-success">92%</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Customer Satisfaction:</span>
+                                    <strong class="text-info">4.8/5</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Script Adherence:</span>
+                                    <strong class="text-warning">85%</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>AI Assistance Used:</span>
+                                <strong class="text-primary">3 times</strong>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Scripts -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Scripts</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="useScript('greeting')">
+                                    <i class="bi bi-chat-dots me-2"></i>Greeting
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="useScript('objection')">
+                                    <i class="bi bi-shield-check me-2"></i>Objection Handler
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="useScript('closing')">
+                                    <i class="bi bi-check-circle me-2"></i>Closing
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="useScript('transfer')">
+                                    <i class="bi bi-arrow-left-right me-2"></i>Transfer
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Call Controls -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Call Controls</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-success btn-sm" onclick="muteCall()">
+                                    <i class="bi bi-mic-mute me-2"></i>Mute/Unmute
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="holdCall()">
+                                    <i class="bi bi-pause-circle me-2"></i>Hold
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="recordCall()">
+                                    <i class="bi bi-record-circle me-2"></i>Start Recording
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="endCall()">
+                                    <i class="bi bi-telephone-x me-2"></i>End Call
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">1 min ago</small>
+                                    <div>AI suggested objection handler</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">3 min ago</small>
+                                    <div>Customer information loaded</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Call started - Sales inquiry</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">10 min ago</small>
+                                    <div>Previous call ended - Appointment scheduled</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -6916,8 +7291,363 @@
             <!-- Call Summarization Section -->
             <div id="call-summarization-section" class="dashboard-section">
                 <h4 class="mb-4">Call Summarization</h4>
-                <div class="bg-white p-4 rounded shadow-sm">
-                    <p>Call summarization interface goes here...</p>
+                <div class="row g-4">
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5>AI-Powered Call Summarization</h5>
+                                <div>
+                                    <span class="badge bg-success me-2">98.5% Accuracy</span>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="configureSummarization()">
+                                        <i class="bi bi-gear me-2"></i>Configure
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Summarization Settings -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Summarization Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Auto-Summarization</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoSummarization" checked>
+                                            <label class="form-check-label" for="autoSummarization">
+                                                Automatically summarize all calls
+                                            </label>
+                                        </div>
+                                        <small class="text-muted">Generate summaries immediately after call ends</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Summarization Level</label>
+                                        <select class="form-select" id="summarizationLevel">
+                                            <option value="brief">Brief (Key points only)</option>
+                                            <option value="standard" selected>Standard (Detailed summary)</option>
+                                            <option value="comprehensive">Comprehensive (Full analysis)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Include Action Items</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="includeActionItems" checked>
+                                            <label class="form-check-label" for="includeActionItems">
+                                                Extract action items and follow-ups
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Sentiment Analysis</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="sentimentAnalysis" checked>
+                                            <label class="form-check-label" for="sentimentAnalysis">
+                                                Include customer sentiment analysis
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Key Topics Extraction</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="keyTopicsExtraction" checked>
+                                            <label class="form-check-label" for="keyTopicsExtraction">
+                                                Identify and highlight key topics
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Summary Language</label>
+                                        <select class="form-select" id="summaryLanguage">
+                                            <option value="auto" selected>Auto-detect</option>
+                                            <option value="english">English</option>
+                                            <option value="spanish">Spanish</option>
+                                            <option value="french">French</option>
+                                            <option value="german">German</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Summaries -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Recent Summaries</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Call Details</th>
+                                                <th>Summary</th>
+                                                <th>Sentiment</th>
+                                                <th>Action Items</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div><strong>+1 (555) 123-4567</strong></div>
+                                                    <small class="text-muted">Dec 15, 2024 - 4:32</small>
+                                                    <div><small>Agent Sarah</small></div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-truncate" style="max-width: 200px;">
+                                                        Customer inquired about premium package pricing. Discussed features and benefits. 
+                                                        Customer showed interest in enterprise features. Price objection handled successfully.
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">Positive</span></td>
+                                                <td>
+                                                    <span class="badge bg-primary">Follow-up</span>
+                                                    <span class="badge bg-info">Quote</span>
+                                                </td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="viewSummary('1')">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-secondary" onclick="editSummary('1')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-info" onclick="exportSummary('1')">
+                                                            <i class="bi bi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div><strong>+1 (555) 987-6543</strong></div>
+                                                    <small class="text-muted">Dec 15, 2024 - 1:45</small>
+                                                    <div><small>Agent Mike</small></div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-truncate" style="max-width: 200px;">
+                                                        Customer called about technical support issue. Problem identified as login difficulty. 
+                                                        Provided step-by-step solution. Customer satisfied with resolution.
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">Positive</span></td>
+                                                <td>
+                                                    <span class="badge bg-success">Resolved</span>
+                                                </td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="viewSummary('2')">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-secondary" onclick="editSummary('2')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-info" onclick="exportSummary('2')">
+                                                            <i class="bi bi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div><strong>+1 (555) 456-7890</strong></div>
+                                                    <small class="text-muted">Dec 15, 2024 - 0:12</small>
+                                                    <div><small>Agent Lisa</small></div>
+                                                </td>
+                                                <td>
+                                                    <div class="text-truncate" style="max-width: 200px;">
+                                                        Call disconnected after brief connection. No meaningful conversation detected. 
+                                                        Customer may have been unavailable or line issue.
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-secondary">Neutral</span></td>
+                                                <td>
+                                                    <span class="badge bg-warning">Callback</span>
+                                                </td>
+                                                <td><span class="badge bg-warning">Processing</span></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <button class="btn btn-outline-primary" onclick="viewSummary('3')">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-secondary" onclick="editSummary('3')">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
+                                                        <button class="btn btn-outline-info" onclick="exportSummary('3')">
+                                                            <i class="bi bi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Items Dashboard -->
+                            <div class="mb-4">
+                                <h6 class="mb-3">Action Items Dashboard</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="card border-primary">
+                                            <div class="card-header bg-primary text-white">
+                                                <h6 class="mb-0">Pending Follow-ups</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="h4 text-primary mb-2">12</div>
+                                                <div class="small text-muted">Requires immediate attention</div>
+                                                <button class="btn btn-outline-primary btn-sm mt-2 w-100">
+                                                    View All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-success">
+                                            <div class="card-header bg-success text-white">
+                                                <h6 class="mb-0">Quotes to Send</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="h4 text-success mb-2">8</div>
+                                                <div class="small text-muted">Ready for customer review</div>
+                                                <button class="btn btn-outline-success btn-sm mt-2 w-100">
+                                                    View All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-warning">
+                                            <div class="card-header bg-warning text-dark">
+                                                <h6 class="mb-0">Escalations</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="h4 text-warning mb-2">3</div>
+                                                <div class="small text-muted">Requires supervisor review</div>
+                                                <button class="btn btn-outline-warning btn-sm mt-2 w-100">
+                                                    View All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-primary" onclick="generateSummary()">
+                                    <i class="bi bi-magic me-2"></i>Generate Summary
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="bulkSummarize()">
+                                    <i class="bi bi-collection me-2"></i>Bulk Summarize
+                                </button>
+                                <button class="btn btn-outline-info" onclick="exportSummaries()">
+                                    <i class="bi bi-download me-2"></i>Export All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <!-- Summarization Statistics -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Summarization Statistics</h6>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Total Summaries:</span>
+                                    <strong>1,247</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Today's Summaries:</span>
+                                    <strong class="text-success">89</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Accuracy Rate:</span>
+                                    <strong class="text-success">98.5%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Processing Time:</span>
+                                    <strong>2.3 seconds</strong>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 98.5%"></div>
+                                </div>
+                                <small class="text-muted">AI accuracy: 98.5%</small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Positive Sentiment:</span>
+                                    <strong class="text-success">67%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Neutral Sentiment:</span>
+                                    <strong class="text-warning">28%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Negative Sentiment:</span>
+                                    <strong class="text-danger">5%</strong>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="generateSummary()">
+                                    <i class="bi bi-magic me-2"></i>Generate Summary
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="reviewSummaries()">
+                                    <i class="bi bi-eye me-2"></i>Review Summaries
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="actionItems()">
+                                    <i class="bi bi-list-check me-2"></i>Action Items
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="summarizationAnalytics()">
+                                    <i class="bi bi-graph-up me-2"></i>Analytics
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Summary Templates -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3">Summary Templates</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="useTemplate('sales')">
+                                    <i class="bi bi-cart me-2"></i>Sales Call
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="useTemplate('support')">
+                                    <i class="bi bi-headset me-2"></i>Support Call
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="useTemplate('followup')">
+                                    <i class="bi bi-arrow-repeat me-2"></i>Follow-up Call
+                                </button>
+                                <button class="btn btn-outline-info btn-sm" onclick="useTemplate('custom')">
+                                    <i class="bi bi-gear me-2"></i>Custom Template
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3">Recent Activity</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <small class="text-muted">2 min ago</small>
+                                    <div>Summary generated for +1 (555) 123-4567</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">5 min ago</small>
+                                    <div>Action items extracted from support call</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">10 min ago</small>
+                                    <div>Bulk summarization completed (25 calls)</div>
+                                </div>
+                                <div class="list-group-item">
+                                    <small class="text-muted">15 min ago</small>
+                                    <div>Summary template updated</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
