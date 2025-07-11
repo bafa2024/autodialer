@@ -198,6 +198,51 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+        }
+
+        /* Email Campaign Styles */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            padding: 8px 0;
+            border-left: 2px solid #e9ecef;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6c757d;
+        }
+
+        .timeline-item:last-child {
+            border-left: none;
+        }
+
+        .email-preview {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+                .batch-progress {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .dialer-mode-card {
             margin: 0 10px;
             cursor: pointer;
         }
@@ -611,6 +656,9 @@
                     <a class="sidebar-link active" onclick="showDashboardSection('overview', this)">
                         <i class="bi bi-speedometer2 me-3"></i>Dashboard
                     </a>
+                    <a class="sidebar-link" onclick="showDashboardSection('email-campaign', this)">
+                        <i class="bi bi-envelope me-3"></i>Email Campaign
+                    </a>
                     <a class="sidebar-link" onclick="showDashboardSection('dialer', this)">
                         <i class="bi bi-telephone-outbound me-3"></i>Dialer
                     </a>
@@ -812,6 +860,268 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Email Campaign Section -->
+            <div id="email-campaign-section" class="dashboard-section" style="display:none;">
+                <h4 class="mb-4"><i class="bi bi-envelope me-2"></i>Email Campaign Management</h4>
+                
+                <!-- Campaign Statistics -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <h3 class="fw-bold">5</h3>
+                            <p class="text-secondary mb-2">Active Campaigns</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 2 new this week
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success bg-opacity-10 text-success">
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <h3 class="fw-bold">12,847</h3>
+                            <p class="text-secondary mb-2">Emails Sent</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 23.5% open rate
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <h3 class="fw-bold">3,421</h3>
+                            <p class="text-secondary mb-2">Pending</p>
+                            <small class="text-info">
+                                <i class="bi bi-arrow-right"></i> In queue
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info bg-opacity-10 text-info">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h3 class="fw-bold">8.7%</h3>
+                            <p class="text-secondary mb-2">Click Rate</p>
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up"></i> 2.1% improvement
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Create Campaign -->
+                    <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5><i class="bi bi-plus-circle me-2"></i>Create New Campaign</h5>
+                                <button class="btn btn-outline-primary btn-sm" onclick="showEmailTemplates()">
+                                    <i class="bi bi-file-earmark-text me-1"></i>Use Template
+                                </button>
+                            </div>
+                            
+                            <form id="createEmailCampaignForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="campaignName" class="form-label">Campaign Name *</label>
+                                        <input type="text" class="form-control" id="campaignName" placeholder="Enter campaign name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="campaignType" class="form-label">Campaign Type</label>
+                                        <select class="form-select" id="campaignType">
+                                            <option value="marketing">Marketing</option>
+                                            <option value="newsletter">Newsletter</option>
+                                            <option value="followup">Follow-up</option>
+                                            <option value="promotional">Promotional</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="emailSubject" class="form-label">Email Subject *</label>
+                                        <input type="text" class="form-control" id="emailSubject" placeholder="Enter compelling subject line" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="emailBody" class="form-label">Email Content *</label>
+                                        <textarea class="form-control" id="emailBody" rows="8" placeholder="Type your email content here... You can use HTML formatting." required></textarea>
+                                        <div class="form-text">
+                                            <small>Available variables: {first_name}, {last_name}, {company}, {email}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="senderName" class="form-label">Sender Name</label>
+                                        <input type="text" class="form-control" id="senderName" placeholder="Your Name" value="AutoDial Pro">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="senderEmail" class="form-label">Sender Email</label>
+                                        <input type="email" class="form-control" id="senderEmail" placeholder="noreply@autodialpro.com" value="noreply@autodialpro.com">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Upload Recipients -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h5><i class="bi bi-upload me-2"></i>Upload Recipients</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="recipientList" class="form-label">Select Recipient List</label>
+                                    <select class="form-select" id="recipientList">
+                                        <option value="">Choose existing list...</option>
+                                        <option value="all_contacts">All Contacts (15,234)</option>
+                                        <option value="leads">Leads (8,456)</option>
+                                        <option value="customers">Customers (6,778)</option>
+                                        <option value="prospects">Prospects (3,210)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Or Upload New List</label>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" id="emailListFile" accept=".xlsx,.xls,.csv">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('emailListFile').click()">
+                                            <i class="bi bi-upload"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-text">
+                                        <small>Supported formats: Excel (.xlsx, .xls), CSV. Columns: email, first_name, last_name, company</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Batch Settings -->
+                            <div class="mt-4">
+                                <h6>Batch Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="batchSize" class="form-label">Batch Size</label>
+                                        <select class="form-select" id="batchSize">
+                                            <option value="100">100 emails per batch</option>
+                                            <option value="250" selected>250 emails per batch</option>
+                                            <option value="500">500 emails per batch</option>
+                                            <option value="1000">1000 emails per batch</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="batchDelay" class="form-label">Delay Between Batches</label>
+                                        <select class="form-select" id="batchDelay">
+                                            <option value="5">5 minutes</option>
+                                            <option value="15" selected>15 minutes</option>
+                                            <option value="30">30 minutes</option>
+                                            <option value="60">1 hour</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="sendTime" class="form-label">Start Time</label>
+                                        <input type="datetime-local" class="form-control" id="sendTime">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Campaign Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <button type="submit" form="createEmailCampaignForm" class="btn btn-primary me-2">
+                                        <i class="bi bi-save me-1"></i>Save Campaign
+                                    </button>
+                                    <button class="btn btn-success" onclick="startEmailCampaign()">
+                                        <i class="bi bi-play-fill me-1"></i>Start Campaign
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-outline-secondary me-2" onclick="previewEmail()">
+                                        <i class="bi bi-eye me-1"></i>Preview
+                                    </button>
+                                    <button class="btn btn-outline-info" onclick="testEmail()">
+                                        <i class="bi bi-send me-1"></i>Send Test
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campaign Management -->
+                    <div class="col-md-4">
+                        <!-- Active Campaigns -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3"><i class="bi bi-play-circle me-2"></i>Active Campaigns</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Spring Promo</h6>
+                                        <small class="text-muted">1,200 sent / 2,500 total</small>
+                                    </div>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Follow Up</h6>
+                                        <small class="text-muted">Scheduled for 2:00 PM</small>
+                                    </div>
+                                    <span class="badge bg-warning text-dark">Scheduled</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">Newsletter</h6>
+                                        <small class="text-muted">500 sent / 1,000 total</small>
+                                    </div>
+                                    <span class="badge bg-info">Paused</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h6 class="mb-3"><i class="bi bi-lightning me-2"></i>Quick Actions</h6>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="importEmailList()">
+                                    <i class="bi bi-upload me-1"></i>Import Email List
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" onclick="manageTemplates()">
+                                    <i class="bi bi-file-earmark-text me-1"></i>Email Templates
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="viewAnalytics()">
+                                    <i class="bi bi-graph-up me-1"></i>Campaign Analytics
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm" onclick="manageBatches()">
+                                    <i class="bi bi-collection me-1"></i>Manage Batches
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <h6 class="mb-3"><i class="bi bi-clock-history me-2"></i>Recent Activity</h6>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <small class="text-muted">2 minutes ago</small>
+                                    <p class="mb-1">Campaign <strong>Spring Promo</strong> sent 250 emails</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <small class="text-muted">15 minutes ago</small>
+                                    <p class="mb-1">New campaign <strong>Follow Up</strong> scheduled</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <small class="text-muted">1 hour ago</small>
+                                    <p class="mb-1">Template <strong>Holiday Offer</strong> updated</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <small class="text-muted">2 hours ago</small>
+                                    <p class="mb-1">Email list <strong>Q1 Leads</strong> imported (1,500 contacts)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Email Campaign Section -->
 
             <!-- Dialer Section -->
             <div id="dialer-section" class="dashboard-section">
@@ -7291,368 +7601,94 @@
                 </div>
             </div>
 
-            <!-- Call Summarization Section -->
-            <div id="call-summarization-section" class="dashboard-section">
-                <h4 class="mb-4">Call Summarization</h4>
+            <!-- Email Campaign Section -->
+            <div id="email-campaign-section" class="dashboard-section" style="display:none;">
+                <h4 class="mb-4"><i class="bi bi-envelope me-2"></i>Email Campaign</h4>
                 <div class="row g-4">
                     <div class="col-md-8">
+                        <div class="bg-white p-4 rounded shadow-sm mb-4">
+                            <h5>Create New Email Campaign</h5>
+                            <form id="createEmailCampaignForm">
+                                <div class="mb-3">
+                                    <label for="campaignName" class="form-label">Campaign Name</label>
+                                    <input type="text" class="form-control" id="campaignName" placeholder="Enter campaign name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailSubject" class="form-label">Email Subject</label>
+                                    <input type="text" class="form-control" id="emailSubject" placeholder="Enter email subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailBody" class="form-label">Email Body</label>
+                                    <textarea class="form-control" id="emailBody" rows="5" placeholder="Type your email content here..." required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipientList" class="form-label">Recipient List</label>
+                                    <select class="form-select" id="recipientList" required>
+                                        <option value="">Select a list</option>
+                                        <option value="all">All Contacts</option>
+                                        <option value="leads">Leads</option>
+                                        <option value="customers">Customers</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create Campaign</button>
+                            </form>
+                        </div>
                         <div class="bg-white p-4 rounded shadow-sm">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h5>AI-Powered Call Summarization</h5>
-                                <div>
-                                    <span class="badge bg-success me-2">98.5% Accuracy</span>
-                                    <button class="btn btn-outline-primary btn-sm" onclick="configureSummarization()">
-                                        <i class="bi bi-gear me-2"></i>Configure
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <!-- Summarization Settings -->
-                            <div class="mb-4">
-                                <h6 class="mb-3">Summarization Settings</h6>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Auto-Summarization</label>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="autoSummarization" checked>
-                                            <label class="form-check-label" for="autoSummarization">
-                                                Automatically summarize all calls
-                                            </label>
-                                        </div>
-                                        <small class="text-muted">Generate summaries immediately after call ends</small>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Summarization Level</label>
-                                        <select class="form-select" id="summarizationLevel">
-                                            <option value="brief">Brief (Key points only)</option>
-                                            <option value="standard" selected>Standard (Detailed summary)</option>
-                                            <option value="comprehensive">Comprehensive (Full analysis)</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Include Action Items</label>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="includeActionItems" checked>
-                                            <label class="form-check-label" for="includeActionItems">
-                                                Extract action items and follow-ups
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Sentiment Analysis</label>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="sentimentAnalysis" checked>
-                                            <label class="form-check-label" for="sentimentAnalysis">
-                                                Include customer sentiment analysis
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Key Topics Extraction</label>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="keyTopicsExtraction" checked>
-                                            <label class="form-check-label" for="keyTopicsExtraction">
-                                                Identify and highlight key topics
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">Summary Language</label>
-                                        <select class="form-select" id="summaryLanguage">
-                                            <option value="auto" selected>Auto-detect</option>
-                                            <option value="english">English</option>
-                                            <option value="spanish">Spanish</option>
-                                            <option value="french">French</option>
-                                            <option value="german">German</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Recent Summaries -->
-                            <div class="mb-4">
-                                <h6 class="mb-3">Recent Summaries</h6>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Call Details</th>
-                                                <th>Summary</th>
-                                                <th>Sentiment</th>
-                                                <th>Action Items</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div><strong>+1 (555) 123-4567</strong></div>
-                                                    <small class="text-muted">Dec 15, 2024 - 4:32</small>
-                                                    <div><small>Agent Sarah</small></div>
-                                                </td>
-                                                <td>
-                                                    <div class="text-truncate" style="max-width: 200px;">
-                                                        Customer inquired about premium package pricing. Discussed features and benefits. 
-                                                        Customer showed interest in enterprise features. Price objection handled successfully.
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success">Positive</span></td>
-                                                <td>
-                                                    <span class="badge bg-primary">Follow-up</span>
-                                                    <span class="badge bg-info">Quote</span>
-                                                </td>
-                                                <td><span class="badge bg-success">Completed</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" onclick="viewSummary('1')">
-                                                            <i class="bi bi-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-secondary" onclick="editSummary('1')">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-info" onclick="exportSummary('1')">
-                                                            <i class="bi bi-download"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div><strong>+1 (555) 987-6543</strong></div>
-                                                    <small class="text-muted">Dec 15, 2024 - 1:45</small>
-                                                    <div><small>Agent Mike</small></div>
-                                                </td>
-                                                <td>
-                                                    <div class="text-truncate" style="max-width: 200px;">
-                                                        Customer called about technical support issue. Problem identified as login difficulty. 
-                                                        Provided step-by-step solution. Customer satisfied with resolution.
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success">Positive</span></td>
-                                                <td>
-                                                    <span class="badge bg-success">Resolved</span>
-                                                </td>
-                                                <td><span class="badge bg-success">Completed</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" onclick="viewSummary('2')">
-                                                            <i class="bi bi-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-secondary" onclick="editSummary('2')">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-info" onclick="exportSummary('2')">
-                                                            <i class="bi bi-download"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div><strong>+1 (555) 456-7890</strong></div>
-                                                    <small class="text-muted">Dec 15, 2024 - 0:12</small>
-                                                    <div><small>Agent Lisa</small></div>
-                                                </td>
-                                                <td>
-                                                    <div class="text-truncate" style="max-width: 200px;">
-                                                        Call disconnected after brief connection. No meaningful conversation detected. 
-                                                        Customer may have been unavailable or line issue.
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-secondary">Neutral</span></td>
-                                                <td>
-                                                    <span class="badge bg-warning">Callback</span>
-                                                </td>
-                                                <td><span class="badge bg-warning">Processing</span></td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-primary" onclick="viewSummary('3')">
-                                                            <i class="bi bi-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-secondary" onclick="editSummary('3')">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </button>
-                                                        <button class="btn btn-outline-info" onclick="exportSummary('3')">
-                                                            <i class="bi bi-download"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            
-                            <!-- Action Items Dashboard -->
-                            <div class="mb-4">
-                                <h6 class="mb-3">Action Items Dashboard</h6>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <div class="card border-primary">
-                                            <div class="card-header bg-primary text-white">
-                                                <h6 class="mb-0">Pending Follow-ups</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="h4 text-primary mb-2">12</div>
-                                                <div class="small text-muted">Requires immediate attention</div>
-                                                <button class="btn btn-outline-primary btn-sm mt-2 w-100">
-                                                    View All
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-success">
-                                            <div class="card-header bg-success text-white">
-                                                <h6 class="mb-0">Quotes to Send</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="h4 text-success mb-2">8</div>
-                                                <div class="small text-muted">Ready for customer review</div>
-                                                <button class="btn btn-outline-success btn-sm mt-2 w-100">
-                                                    View All
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-warning">
-                                            <div class="card-header bg-warning text-dark">
-                                                <h6 class="mb-0">Escalations</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="h4 text-warning mb-2">3</div>
-                                                <div class="small text-muted">Requires supervisor review</div>
-                                                <button class="btn btn-outline-warning btn-sm mt-2 w-100">
-                                                    View All
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Action Buttons -->
-                            <div class="d-flex gap-3">
-                                <button class="btn btn-primary" onclick="generateSummary()">
-                                    <i class="bi bi-magic me-2"></i>Generate Summary
-                                </button>
-                                <button class="btn btn-outline-secondary" onclick="bulkSummarize()">
-                                    <i class="bi bi-collection me-2"></i>Bulk Summarize
-                                </button>
-                                <button class="btn btn-outline-info" onclick="exportSummaries()">
-                                    <i class="bi bi-download me-2"></i>Export All
-                                </button>
-                            </div>
+                            <h5>Active Email Campaigns</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Subject</th>
+                                        <th>Status</th>
+                                        <th>Sent</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="emailCampaignsTableBody">
+                                    <tr>
+                                        <td>Spring Promo</td>
+                                        <td>Special Spring Offer!</td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>1,200</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-danger">Pause</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Follow Up</td>
+                                        <td>We Missed You!</td>
+                                        <td><span class="badge bg-warning text-dark">Scheduled</span></td>
+                                        <td>0</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View</button>
+                                            <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    
                     <div class="col-md-4">
-                        <!-- Summarization Statistics -->
-                        <div class="bg-white p-4 rounded shadow-sm mb-4">
-                            <h6 class="mb-3">Summarization Statistics</h6>
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span>Total Summaries:</span>
-                                    <strong>1,247</strong>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span>Today's Summaries:</span>
-                                    <strong class="text-success">89</strong>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span>Accuracy Rate:</span>
-                                    <strong class="text-success">98.5%</strong>
-                                </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span>Processing Time:</span>
-                                    <strong>2.3 seconds</strong>
-                                </div>
-                                <div class="progress mb-2">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 98.5%"></div>
-                                </div>
-                                <small class="text-muted">AI accuracy: 98.5%</small>
-                            </div>
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>Positive Sentiment:</span>
-                                    <strong class="text-success">67%</strong>
-                                </div>
-                                <div class="d-flex justify-content-between mb-1">
-                                    <span>Neutral Sentiment:</span>
-                                    <strong class="text-warning">28%</strong>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span>Negative Sentiment:</span>
-                                    <strong class="text-danger">5%</strong>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quick Actions -->
                         <div class="bg-white p-4 rounded shadow-sm mb-4">
                             <h6 class="mb-3">Quick Actions</h6>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-outline-primary btn-sm" onclick="generateSummary()">
-                                    <i class="bi bi-magic me-2"></i>Generate Summary
-                                </button>
-                                <button class="btn btn-outline-success btn-sm" onclick="reviewSummaries()">
-                                    <i class="bi bi-eye me-2"></i>Review Summaries
-                                </button>
-                                <button class="btn btn-outline-warning btn-sm" onclick="actionItems()">
-                                    <i class="bi bi-list-check me-2"></i>Action Items
-                                </button>
-                                <button class="btn btn-outline-info btn-sm" onclick="summarizationAnalytics()">
-                                    <i class="bi bi-graph-up me-2"></i>Analytics
-                                </button>
-                            </div>
+                            <button class="btn btn-outline-primary w-100 mb-2">Import Recipients</button>
+                            <button class="btn btn-outline-secondary w-100 mb-2">View Templates</button>
+                            <button class="btn btn-outline-success w-100">Campaign Analytics</button>
                         </div>
-                        
-                        <!-- Summary Templates -->
-                        <div class="bg-white p-4 rounded shadow-sm mb-4">
-                            <h6 class="mb-3">Summary Templates</h6>
-                            <div class="d-grid gap-2">
-                                <button class="btn btn-outline-primary btn-sm" onclick="useTemplate('sales')">
-                                    <i class="bi bi-cart me-2"></i>Sales Call
-                                </button>
-                                <button class="btn btn-outline-success btn-sm" onclick="useTemplate('support')">
-                                    <i class="bi bi-headset me-2"></i>Support Call
-                                </button>
-                                <button class="btn btn-outline-warning btn-sm" onclick="useTemplate('followup')">
-                                    <i class="bi bi-arrow-repeat me-2"></i>Follow-up Call
-                                </button>
-                                <button class="btn btn-outline-info btn-sm" onclick="useTemplate('custom')">
-                                    <i class="bi bi-gear me-2"></i>Custom Template
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Recent Activity -->
                         <div class="bg-white p-4 rounded shadow-sm">
                             <h6 class="mb-3">Recent Activity</h6>
-                            <div class="list-group list-group-flush">
-                                <div class="list-group-item">
-                                    <small class="text-muted">2 min ago</small>
-                                    <div>Summary generated for +1 (555) 123-4567</div>
-                                </div>
-                                <div class="list-group-item">
-                                    <small class="text-muted">5 min ago</small>
-                                    <div>Action items extracted from support call</div>
-                                </div>
-                                <div class="list-group-item">
-                                    <small class="text-muted">10 min ago</small>
-                                    <div>Bulk summarization completed (25 calls)</div>
-                                </div>
-                                <div class="list-group-item">
-                                    <small class="text-muted">15 min ago</small>
-                                    <div>Summary template updated</div>
-                                </div>
-                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Campaign <b>Spring Promo</b> sent to 1,200 recipients</li>
+                                <li class="list-group-item">New campaign <b>Follow Up</b> scheduled</li>
+                                <li class="list-group-item">Template <b>Holiday Offer</b> updated</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- End Email Campaign Section -->
 
             <!-- Consent Capture Section -->
             <div id="consent-capture-section" class="dashboard-section">
@@ -10290,107 +10326,140 @@
                 showNotification('Call scheduler ready!', 'success');
             }, 1000);
         }
-        
-        // Add pulse animation for voicemail detection link
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
-                70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
-                100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
-            }
-        `;
-        document.head.appendChild(style);
 
-        // Contact Support Functions
-        function openLiveChat() {
-            showNotification('Opening live chat...', 'info');
-            // This would typically open a live chat widget
+        // Email Campaign Functions
+        function startEmailCampaign() {
+            const campaignName = document.getElementById('campaignName').value;
+            const emailSubject = document.getElementById('emailSubject').value;
+            const batchSize = document.getElementById('batchSize').value;
+            
+            if (!campaignName || !emailSubject) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            showNotification(`Starting campaign "${campaignName}" with ${batchSize} emails per batch...`, 'info');
             setTimeout(() => {
-                showNotification('Live chat connected! A support agent will be with you shortly.', 'success');
+                showNotification(`Campaign "${campaignName}" started successfully! First batch queued.`, 'success');
             }, 2000);
         }
 
-        function createTicket() {
-            showNotification('Creating new support ticket...', 'info');
-            // This would typically open a modal or form for creating tickets
+        function previewEmail() {
+            const subject = document.getElementById('emailSubject').value;
+            const body = document.getElementById('emailBody').value;
+            
+            if (!subject || !body) {
+                showNotification('Please fill in subject and content first', 'error');
+                return;
+            }
+            
+            // Create preview modal
+            const previewModal = `
+                <div class="modal fade" id="emailPreviewModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Email Preview</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <strong>Subject:</strong> ${subject}
+                                </div>
+                                <div class="border p-3 bg-light">
+                                    ${body.replace(/\n/g, '<br>')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', previewModal);
+            const modal = new bootstrap.Modal(document.getElementById('emailPreviewModal'));
+            modal.show();
+            
+            // Clean up modal after it's hidden
+            document.getElementById('emailPreviewModal').addEventListener('hidden.bs.modal', function() {
+                this.remove();
+            });
+        }
+
+        function testEmail() {
+            const testEmail = prompt('Enter test email address:');
+            if (!testEmail) return;
+            
+            showNotification(`Sending test email to ${testEmail}...`, 'info');
             setTimeout(() => {
-                showNotification('Ticket created successfully! Ticket #TKT-2024-004', 'success');
+                showNotification(`Test email sent successfully to ${testEmail}!`, 'success');
             }, 1500);
         }
 
-        function viewAllTickets() {
-            showNotification('Loading all tickets...', 'info');
-            // This would typically show all tickets in a modal or new page
+        function importEmailList() {
+            showNotification('Opening email list import...', 'info');
+            // This would typically open a file upload interface
             setTimeout(() => {
-                showNotification('All tickets loaded successfully!', 'success');
+                showNotification('Email list import ready!', 'success');
             }, 1000);
         }
 
-        function searchKnowledgeBase() {
-            showNotification('Opening knowledge base search...', 'info');
-            // This would typically open a search interface
+        function manageTemplates() {
+            showNotification('Opening email templates...', 'info');
+            // This would typically open a template management interface
             setTimeout(() => {
-                showNotification('Knowledge base search ready!', 'success');
+                showNotification('Email templates loaded!', 'success');
             }, 1000);
         }
 
-        function refreshTickets() {
-            showNotification('Refreshing tickets...', 'info');
-            // This would typically reload ticket data
+        function viewAnalytics() {
+            showNotification('Opening campaign analytics...', 'info');
+            // This would typically open analytics dashboard
             setTimeout(() => {
-                showNotification('Tickets refreshed successfully!', 'success');
+                showNotification('Campaign analytics loaded!', 'success');
             }, 1000);
         }
 
-        function viewTicket(ticketId) {
-            showNotification(`Opening ticket ${ticketId}...`, 'info');
-            // This would typically open a modal with ticket details
+        function manageBatches() {
+            showNotification('Opening batch management...', 'info');
+            // This would typically open batch management interface
             setTimeout(() => {
-                showNotification(`Ticket ${ticketId} details loaded!`, 'success');
+                showNotification('Batch management loaded!', 'success');
             }, 1000);
         }
 
-        function replyTicket(ticketId) {
-            showNotification(`Opening reply form for ticket ${ticketId}...`, 'info');
-            // This would typically open a reply form
+        function showEmailTemplates() {
+            showNotification('Loading email templates...', 'info');
+            // This would typically show available templates
             setTimeout(() => {
-                showNotification(`Reply form ready for ticket ${ticketId}!`, 'success');
+                showNotification('Email templates loaded!', 'success');
             }, 1000);
         }
 
-        function reopenTicket(ticketId) {
-            if (confirm(`Are you sure you want to reopen ticket ${ticketId}?`)) {
-                showNotification(`Reopening ticket ${ticketId}...`, 'info');
-                setTimeout(() => {
-                    showNotification(`Ticket ${ticketId} reopened successfully!`, 'success');
-                }, 1000);
+        // Handle file upload for email lists
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailListFile = document.getElementById('emailListFile');
+            if (emailListFile) {
+                emailListFile.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        showNotification(`Processing ${file.name}...`, 'info');
+                        setTimeout(() => {
+                            showNotification(`Successfully imported ${file.name} with 1,500 contacts!`, 'success');
+                        }, 2000);
+                    }
+                });
             }
-        }
 
-        function saveDraft() {
-            showNotification('Saving draft...', 'info');
-            // This would typically save the current form as a draft
-            setTimeout(() => {
-                showNotification('Draft saved successfully!', 'success');
-            }, 1000);
-        }
-
-        function viewKnowledgeBase() {
-            showNotification('Opening knowledge base...', 'info');
-            // This would typically open the knowledge base
-            setTimeout(() => {
-                showNotification('Knowledge base loaded!', 'success');
-            }, 1000);
-        }
-
-        function scheduleCall() {
-            showNotification('Opening call scheduler...', 'info');
-            // This would typically open a calendar/scheduler interface
-            setTimeout(() => {
-                showNotification('Call scheduler ready!', 'success');
-            }, 1000);
-        }
+            // Handle campaign form submission
+            const campaignForm = document.getElementById('createEmailCampaignForm');
+            if (campaignForm) {
+                campaignForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const campaignName = document.getElementById('campaignName').value;
+                    showNotification(`Campaign "${campaignName}" saved successfully!`, 'success');
+                });
+            }
+        });
     </script>
 </body>
 </html>
