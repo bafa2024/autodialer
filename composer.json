@@ -1,0 +1,22 @@
+{
+    "name": "autodialer/application",
+    "description": "AutoDial Pro - Enterprise Auto Dialer Solution",
+    "type": "project",
+    "require": {
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

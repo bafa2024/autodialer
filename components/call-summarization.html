@@ -1,0 +1,60 @@
+<div id="call-summarization-section" class="dashboard-section">
+    <h4 class="mb-4">Call Summarization</h4>
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5>AI Call Summarization</h5>
+                    <div>
+                        <span class="badge bg-success me-2">AI Enabled</span>
+                        <button class="btn btn-outline-primary btn-sm" onclick="configureSummarization()">
+                            <i class="bi bi-gear me-2"></i>Configure
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h6 class="mb-3">Summarization Settings</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Summary Type</label>
+                            <select class="form-select" id="summaryType">
+                                <option value="comprehensive" selected>Comprehensive Summary</option>
+                                <option value="brief">Brief Summary</option>
+                                <option value="action_items">Action Items Only</option>
+                                <option value="custom">Custom Template</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Summary Length</label>
+                            <select class="form-select" id="summaryLength">
+                                <option value="short">Short (50-100 words)</option>
+                                <option value="medium" selected>Medium (100-200 words)</option>
+                                <option value="long">Long (200-500 words)</option>
+                                <option value="detailed">Detailed (500+ words)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Auto-Generate</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoGenerate" checked>
+                                <label class="form-check-label" for="autoGenerate">
+                                    Automatically generate after each call
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Include Sentiment</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="includeSentiment" checked>
+                                <label class="form-check-label" for="includeSentiment">
+                                    Include customer sentiment analysis
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

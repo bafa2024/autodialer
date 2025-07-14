@@ -18,7 +18,7 @@
 <body>
     <!-- Landing Page -->
     <div id="landing-page" class="page-content active">
-        <!-- Navigation -->
+    
         <nav class="navbar navbar-expand-lg landing-nav">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="javascript:void(0);" onclick="showPage('landing-page')">
@@ -50,7 +50,7 @@
             </div>
         </nav>
 
-        <!-- Hero Section -->
+    
         <section class="hero-section">
             <div class="container">
                 <div class="row align-items-center">
@@ -77,7 +77,7 @@
             </div>
         </section>
 
-        <!-- Features Section -->
+    
         <section id="features" class="py-5">
             <div class="container">
                 <div class="text-center mb-5">
@@ -116,7 +116,7 @@
             </div>
         </section>
 
-        <!-- Footer -->
+    
         <footer class="bg-dark text-white py-5">
             <div class="container">
                 <div class="text-center">
@@ -125,8 +125,661 @@
             </div>
         </footer>
     </div>
+<!-- Call Summarization Section -->
+<div id="call-summarization-section" class="dashboard-section">
+    <h4 class="mb-4">Call Summarization</h4>
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5>AI Call Summarization</h5>
+                    <div>
+                        <span class="badge bg-success me-2">AI Enabled</span>
+                        <button class="btn btn-outline-primary btn-sm" onclick="configureSummarization()">
+                            <i class="bi bi-gear me-2"></i>Configure
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Summarization Settings -->
+                <div class="mb-4">
+                    <h6 class="mb-3">Summarization Settings</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Summary Type</label>
+                            <select class="form-select" id="summaryType">
+                                <option value="comprehensive" selected>Comprehensive Summary</option>
+                                <option value="brief">Brief Summary</option>
+                                <option value="action_items">Action Items Only</option>
+                                <option value="custom">Custom Template</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Summary Length</label>
+                            <select class="form-select" id="summaryLength">
+                                <option value="short">Short (50-100 words)</option>
+                                <option value="medium" selected>Medium (100-200 words)</option>
+                                <option value="long">Long (200-500 words)</option>
+                                <option value="detailed">Detailed (500+ words)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Auto-Generate</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoGenerate" checked>
+                                <label class="form-check-label" for="autoGenerate">
+                                    Automatically generate after each call
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Include Sentiment</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="includeSentiment" checked>
+                                <label class="form-check-label" for="includeSentiment">
+                                    Include customer sentiment analysis
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Summaries -->
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6>Recent Call Summaries</h6>
+                        <div>
+                            <button class="btn btn-outline-primary btn-sm me-2" onclick="exportSummaries()">
+                                <i class="bi bi-download me-1"></i>Export
+                            </button>
+                            <button class="btn btn-primary btn-sm" onclick="searchSummaries()">
+                                <i class="bi bi-search me-1"></i>Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="accordion" id="summariesAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#summary1">
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between align-items-center me-3">
+                                            <div>
+                                                <strong>John Smith - Trucking Insurance</strong>
+                                                <small class="text-muted ms-2">Dec 15, 2024 2:30 PM</small>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-success me-2">Positive</span>
+                                                <span class="badge bg-info">4:23 duration</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="summary1" class="accordion-collapse collapse show" data-bs-parent="#summariesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6>Summary</h6>
+                                            <p>Customer expressed strong interest in commercial trucking insurance. Currently paying $2,500/month with competitor. Looking for better coverage and competitive rates. Has a fleet of 15 trucks, excellent safety record. Interested in our comprehensive package.</p>
+                                            
+                                            <h6 class="mt-3">Key Points</h6>
+                                            <ul>
+                                                <li>Fleet size: 15 trucks</li>
+                                                <li>Current premium: $2,500/month</li>
+                                                <li>Pain point: Limited coverage with current provider</li>
+                                                <li>Decision timeline: 30 days</li>
+                                            </ul>
+                                            
+                                            <h6 class="mt-3">Action Items</h6>
+                                            <ul>
+                                                <li>Send customized quote by end of day</li>
+                                                <li>Schedule follow-up call for next Tuesday</li>
+                                                <li>Include fleet discount information</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Call Metrics</h6>
+                                            <div class="small">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Talk Time:</span>
+                                                    <strong>4:23</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Sentiment Score:</span>
+                                                    <strong class="text-success">8.5/10</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Interest Level:</span>
+                                                    <strong class="text-danger">Hot</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Agent Performance:</span>
+                                                    <strong>Excellent</strong>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <button class="btn btn-sm btn-outline-primary w-100 mb-2" onclick="editSummary('1')">
+                                                    <i class="bi bi-pencil me-1"></i>Edit Summary
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary w-100" onclick="listenToCall('1')">
+                                                    <i class="bi bi-play-circle me-1"></i>Listen to Call
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#summary2">
+                                    <div class="w-100">
+                                        <div class="d-flex justify-content-between align-items-center me-3">
+                                            <div>
+                                                <strong>Sarah Johnson - Real Estate Lead</strong>
+                                                <small class="text-muted ms-2">Dec 15, 2024 1:45 PM</small>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-warning me-2">Neutral</span>
+                                                <span class="badge bg-info">2:15 duration</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="summary2" class="accordion-collapse collapse" data-bs-parent="#summariesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6>Summary</h6>
+                                            <p>Customer is in early stages of home search. Looking for 3-bedroom properties in the $300-400k range. Not ready to commit but interested in receiving property listings. Prefers email communication over phone calls.</p>
+                                            
+                                            <h6 class="mt-3">Key Points</h6>
+                                            <ul>
+                                                <li>Budget: $300,000 - $400,000</li>
+                                                <li>Property type: 3-bedroom home</li>
+                                                <li>Timeline: 6-12 months</li>
+                                                <li>Preferred contact: Email</li>
+                                            </ul>
+                                            
+                                            <h6 class="mt-3">Action Items</h6>
+                                            <ul>
+                                                <li>Add to email nurture campaign</li>
+                                                <li>Send weekly property listings</li>
+                                                <li>Follow up in 3 months</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Call Metrics</h6>
+                                            <div class="small">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Talk Time:</span>
+                                                    <strong>2:15</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Sentiment Score:</span>
+                                                    <strong class="text-warning">6.0/10</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Interest Level:</span>
+                                                    <strong class="text-info">Cool</strong>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span>Agent Performance:</span>
+                                                    <strong>Good</strong>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <button class="btn btn-sm btn-outline-primary w-100 mb-2" onclick="editSummary('2')">
+                                                    <i class="bi bi-pencil me-1"></i>Edit Summary
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary w-100" onclick="listenToCall('2')">
+                                                    <i class="bi bi-play-circle me-1"></i>Listen to Call
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary Templates -->
+                <div class="mb-4">
+                    <h6 class="mb-3">Summary Templates</h6>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card border">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Sales Call Template</h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled small">
+                                        <li>• Customer Information</li>
+                                        <li>• Pain Points & Needs</li>
+                                        <li>• Product Interest</li>
+                                        <li>• Budget & Timeline</li>
+                                        <li>• Next Steps</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary w-100">Use Template</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border">
+                                <div class="card-header">
+                                    <h6 class="mb-0">Support Call Template</h6>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-unstyled small">
+                                        <li>• Issue Description</li>
+                                        <li>• Troubleshooting Steps</li>
+                                        <li>• Resolution Status</li>
+                                        <li>• Customer Satisfaction</li>
+                                        <li>• Follow-up Required</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary w-100">Use Template</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-flex gap-3">
+                    <button class="btn btn-primary" onclick="saveSummarizationSettings()">
+                        <i class="bi bi-check-circle me-2"></i>Save Settings
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="testSummarization()">
+                        <i class="bi bi-play-circle me-2"></i>Test Summarization
+                    </button>
+                    <button class="btn btn-outline-info" onclick="exportSummaryReport()">
+                        <i class="bi bi-download me-2"></i>Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Summarization Statistics -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Summarization Statistics</h6>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Total Summaries:</span>
+                        <strong>1,247</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Generated Today:</span>
+                        <strong class="text-success">89</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Average Length:</span>
+                        <strong>152 words</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>AI Accuracy:</span>
+                        <strong class="text-success">94.5%</strong>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 94.5%"></div>
+                    </div>
+                    <small class="text-muted">AI accuracy rate: 94.5%</small>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Quick Actions</h6>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary btn-sm" onclick="generateBulkSummaries()">
+                        <i class="bi bi-lightning me-2"></i>Bulk Generate
+                    </button>
+                    <button class="btn btn-outline-success btn-sm" onclick="reviewSummaries()">
+                        <i class="bi bi-check-square me-2"></i>Review Queue
+                    </button>
+                    <button class="btn btn-outline-warning btn-sm" onclick="trainAISummarizer()">
+                        <i class="bi bi-robot me-2"></i>Train AI
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="summaryAnalytics()">
+                        <i class="bi bi-graph-up me-2"></i>Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sentiment Distribution -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Sentiment Distribution</h6>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Positive:</span>
+                        <strong class="text-success">567 (45%)</strong>
+                    </div>
+                    <div class="progress mb-2" style="height: 10px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Neutral:</span>
+                        <strong class="text-warning">380 (31%)</strong>
+                    </div>
+                    <div class="progress mb-2" style="height: 10px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 31%"></div>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Negative:</span>
+                        <strong class="text-danger">300 (24%)</strong>
+                    </div>
+                    <div class="progress mb-2" style="height: 10px;">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 24%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h6 class="mb-3">Recent Activity</h6>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <small class="text-muted">2 min ago</small>
+                        <div>Summary generated for call #12847</div>
+                    </div>
+                    <div class="list-group-item">
+                        <small class="text-muted">5 min ago</small>
+                        <div>Bulk export completed (50 summaries)</div>
+                    </div>
+                    <div class="list-group-item">
+                        <small class="text-muted">10 min ago</small>
+                        <div>AI model updated</div>
+                    </div>
+                    <div class="list-group-item">
+                        <small class="text-muted">15 min ago</small>
+                        <div>Summary template created</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Signup Page -->
+<!-- Contact Support Section -->
+<div id="contact-support-section" class="dashboard-section">
+    <h4 class="mb-4">Contact Support</h4>
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h5 class="mb-4">How Can We Help You?</h5>
+                
+                <!-- Support Categories -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-gear fs-1 text-primary mb-3"></i>
+                                <h6>Technical Support</h6>
+                                <p class="small text-muted">System issues, bugs, or technical difficulties</p>
+                                <button class="btn btn-outline-primary btn-sm" onclick="openTicket('technical')">
+                                    Get Help
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-credit-card fs-1 text-success mb-3"></i>
+                                <h6>Billing & Account</h6>
+                                <p class="small text-muted">Subscription, payments, or account issues</p>
+                                <button class="btn btn-outline-success btn-sm" onclick="openTicket('billing')">
+                                    Get Help
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-book fs-1 text-info mb-3"></i>
+                                <h6>Training & Documentation</h6>
+                                <p class="small text-muted">Learn how to use features effectively</p>
+                                <button class="btn btn-outline-info btn-sm" onclick="openTicket('training')">
+                                    Get Help
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-lightbulb fs-1 text-warning mb-3"></i>
+                                <h6>Feature Requests</h6>
+                                <p class="small text-muted">Suggest new features or improvements</p>
+                                <button class="btn btn-outline-warning btn-sm" onclick="openTicket('feature')">
+                                    Submit Idea
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="mb-4">
+                    <h6 class="mb-3">Submit a Support Ticket</h6>
+                    <form id="supportTicketForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Your Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Issue Category <span class="text-danger">*</span></label>
+                                <select class="form-select" required>
+                                    <option value="">Select category...</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="billing">Billing & Account</option>
+                                    <option value="training">Training & Documentation</option>
+                                    <option value="feature">Feature Request</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority Level</label>
+                                <select class="form-select">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Subject <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Brief description of your issue" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Description <span class="text-danger">*</span></label>
+                                <textarea class="form-control" rows="5" placeholder="Please provide detailed information about your issue..." required></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Attachments</label>
+                                <input type="file" class="form-control" multiple>
+                                <small class="text-muted">You can attach screenshots or relevant files (Max 10MB per file)</small>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-send me-2"></i>Submit Ticket
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Frequently Asked Questions -->
+                <div class="mb-4">
+                    <h6 class="mb-3">Frequently Asked Questions</h6>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How do I set up my first campaign?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To set up your first campaign: 1) Navigate to the Campaigns section, 2) Click "Create New Campaign", 3) Upload your contact list or connect your CRM, 4) Configure your dialing settings, and 5) Start the campaign. Our system will automatically handle the dialing and connect live calls to available agents.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How does the AI voicemail detection work?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Our AI-powered voicemail detection uses advanced machine learning to identify voicemail greetings with 98.5% accuracy. It analyzes audio patterns in real-time and can differentiate between human responses and voicemail systems within 1-2 seconds, automatically taking the appropriate action based on your settings.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Can I integrate with my existing CRM?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! AutoDial Pro integrates with 50+ popular CRM platforms including Salesforce, HubSpot, Pipedrive, and Zoho. Simply go to the CRM Integration section, select your CRM, enter your API credentials, and configure the sync settings. Data flows bidirectionally in real-time.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Contact Information -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Contact Information</h6>
+                <div class="mb-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-telephone text-primary me-3 fs-5"></i>
+                        <div>
+                            <strong>Phone Support</strong>
+                            <br><small class="text-muted">1-800-AUTODIAL</small>
+                            <br><small class="text-muted">Mon-Fri: 8AM-8PM EST</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-envelope text-primary me-3 fs-5"></i>
+                        <div>
+                            <strong>Email Support</strong>
+                            <br><small class="text-muted">support@autodialpro.com</small>
+                            <br><small class="text-muted">Response: 24-48 hours</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-chat-dots text-primary me-3 fs-5"></i>
+                        <div>
+                            <strong>Live Chat</strong>
+                            <br><small class="text-muted">Available 24/7</small>
+                            <br><button class="btn btn-sm btn-primary mt-1">Start Chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support Status -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Support Status</h6>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Average Response Time:</span>
+                        <strong class="text-success">< 2 hours</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Satisfaction Rate:</span>
+                        <strong class="text-success">96%</strong>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Open Tickets:</span>
+                        <strong>3</strong>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>System Status:</span>
+                        <strong class="text-success">All Systems Operational</strong>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm w-100" onclick="viewSystemStatus()">
+                    <i class="bi bi-activity me-2"></i>View System Status
+                </button>
+            </div>
+            
+            <!-- Your Tickets -->
+            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                <h6 class="mb-3">Your Recent Tickets</h6>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>#12345</strong>
+                                <br><small class="text-muted">CRM sync issue</small>
+                            </div>
+                            <span class="badge bg-success">Resolved</span>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>#12344</strong>
+                                <br><small class="text-muted">Billing question</small>
+                            </div>
+                            <span class="badge bg-warning">In Progress</span>
+                        </div>
+                    </div>
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>#12343</strong>
+                                <br><small class="text-muted">Feature request</small>
+                            </div>
+                            <span class="badge bg-info">Under Review</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-primary btn-sm w-100 mt-3" onclick="viewAllTickets()">
+                    <i class="bi bi-list me-2"></i>View All Tickets
+                </button>
+            </div>
+            
+            <!-- Resources -->
+            <div class="bg-white p-4 rounded shadow-sm">
+                <h6 class="mb-3">Helpful Resources</h6>
+                <div class="d-grid gap-2">
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-book me-2"></i>Documentation
+                    </a>
+                    <a href="#" class="btn btn-outline-info btn-sm">
+                        <i class="bi bi-play-circle me-2"></i>Video Tutorials
+                    </a>
+                    <a href="#" class="btn btn-outline-success btn-sm">
+                        <i class="bi bi-chat-dots me-2"></i>Community Forum
+                    </a>
+                    <a href="#" class="btn btn-outline-warning btn-sm">
+                        <i class="bi bi-calendar me-2"></i>Schedule Training
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div id="signup-page" class="page-content">
         <div class="auth-container">
             <div class="auth-card">
@@ -210,7 +863,7 @@
 
     <!-- Dashboard -->
     <div id="dashboard-page" class="page-content">
-        <!-- Sidebar -->
+    
         <div class="sidebar" id="sidebar">
             <div class="p-4 pb-5">
                 <h5 class="fw-bold mb-4">
@@ -320,9 +973,9 @@
             </div>
         </div>
 
-        <!-- Main Content -->
+    
         <div class="main-content">
-            <!-- Top Bar -->
+        
             <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded shadow-sm">
                 <button class="btn btn-light d-md-none mobile-toggle" onclick="toggleSidebar()">
                     <i class="bi bi-list"></i>
