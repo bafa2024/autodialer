@@ -96,8 +96,18 @@ class Router
      */
     private function pathToPattern($path)
     {
+        // Escape regex special characters, except for curly braces (parameter placeholders)
+        $escaped = preg_replace_callback('/\{[^}]+\}|[.\\+*?[^\\]$(){}=!<>|:-]/', function ($matches) {
+            if (strpos($matches[0], '{') === 0) {
+                // Don't escape parameter placeholders
+                return $matches[0];
+            }
+            // Escape special character
+            return '\\' . $matches[0];
+        }, $path);
+
         // Convert route parameters like {id} to regex patterns
-        $pattern = preg_replace('/\{([^}]+)\}/', '(?P<$1>[^/]+)', $path);
+        $pattern = preg_replace('/\{([^}]+)\}/', '(?P<$1>[^/]+)', $escaped);
         return '#^' . $pattern . '$#';
     }
 
