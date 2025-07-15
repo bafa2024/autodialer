@@ -217,14 +217,264 @@ function toggleSidebar() {
 // Handle Login
 function handleLogin(event) {
     event.preventDefault();
-    showPage('dashboard-page');
+    
+    const form = event.target;
+    const email = form.querySelector('input[type="email"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    const remember = form.querySelector('input[type="checkbox"]')?.checked || false;
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Signing In...';
+    submitBtn.disabled = true;
+    
+    // Call the backend API
+    fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+            remember: remember
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Store authentication tokens
+            localStorage.setItem('auth_token', data.data.token);
+            if (data.data.refresh_token) {
+                localStorage.setItem('refresh_token', data.data.refresh_token);
+            }
+            
+            // Store user data
+            localStorage.setItem('user_data', JSON.stringify(data.data.user));
+            
+            // Show success message
+            showNotification('Login successful!', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                showPage('dashboard-page');
+                updateDashboardUserInfo(data.data.user);
+            }, 1000);
+            
+        } else {
+            // Show error message
+            showNotification(data.message || 'Login failed', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Login error:', error);
+        showNotification('Network error. Please try again.', 'error');
+    })
+    .finally(() => {
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
 }
 
 // Handle Signup
 function handleSignup(event) {
     event.preventDefault();
-    showPage('dashboard-page');
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Get form data
+    const data = {
+        first_name: formData.get('first_name') || form.querySelector('input[name="first_name"]')?.value,
+        last_name: formData.get('last_name') || form.querySelector('input[name="last_name"]')?.value,
+        email: formData.get('email') || form.querySelector('input[type="email"]')?.value,
+        password: formData.get('password') || form.querySelector('input[type="password"]')?.value,
+        company: formData.get('company') || form.querySelector('input[name="company"]')?.value
+    };
+    
+    // Validate required fields
+    if (!data.first_name || !data.last_name || !data.email || !data.password || !data.company) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Creating Account...';
+    submitBtn.disabled = true;
+    
+    // Call the backend API
+    fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Store authentication tokens
+            localStorage.setItem('auth_token', data.data.token);
+            if (data.data.refresh_token) {
+                localStorage.setItem('refresh_token', data.data.refresh_token);
+            }
+            
+            // Store user data
+            localStorage.setItem('user_data', JSON.stringify(data.data.user));
+            
+            // Show success message
+            showNotification('Account created successfully!', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                showPage('dashboard-page');
+                updateDashboardUserInfo(data.data.user);
+            }, 1000);
+            
+        } else {
+            // Show error message
+            showNotification(data.message || 'Registration failed', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Registration error:', error);
+        showNotification('Network error. Please try again.', 'error');
+    })
+    .finally(() => {
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
 }
+
+// Update dashboard user info
+function updateDashboardUserInfo(user) {
+    const userNameElement = document.querySelector('.user-name');
+    if (userNameElement && user.first_name) {
+        userNameElement.textContent = user.first_name;
+    }
+    
+    // Update welcome message
+    const welcomeElement = document.querySelector('.welcome-message');
+    if (welcomeElement) {
+        welcomeElement.textContent = `Welcome back, ${user.first_name}`;
+    }
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Check authentication status
+function checkAuthStatus() {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+        // Verify token with backend
+        fetch('/api/auth/verify', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // User is authenticated, show dashboard
+                showPage('dashboard-page');
+                updateDashboardUserInfo(data.data.user);
+            } else {
+                // Token is invalid, clear storage
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('refresh_token');
+                localStorage.removeItem('user_data');
+                showPage('landing-page');
+            }
+        })
+        .catch(error => {
+            console.error('Auth check error:', error);
+            // On error, clear storage and show landing page
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('user_data');
+            showPage('landing-page');
+        });
+    }
+}
+
+// Logout function
+function logout() {
+    const token = localStorage.getItem('auth_token');
+    
+    if (token) {
+        // Call logout API
+        fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            }
+        }).catch(error => {
+            console.error('Logout error:', error);
+        });
+    }
+    
+    // Clear local storage
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user_data');
+    
+    // Show landing page
+    showPage('landing-page');
+    showNotification('Logged out successfully', 'success');
+}
+
+// Add event listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Attach form handlers
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+    
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', handleSignup);
+    }
+    
+    // Check authentication status on page load
+    checkAuthStatus();
+    
+    // Add logout handler to logout links
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('[onclick*="logout"]') || e.target.closest('[onclick*="logout"]')) {
+            e.preventDefault();
+            logout();
+        }
+    });
+});
 
 // Initialize Charts when dashboard loads
 function initializeCharts() {
